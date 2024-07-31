@@ -1,0 +1,20 @@
+header {
+  background: #fff;
+  padding: 1rem 0;
+  border-bottom: 1px solid #ddd;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+header .search-bar {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+header .icons img {
+  width: 24px;
+  margin-left: 1rem;
+}

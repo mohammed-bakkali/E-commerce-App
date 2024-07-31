@@ -1,0 +1,56 @@
+/* SubTitle Text Style */
+.sub-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  border: 1px solid black;
+  padding: 8px; 
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for sub-title */
+.sub-title:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+}
+
+/* Button Title Style */
+.shopping-now {
+  background-color: #000;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for button title */
+.shopping-now:hover {
+  background-color: #333;
+}
+
+/* Responsive Styles */
+
+/* Small screens */
+@media (max-width: 768px) {
+  .sub-title {
+    font-size: 1rem; 
+    padding: 6px; 
+  }
+
+  .shopping-now {
+    padding: 8px 16px;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 576px) {
+  .sub-title {
+    font-size: 0.875rem; /* Even smaller font size for very small screens */
+  }
+
+  .shopping-now {
+    padding: 6px 12px;
+  }
+}

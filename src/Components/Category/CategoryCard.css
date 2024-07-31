@@ -1,0 +1,8 @@
+.category-item img {
+  border-radius: 50%;
+  width: 100px; 
+  height: 100px;
+}
+p {
+  text-align: center;
+}
