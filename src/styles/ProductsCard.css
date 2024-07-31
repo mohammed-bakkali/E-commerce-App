@@ -1,0 +1,38 @@
+.product-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.product-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.product-card p {
+  margin: 0.5rem 0;
+}
+
+.product-card .price {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.product-card .original-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 0.5rem;
+}
+
+.product-card .rating {
+  margin-top: 0.5rem;
+  color: #f39c12;
+}
