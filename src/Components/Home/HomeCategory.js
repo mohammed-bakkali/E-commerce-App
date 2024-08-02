@@ -9,7 +9,7 @@ import clothes4 from "../../assets/images/products/clothes-4.jpg";
 const HomeCategory = () => {
   return (
     <div className="container">
-      <SubTitle title="Category" btntitle="More" />
+      <SubTitle title="Category" btntitle="More" pathText="allcategory"/>
       <div className="responsive-grid-200">
         <CategoryCard title="Product" img={clothes1} background={"#F4DBA4"} />
         <CategoryCard title="Product" img={clothes2} background={"#F4DBA4"} />

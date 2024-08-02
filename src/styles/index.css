@@ -136,6 +136,9 @@ body {
 .mr-10 {
   margin-right: 10px;
 }
+.ml-10 {
+  margin-left: 5px;
+}
 .mr-15 {
   margin-right: 15px;
 }
@@ -379,12 +382,12 @@ body {
 .justify-end {
   justify-content: flex-end;
 }
-.responsive-grid-200 { 
+.responsive-grid-200 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 40px;
 }
-.responsive-grid-250 { 
+.responsive-grid-250 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 40px;
@@ -441,3 +444,9 @@ body {
 /* End Font Styles */
 /* Start Modal */
 /* End Modal */
+/* Add responsive media query */
+@media (max-width: 992px) {
+  .column-direction {
+    flex-direction: column;
+  }
+}

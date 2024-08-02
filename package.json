@@ -12,8 +12,12 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-dropdown": "^1.11.0",
+    "react-image-gallery": "^1.3.0",
+    "react-paginate": "^8.2.0",
+    "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.25.1",
-    "react-scripts": "5.0.1",
+    "unop-react-dropdown": "^0.2.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -39,5 +43,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "author": "Mohammed Bakkali <mohammed.bakkali807@gmail.com> (https://mohammed-bakkali.netlify.app/) | Phone: +212 722-923357 | Web Developer | City: Tanger",
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
   }
 }

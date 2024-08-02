@@ -14,7 +14,18 @@ header .search-bar {
   border: 1px solid #ddd;
 }
 
-header .icons img {
+/* header .icons img {
   width: 24px;
   margin-left: 1rem;
+} */
+.icons a {
+  color: #000; 
+  margin: 0 10px; 
+  font-size: 12px;
 }
+
+.icons a:hover {
+  color: #3b71ca; 
+}
+
+
