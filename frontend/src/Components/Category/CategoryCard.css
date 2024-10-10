@@ -1,0 +1,50 @@
+.category-card {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.category-item {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.category-item img {
+  width: 110px;
+  height: 110px;
+  transition: transform 0.3s ease;
+}
+.category-item img:hover {
+  transform: scale(1.1);
+}
+
+.category-card p {
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* Adding arrow icons (optional) */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #ccc;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
+}

@@ -1,0 +1,34 @@
+.rate-item {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  background-color: #fff;
+}
+
+.rate-item-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.rate-item-header div {
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.rate-item-header img {
+  margin-right: 0.5rem;
+}
+
+.rate-item-header .rate-value {
+  font-size: 1.2rem;
+  color: #f39c12;
+}
+
+.rate-description {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}

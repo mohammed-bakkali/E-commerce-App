@@ -1,0 +1,85 @@
+/* UserAllOrder.css */
+.user-orders-container {
+  padding: 20px;
+}
+
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* UserAllOrderItem.css */
+.order-item-container {
+  margin-bottom: 20px;
+}
+
+.order-number {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.order-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.between-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-summary {
+  margin-top: 15px;
+}
+
+.order-status, .order-total {
+  font-size: 18px;
+}
+
+/* UserAllOrderCard.css */
+.order-card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.item-details {
+  display: flex;
+  gap: 10px;
+}
+
+.item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-brand, .item-name, .item-rating {
+  margin-bottom: 5px;
+}
+
+.item-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.remove-item {
+  cursor: pointer;
+  color: red;
+}
+
+.item-price {
+  font-weight: bold;
+  text-align: right;
+}

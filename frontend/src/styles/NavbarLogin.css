@@ -1,0 +1,100 @@
+/* Navbar base styles */
+header {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  header .container {
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  header .logo {
+    margin-bottom: 10px;
+  }
+}
+
+header .group {
+  display: flex;
+  width: 100%;
+  max-width: 628px;
+}
+
+header .search-bar {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  width: 100%;
+  border-color: #0082e6;
+}
+
+/* Icons styling */
+.icons a {
+  display: flex;
+  text-decoration: none;
+  flex-direction: column;
+  color: #000;
+  margin: 0 10px;
+}
+
+.icons a:hover {
+  color: #3b71ca;
+}
+
+header .fa-icon {
+  font-size: 22.67px;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+}
+
+.icons .icon-label {
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .search-bar {
+    width: 100%;
+  }
+
+  .icons {
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header .logo {
+    font-size: 1.2rem;
+  }
+
+  header .fa-icon {
+    font-size: 18px;
+  }
+
+  .icons a {
+    font-size: 10px;
+  }
+
+  .icons .icon-label {
+    font-size: 0.7rem;
+  }
+}

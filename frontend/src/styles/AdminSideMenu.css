@@ -1,0 +1,74 @@
+/* AdminSideMenu.css */
+.sidmenu {
+  width: 250px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidmenu .menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sidmenu .menu-item:hover {
+  background-color: #000;
+  color: white;
+}
+
+.sidmenu .menu-item .icon-dashboard,
+.sidmenu .menu-item .icon-orders,
+.sidmenu .menu-item .icon-products,
+.sidmenu .menu-item .icon-brand,
+.sidmenu .menu-item .icon-category,
+.sidmenu .menu-item .icon-subcategory,
+.sidmenu .menu-item .icon-add-product {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+/* Specific styles for each icon */
+.icon-dashboard {
+  color: #3498db;
+}
+
+.icon-orders {
+  color: #e74c3c;
+}
+
+.icon-products {
+  color: #2ecc71;
+}
+
+.icon-brand {
+  color: #f39c12;
+}
+
+.icon-category {
+  color: #9b59b6;
+}
+
+.icon-subcategory {
+  color: #34495e;
+}
+
+.icon-add-product {
+  color: #1abc9c;
+}
+
+.sidmenu .menu-item span {
+  font-size: 16px;
+}
+
+@media (max-width: 992px) {
+  .sidmenu {
+    width: 100%;
+    text-align: center;
+  }
+}

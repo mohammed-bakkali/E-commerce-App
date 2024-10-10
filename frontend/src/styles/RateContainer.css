@@ -1,0 +1,41 @@
+.rate {
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+  background-color: #f8f9fa;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.rate-header {
+  display: flex;
+  align-items: center;
+}
+
+.rate-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.rate-header-right {
+  display: flex;
+  align-items: center;
+}
+
+.rate-header img {
+  width: 20px;
+  height: 20px;
+  margin-right: 0.5rem;
+}
+
+.rate-value {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f39c12;
+  margin-right: 0.5rem;
+}
+
+.evaluation-count {
+  font-size: 0.9rem;
+  color: #999;
+}
