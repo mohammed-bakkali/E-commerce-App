@@ -7,12 +7,12 @@ export const createNewUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await postData(`api/v1/auth/signup`, data);
-      return response;
+      return response; 
     } catch (error) {
-      if (error.response && error.response.data.errors) {
-        return {
-          msgEmail: error.response.data.errors[0].msg,
-        };
+      // إذا كان هناك استجابة من الخادم
+      if (error.response) {
+        console.error("Server response:", error.response.data); // سجل بيانات الاستجابة
+        return rejectWithValue(error.response.data); 
       }
       return rejectWithValue("Network Error");
     }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createNewUser } from "../../Redux/reducers/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const useRegisterHook = () => {
   const [name, setName] = useState("");
@@ -12,6 +13,13 @@ const useRegisterHook = () => {
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // const onChangeName = (e) => setName(e.target.value);
+  // const onChangeEmail = (e) => setEmail(e.target.value);
+  // const onChangePhone = (e) => setPhone(e.target.value);
+  // const onChangePassword = (e) => setPassword(e.target.value);
+  // const onChangeConfirmPassword = (e) => setConfirmPassword(e.target.value);
 
   const onChangeName = (e) => {
     setName(e.target.value);
@@ -68,51 +76,58 @@ const useRegisterHook = () => {
     return true;
   };
 
-  const { response, error } = useSelector((state) => ({
-    response: state.user.creatUsers,
-    error: state.user.error,
-  }));
+  // const { response, error } = useSelector((state) => ({
+  //   response: state.user.creatUsers,
+  //   error: state.user.error,
+  // }));
+  const res = useSelector((state) => state.user.creatUsers);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
     setLoading(true);
-    try {
-      await dispatch(
-        createNewUser({
-          name,
-          email,
-          password,
-          passwordConfirm: confirmPassword,
-          phone,
-        })
-      ).unwrap();
-      toast.success("Registration successful!");
-    } catch (error) {
-      toast.error("Failed to add user");
-    } finally {
-      setLoading(false);
-    }
+
+    await dispatch(
+      createNewUser({
+        name,
+        email,
+        password,
+        passwordConfirm: confirmPassword,
+        phone,
+      })
+    );
+    setLoading(false);
   };
 
   useEffect(() => {
-    if (!loading) {
-      if (response) {
-        if (response.data?.token) {
-          localStorage.setItem("token", response.data.token);
+    if (loading === false) {
+      if (res) {
+        console.log(res);
+        if (res.token) {
+          localStorage.setItem("token", res.token);
           toast.success("Registration successful!");
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        }
+
+        if (res.errors) {
+          if (res.data.errors[0].msg === "E-mail already in use")
+            toast.error("هذا الايميل مسجل من قبل");
+        }
+        if (res.errors) {
+          if (res.data.errors[0].msg === "accept only egypt phone numbers")
+            toast.error("يجب ان يكون الرقم مصري مكون من 11 رقم", "error");
+        }
+
+        if (res.errors) {
+          if (res.data.errors[0].msg === "must be at least 6 chars")
+            toast.error("يجب ان لاقل كلمه السر عن 6 احرف او ارقام", "error");
         }
       }
-
-      if (error) {
-        // عرض الأخطاء القادمة من الخادم
-        error.forEach((errMsg) => {
-          toast.error(errMsg);
-        });
-      }
     }
-  }, [loading, response, error]);
+  }, [loading]);
 
   return {
     name,
