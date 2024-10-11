@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   return (
-    <div className="container center-flex">
+    <div className="container center-flex" style={{height: "670px"}}>
       <div className="form-container">
         <h2>Login</h2>
         <form>

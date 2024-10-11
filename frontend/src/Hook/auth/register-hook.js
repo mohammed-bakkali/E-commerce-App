@@ -15,27 +15,11 @@ const useRegisterHook = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const onChangeName = (e) => setName(e.target.value);
-  // const onChangeEmail = (e) => setEmail(e.target.value);
-  // const onChangePhone = (e) => setPhone(e.target.value);
-  // const onChangePassword = (e) => setPassword(e.target.value);
-  // const onChangeConfirmPassword = (e) => setConfirmPassword(e.target.value);
-
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const onChangePhone = (e) => {
-    setPhone(e.target.value);
-  };
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const onChangeConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
-  };
+  const onChangeName = (e) => setName(e.target.value);
+  const onChangeEmail = (e) => setEmail(e.target.value);
+  const onChangePhone = (e) => setPhone(e.target.value);
+  const onChangePassword = (e) => setPassword(e.target.value);
+  const onChangeConfirmPassword = (e) => setConfirmPassword(e.target.value);
 
   const validate = () => {
     if (!name.trim()) {
@@ -76,11 +60,8 @@ const useRegisterHook = () => {
     return true;
   };
 
-  // const { response, error } = useSelector((state) => ({
-  //   response: state.user.creatUsers,
-  //   error: state.user.error,
-  // }));
-  const res = useSelector((state) => state.user.creatUsers);
+  // تعديل useSelector للوصول إلى `user` و `error`
+  const { user, error } = useSelector((state) => state.user.creatUsers);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -101,33 +82,30 @@ const useRegisterHook = () => {
   };
 
   useEffect(() => {
-    if (loading === false) {
-      if (res) {
-        console.log(res);
-        if (res.token) {
-          localStorage.setItem("token", res.token);
-          toast.success("Registration successful!");
-          setTimeout(() => {
-            navigate("/login");
-          }, 2000);
-        }
+    if (!loading) {
+      if (user) {
+        localStorage.setItem("token", user.token); // تأكد من استخدام `user.token`
+        toast.success("Registration successful!");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      }
 
-        if (res.errors) {
-          if (res.data.errors[0].msg === "E-mail already in use")
+      if (error && error.errors && error.errors.length > 0) {
+        error.errors.forEach((errorItem) => {
+          if (errorItem.msg === "E-mail already in use") {
             toast.error("هذا الايميل مسجل من قبل");
-        }
-        if (res.errors) {
-          if (res.data.errors[0].msg === "accept only egypt phone numbers")
-            toast.error("يجب ان يكون الرقم مصري مكون من 11 رقم", "error");
-        }
-
-        if (res.errors) {
-          if (res.data.errors[0].msg === "must be at least 6 chars")
-            toast.error("يجب ان لاقل كلمه السر عن 6 احرف او ارقام", "error");
-        }
+          } else if (errorItem.msg === "accept only egypt phone numbers") {
+            toast.error("يجب أن يكون الرقم مصري مكون من 11 رقم");
+          } else if (errorItem.msg === "must be at least 6 chars") {
+            toast.error("يجب أن لا تقل كلمة السر عن 6 أحرف أو أرقام");
+          } else {
+            toast.error("حدث خطأ غير معروف. يرجى المحاولة مرة أخرى.");
+          }
+        });
       }
     }
-  }, [loading]);
+  }, [loading, user, error, navigate]);
 
   return {
     name,

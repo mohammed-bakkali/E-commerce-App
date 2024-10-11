@@ -7,9 +7,8 @@ export const createNewUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await postData(`api/v1/auth/signup`, data);
-      return response; 
+      return response.data; 
     } catch (error) {
-      // إذا كان هناك استجابة من الخادم
       if (error.response) {
         console.error("Server response:", error.response.data); // سجل بيانات الاستجابة
         return rejectWithValue(error.response.data); 
@@ -19,29 +18,25 @@ export const createNewUser = createAsyncThunk(
   }
 );
 
-
-
 const initialState = {
-  creatUsers: [], // Changed from brands to users
+  creatUsers: [], 
   loading: false,
   error: null,
 };
 
 const userSlice = createSlice({
-  name: "user", // Changed from "brand" to "user"
+  name: "user",
   initialState,
   reducers: {},
-
   extraReducers: (builder) => {
     builder
-      // Handling create New User actions
       .addCase(createNewUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(createNewUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.creatUsers.push(action.payload); // Store the new user data
+        state.creatUsers = action.payload; 
       })
       .addCase(createNewUser.rejected, (state, action) => {
         state.loading = false;
@@ -49,4 +44,5 @@ const userSlice = createSlice({
       });
   },
 });
+
 export default userSlice.reducer;
