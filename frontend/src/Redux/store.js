@@ -3,8 +3,8 @@ import productsReducer from "./reducers/ProductSlice";
 import categoryReducer from "./reducers/categorySlice";
 import brandReducer from "./reducers/BrandSlice"
 import subcategoryReducer from "./reducers/SubCategorySlice";
+import userReducer from "./reducers/AuthSlice";
 // import cartReducer from "./reducers/cartSlice";
-// import userReducer from "./reducers/userSlice";
 // import adminReducer from "./reducers/adminSlice";
 
 const store = configureStore({
@@ -13,8 +13,8 @@ const store = configureStore({
     brand: brandReducer,
     subcategory: subcategoryReducer,
     product: productsReducer,
+    user: userReducer,
     // cart: cartReducer,
-    // user: userReducer,
     // admin: adminReducer,
   },
 });

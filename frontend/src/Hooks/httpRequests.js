@@ -8,9 +8,9 @@ import baseURL from "../Api/BaseURL";
  * @returns {object} - The response from the API.
  * @throws {Error} - Throws an error if the request fails.
  */
-const fetchData = async (url, params) => {
+const fetchData = async (url, data) => {
   try {
-    const response = await baseURL.get(url, { params });
+    const response = await baseURL.get(url, { data });
     return response;
   } catch (error) {
     // Log the error or handle it as necessary
