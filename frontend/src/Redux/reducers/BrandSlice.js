@@ -9,7 +9,7 @@ export const fetchAllBrands = createAsyncThunk(
       const response = await fetchData(`api/v1/brands/?limit=${limit}`);
       if (response.data.data && response.data.data.length > 0) {
         return {
-          brands: response.data.data,
+          brands: response.data.data, 
           totalPages: response.data.paginationResult.numberOfPages,
         };
       } else {

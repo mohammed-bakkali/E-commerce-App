@@ -68,10 +68,9 @@ const useRegisterHook = () => {
     return true;
   };
 
-
-  const { response, msgEmail } = useSelector((state) => ({
+  const { response, error } = useSelector((state) => ({
     response: state.user.creatUsers,
-    msgEmail: state.user.msgEmail,
+    error: state.user.error,
   }));
 
   const handleRegister = async (e) => {
@@ -100,18 +99,20 @@ const useRegisterHook = () => {
   useEffect(() => {
     if (!loading) {
       if (response) {
-        console.log(response);
         if (response.data?.token) {
           localStorage.setItem("token", response.data.token);
           toast.success("Registration successful!");
         }
+      }
 
-        if (msgEmail) {
-          toast.error(msgEmail); 
-        }
+      if (error) {
+        // عرض الأخطاء القادمة من الخادم
+        error.forEach((errMsg) => {
+          toast.error(errMsg);
+        });
       }
     }
-  }, [loading, response, msgEmail]);
+  }, [loading, response, error]);
 
   return {
     name,

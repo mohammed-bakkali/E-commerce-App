@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { postData } from "../../Hooks/httpRequests";
-import baseURL from "../../Api/BaseURL";
 
 // Create an AsyncThunk to create a New User
 export const createNewUser = createAsyncThunk(
