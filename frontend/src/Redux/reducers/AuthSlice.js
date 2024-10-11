@@ -11,25 +11,15 @@ export const createNewUser = createAsyncThunk(
       return response;
     } catch (error) {
       if (error.response && error.response.data.errors) {
-        console.error("Server response:", error.response.data.errors[0].msg);
-        return rejectWithValue({
+        return {
           msgEmail: error.response.data.errors[0].msg,
-        });
+        };
       }
       return rejectWithValue("Network Error");
     }
   }
 );
 
-export const checkEmailExists = async (email) => {
-  try {
-    const response = await baseURL.get(`api/v1/auth/check-email?email=${email}`);
-    return response.data.exists; 
-  } catch (error) {
-    console.error("Error checking email:", error);
-    throw error; 
-  }
-};
 
 
 const initialState = {

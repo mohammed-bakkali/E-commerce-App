@@ -68,7 +68,7 @@ const useRegisterHook = () => {
     return true;
   };
 
-  // استخدام useSelector لجلب الاستجابة والرسائل من الخادم
+
   const { response, msgEmail } = useSelector((state) => ({
     response: state.user.creatUsers,
     msgEmail: state.user.msgEmail,
