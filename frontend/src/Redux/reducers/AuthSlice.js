@@ -10,7 +10,7 @@ export const createNewUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
+        error.response.payload ? error.response.payloaddata : "Network Error"
       );
     }
   }
@@ -63,7 +63,7 @@ const userSlice = createSlice({
       })
       .addCase(LoginUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.loginUser = action.payload;
+        state.loginUser = action.payload.loginUser;
       })
       .addCase(LoginUser.rejected, (state, action) => {
         state.loading = false;

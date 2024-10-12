@@ -29,6 +29,7 @@ const useLoginHook = () => {
 
     return true;
   };
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -42,20 +43,30 @@ const useLoginHook = () => {
           password,
         })
       );
-      // toast.success("successfully");
-      if (!loading && res) {
-        const userData = res.payload.data;
+
+      console.log("test1", res);
+      console.log("test2", res.payload.data);
+      console.log("test3", res.payload.token);
+      console.log("test4", res.payload);
+      console.log("test5", res.payload.data);
+
+      if (res.payload.token) {
         const token = res.payload.token;
-
-        console.log("User Data:", userData);
-        console.log("Token:", token);
-        setLoading(true);
-
         localStorage.setItem("token", token); // تخزين التوكن
-        setLoading(true); // تحديث الحالة إذا لزم الأمر
+      } else {
+        localStorage.removeItem("token");
       }
-      setLoading(false);
+      if (res.payload.status === "error" || res.payload.message === "Incorrect email or password") {
+        toast.error(res.payload.message);  // عرض رسالة الخطأ للمستخدم
+        setLoading(false);  // إيقاف التحميل
+        return;  // الخروج من الوظيفة إذا كان هناك خطأ
+      }
+
+      const userData = res.payload.data;
+      setLoading(true);  // إذا كنت بحاجة إلى تحديث الحالة بناءً على البيانات
+
     } catch (error) {
+      console.log("test10",error)
       if (error.response && error.response.data) {
         toast.error("Failed : " + error.response.data.message);
       } else {
