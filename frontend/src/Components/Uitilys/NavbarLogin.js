@@ -1,37 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faShoppingCart,
   faSearch,
   faHeart,
-  faSignOutAlt, // أيقونة لتسجيل الخروج
-} from "@fortawesome/free-solid-svg-icons";
+  faSignOutAlt,
+  faEnvelope,
+  faCog,
+  faQuestionCircle,
+  faEdit,
+} from "@fortawesome/free-solid-svg-icons"; // Import Font Awesome icons
 import "../../styles/NavbarLogin.css";
+import avatar from "../../assets/icons/man-avatar.png"; // Adjust the path as necessary
 import useNavbarSearchHook from "../../Hook/search/navbar-search-hook";
 
 const NavbarLogin = () => {
   const { OnChangeSearch } = useNavbarSearchHook();
   const word = localStorage.getItem("searchword") || "";
-  
-  // حالة المستخدم و القائمة المنسدلة
+
+  // User state and dropdown menu state
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  
+  // Retrieve user info
+  let user = JSON.parse(localStorage.getItem("user")) || null;
 
-  let user = "";
-  if (localStorage.getItem("user") != null) {
-    user = JSON.parse(localStorage.getItem("user"));
-    console.log("user", user.name);
-  }
-
-  // دالة للتبديل بين فتح وإغلاق القائمة المنسدلة
+  // Toggle dropdown
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
 
+  // Handle logout
   const handleLogout = () => {
     localStorage.removeItem("user");
-    window.location.reload(); // إعادة تحميل الصفحة بعد تسجيل الخروج
+    window.location.reload(); // Reload the page after logging out
   };
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
 
   return (
     <header>
@@ -65,20 +83,43 @@ const NavbarLogin = () => {
 
         <div className="icons d-flex align-center">
           {user ? (
-            <div className="dropdown-login">
-              <button onClick={toggleDropdown} className="d-flex flex-column align-items-center">
-                <FontAwesomeIcon icon={faUser} size="2x" className="fa-icon" />
-                <span className="icon-label">{user.name}</span>
-              </button>
-              {isDropdownOpen && (
-                <div className="dropdown-menu-login">
-                  <a href="/profile" className="dropdown-item">Profile</a>
-                  <a href="/orders" className="dropdown-item">Orders</a>
-                  <button onClick={handleLogout} className="dropdown-item">
-                    <FontAwesomeIcon icon={faSignOutAlt} /> Logout
-                  </button>
-                </div>
-              )}
+            <div className="action" ref={dropdownRef}>
+              <div className="profile" onClick={toggleDropdown}>
+                <img src={avatar} alt="User Avatar" />
+              </div>
+              <div className={`menu ${isDropdownOpen ? "active" : ""}`}>
+                <h3>
+                  {user.name}
+                  <br />
+                  <span>{user.role}</span>
+                </h3>
+                <ul>
+                  <li>
+                    <FontAwesomeIcon icon={faUser} />
+                    <a href="">My Profile</a>
+                  </li>
+                  <li>
+                    <FontAwesomeIcon icon={faEdit} />
+                    <a href="#">Edit Profile</a>
+                  </li>
+                  <li>
+                    <FontAwesomeIcon icon={faEnvelope} />
+                    <a href="#">Inbox</a>
+                  </li>
+                  <li>
+                    <FontAwesomeIcon icon={faCog} />
+                    <a href="#">Settings</a>
+                  </li>
+                  <li>
+                    <FontAwesomeIcon icon={faQuestionCircle} />
+                    <a href="#">Help</a>
+                  </li>
+                  <li onClick={handleLogout}>
+                    <FontAwesomeIcon icon={faSignOutAlt} />
+                    <a href="#">Logout</a>
+                  </li>
+                </ul>
+              </div>
             </div>
           ) : (
             <a href="/login" className="d-flex flex-column align-items-center">
@@ -91,7 +132,11 @@ const NavbarLogin = () => {
             <span className="icon-label">Favorites</span>
           </a>
           <a href="/cart" className="d-flex flex-column align-items-center">
-            <FontAwesomeIcon icon={faShoppingCart} size="2x" className="fa-icon" />
+            <FontAwesomeIcon
+              icon={faShoppingCart}
+              size="2x"
+              className="fa-icon"
+            />
             <span className="icon-label">Cart</span>
           </a>
         </div>
