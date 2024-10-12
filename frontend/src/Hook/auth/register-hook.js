@@ -76,22 +76,14 @@ const useRegisterHook = () => {
         phone,
       })
     );
-    setLoading(false);
-    console.log("test1", res);
-    console.log("test2", res.payload.status);
-    console.log("test3", res.payload.token);
-    console.log("test4", res.token);
-    console.log("test4", res.payload);
-    console.log("test5", res.payload.data);
-    console.log("test11",res.payload.errors)
-    console.log("test10",res.payload.errors[0].msg)
-    console.log("tset12",res.payload.status)
+
+    console.log("Response:", res);
 
     if (loading === false) {
       if (res) {
-        console.log(res)
+        console.log(res);
         if (res.payload.token) {
-          console.log(res.payload.token)
+          console.log(res.payload.token);
           const token = res.payload.token;
           localStorage.setItem("token", token);
           toast.success("Registration successful!");
@@ -101,12 +93,14 @@ const useRegisterHook = () => {
           }, 1500);
         }
       }
-      if (res.payload.errors[0].msg) {
-        console.log(res.payload.errors)
-        toast.error(res.payload.errors[0].msg);
-        localStorage.removeItem("token");
-        setLoading(false);
-        return;
+      if (res.payload.errors && res.payload.errors.length > 0) {
+        if (res.payload.errors[0].msg) {
+          console.log(res.payload.errors);
+          toast.error(res.payload.errors[0].msg);
+          localStorage.removeItem("token");
+          setLoading(false);
+          return;
+        }
       }
     }
   };

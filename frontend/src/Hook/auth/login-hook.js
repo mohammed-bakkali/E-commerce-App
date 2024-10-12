@@ -15,7 +15,6 @@ const useLoginHook = () => {
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangePassword = (e) => setPassword(e.target.value);
 
-  // التحقق من صحة البريد الإلكتروني وكلمة المرور
   const validate = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim() || !emailRegex.test(email)) {
@@ -45,33 +44,37 @@ const useLoginHook = () => {
         })
       );
 
-      // عرض النتائج في وحدة التحكم
-      console.log("test1", res.error.payload.message);
-          console.log("test1", res.error.payload.message);
-      console.log("test2", res.payload);
-      console.log("test3", res.payload.token);
-      console.log("test4", res.payload);
-      console.log("test5", res.payload.data);
-  
-
-      if (res.payload.token) {
-        const token = res.payload.token;
-        localStorage.setItem("token", token); // تخزين التوكن
-        toast.success("Login successful!"); // عرض رسالة النجاح
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
-        // الانتقال إلى صفحة أخرى بعد تسجيل الدخول
-      } else {
-        localStorage.removeItem("token");
+      // عرض النتائج في وحدة التحكم مع الفحص الأمني
+      if (res.error) {
+        console.log("Login error:", res.error.message);
+        toast.error(res.error.message || "Login failed.");
+        setLoading(false);
+        return;
       }
 
-      // التحقق من استجابة السيرفر
-      if (res.payload && res.payload.status === "error") {
-        toast.error(res.payload.message); // عرض رسالة الخطأ للمستخدم
-        localStorage.removeItem("token");
-        setLoading(false); // إيقاف التحميل
-        return; // الخروج من الوظيفة إذا كان هناك خطأ
+      if (res.payload) {
+        if (res.payload.token) {
+          const token = res.payload.token;
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(res.payload.data)); // تخزين التوكن
+          toast.success("Login successful!"); 
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+        } else {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+        }
+
+        // Check server response
+        if (res.payload.status === "error") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          toast.error(res.payload.message);
+          console.log("email or password is invalid");
+          setLoading(false);
+          return;
+        }
       }
     } catch (error) {
       if (error.response && error.response.data) {
