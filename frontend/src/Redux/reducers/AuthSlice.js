@@ -10,7 +10,7 @@ export const createNewUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(
-        error.response.payload ? error.response.payloaddata : "Network Error"
+        error.response ? error.response.data : "Network Error"
       );
     }
   }
@@ -50,7 +50,7 @@ const userSlice = createSlice({
       })
       .addCase(createNewUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.creatUsers = action.payload;
+        state.creatUsers = action.payload.creatUsers;
       })
       .addCase(createNewUser.rejected, (state, action) => {
         state.loading = false;

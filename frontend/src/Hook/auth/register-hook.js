@@ -59,7 +59,7 @@ const useRegisterHook = () => {
 
     return true;
   };
-  const { user, error } = useSelector((state) => state.user.creatUsers);
+  // const { user, error } = useSelector((state) => state.user.creatUsers);
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -67,7 +67,7 @@ const useRegisterHook = () => {
     if (!validate()) return;
     setLoading(true);
 
-    await dispatch(
+    const res = await dispatch(
       createNewUser({
         name,
         email,
@@ -76,35 +76,33 @@ const useRegisterHook = () => {
         phone,
       })
     );
-    setLoading(false);
-  };
 
-  useEffect(() => {
-    if (!loading) {
-      if (user) {
-        localStorage.setItem("token", user.token); // تأكد من استخدام `user.token`
+    if (loading === false) {
+      if (res) {
+        const token = res.payload.token;
+        localStorage.setItem("token", token);
         toast.success("Registration successful!");
         setTimeout(() => {
           navigate("/login");
-        }, 2000);
+        }, 1500);
       }
-
-      if (error && error.errors && error.errors.length > 0) {
-        error.errors.forEach((errorItem) => {
-          if (errorItem.msg === "E-mail already in use") {
-            toast.error("This email is already registered.");
-          } else if (errorItem.msg === "accept only egypt phone numbers") {
-            toast.error("The phone number must Morocco and consist of 10 digits.");
-          } else if (errorItem.msg === "must be at least 6 chars") {
-            toast.error("The password must be at least 6 characters long.");
-          } else {
-            toast.error("An unknown error occurred. Please try again.");
-          }
-        });
+      if (res.payload && res.payload.status === "error") {
+        toast.error(res.payload.message);
+        localStorage.removeItem("token");
+        setLoading(false);
+        return;
       }
-      
     }
-  }, [loading, user, error, navigate]);
+
+    console.log("test1", res);
+    console.log("test2", res.payload.data);
+    console.log("test3", res.payload.token);
+    console.log("test4", res.token);
+    console.log("test4", res.payload);
+    console.log("test5", res.payload.data);
+  };
+
+  
 
   return {
     name,

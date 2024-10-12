@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { LoginUser } from "../../Redux/reducers/AuthSlice";
 import { useNavigate } from "react-router-dom";
@@ -46,30 +46,33 @@ const useLoginHook = () => {
       );
 
       // عرض النتائج في وحدة التحكم
-      console.log("test1", res);
-      console.log("test2", res.payload.data);
+      console.log("test1", res.error.payload.message);
+          console.log("test1", res.error.payload.message);
+      console.log("test2", res.payload);
       console.log("test3", res.payload.token);
       console.log("test4", res.payload);
       console.log("test5", res.payload.data);
 
-      // التحقق من استجابة السيرفر
-      if (res.payload && res.payload.status === "error") {
-        toast.error(res.payload.message);  // عرض رسالة الخطأ للمستخدم
-        setLoading(false);  // إيقاف التحميل
-        return;  // الخروج من الوظيفة إذا كان هناك خطأ
-      }
-
       if (res.payload.token) {
         const token = res.payload.token;
         localStorage.setItem("token", token); // تخزين التوكن
-        toast.success("Login successful!");  // عرض رسالة النجاح
-        // navigate("/dashboard");  // الانتقال إلى صفحة أخرى بعد تسجيل الدخول
+        toast.success("Login successful!"); // عرض رسالة النجاح
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+        // الانتقال إلى صفحة أخرى بعد تسجيل الدخول
       } else {
         localStorage.removeItem("token");
       }
 
+      // التحقق من استجابة السيرفر
+      if (res.payload && res.payload.status === "error") {
+        toast.error(res.payload.message); // عرض رسالة الخطأ للمستخدم
+        localStorage.removeItem("token");
+        setLoading(false); // إيقاف التحميل
+        return; // الخروج من الوظيفة إذا كان هناك خطأ
+      }
     } catch (error) {
-      console.log("test10", error);
       if (error.response && error.response.data) {
         toast.error("Failed : " + error.response.data.message);
       } else {
