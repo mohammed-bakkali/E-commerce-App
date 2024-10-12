@@ -7,19 +7,33 @@ export const createNewUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await postData(`api/v1/auth/signup`, data);
-      return response.data; 
+      return response.data;
     } catch (error) {
-      if (error.response) {
-        console.error("Server response:", error.response.data); // سجل بيانات الاستجابة
-        return rejectWithValue(error.response.data); 
-      }
-      return rejectWithValue("Network Error");
+      return rejectWithValue(
+        error.response ? error.response.data : "Network Error"
+      );
+    }
+  }
+);
+
+// Create an AsyncThunk to create a New User
+export const LoginUser = createAsyncThunk(
+  "LoginUser/LoginUser",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await postData(`/api/v1/auth/login`, data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "Network Error"
+      );
     }
   }
 );
 
 const initialState = {
-  creatUsers: [], 
+  creatUsers: [],
+  loginUser: [],
   loading: false,
   error: null,
 };
@@ -36,12 +50,27 @@ const userSlice = createSlice({
       })
       .addCase(createNewUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.creatUsers = action.payload; 
+        state.creatUsers = action.payload;
       })
       .addCase(createNewUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+
+      .addCase(LoginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(LoginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.loginUser = action.payload;
+      })
+      .addCase(LoginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
+
+
   },
 });
 

@@ -59,8 +59,6 @@ const useRegisterHook = () => {
 
     return true;
   };
-
-  // تعديل useSelector للوصول إلى `user` و `error`
   const { user, error } = useSelector((state) => state.user.creatUsers);
 
   const handleRegister = async (e) => {
@@ -94,16 +92,17 @@ const useRegisterHook = () => {
       if (error && error.errors && error.errors.length > 0) {
         error.errors.forEach((errorItem) => {
           if (errorItem.msg === "E-mail already in use") {
-            toast.error("هذا الايميل مسجل من قبل");
+            toast.error("This email is already registered.");
           } else if (errorItem.msg === "accept only egypt phone numbers") {
-            toast.error("يجب أن يكون الرقم مصري مكون من 11 رقم");
+            toast.error("The phone number must Morocco and consist of 10 digits.");
           } else if (errorItem.msg === "must be at least 6 chars") {
-            toast.error("يجب أن لا تقل كلمة السر عن 6 أحرف أو أرقام");
+            toast.error("The password must be at least 6 characters long.");
           } else {
-            toast.error("حدث خطأ غير معروف. يرجى المحاولة مرة أخرى.");
+            toast.error("An unknown error occurred. Please try again.");
           }
         });
       }
+      
     }
   }, [loading, user, error, navigate]);
 
