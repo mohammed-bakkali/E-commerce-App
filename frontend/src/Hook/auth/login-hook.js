@@ -15,6 +15,7 @@ const useLoginHook = () => {
   const onChangeEmail = (e) => setEmail(e.target.value);
   const onChangePassword = (e) => setPassword(e.target.value);
 
+  // التحقق من صحة البريد الإلكتروني وكلمة المرور
   const validate = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim() || !emailRegex.test(email)) {
@@ -44,33 +45,35 @@ const useLoginHook = () => {
         })
       );
 
+      // عرض النتائج في وحدة التحكم
       console.log("test1", res);
       console.log("test2", res.payload.data);
       console.log("test3", res.payload.token);
       console.log("test4", res.payload);
       console.log("test5", res.payload.data);
 
-      if (res.payload.token) {
-        const token = res.payload.token;
-        localStorage.setItem("token", token); // تخزين التوكن
-      } else {
-        localStorage.removeItem("token");
-      }
-      if (res.payload.status === "error" || res.payload.message === "Incorrect email or password") {
+      // التحقق من استجابة السيرفر
+      if (res.payload && res.payload.status === "error") {
         toast.error(res.payload.message);  // عرض رسالة الخطأ للمستخدم
         setLoading(false);  // إيقاف التحميل
         return;  // الخروج من الوظيفة إذا كان هناك خطأ
       }
 
-      const userData = res.payload.data;
-      setLoading(true);  // إذا كنت بحاجة إلى تحديث الحالة بناءً على البيانات
+      if (res.payload.token) {
+        const token = res.payload.token;
+        localStorage.setItem("token", token); // تخزين التوكن
+        toast.success("Login successful!");  // عرض رسالة النجاح
+        // navigate("/dashboard");  // الانتقال إلى صفحة أخرى بعد تسجيل الدخول
+      } else {
+        localStorage.removeItem("token");
+      }
 
     } catch (error) {
-      console.log("test10",error)
+      console.log("test10", error);
       if (error.response && error.response.data) {
         toast.error("Failed : " + error.response.data.message);
       } else {
-        toast.error("Failed to login:  : " + error.message);
+        toast.error("Failed to login: " + error.message);
       }
     } finally {
       setLoading(false);
