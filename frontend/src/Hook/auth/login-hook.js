@@ -44,19 +44,19 @@ const useLoginHook = () => {
         })
       );
 
-      // عرض النتائج في وحدة التحكم مع الفحص الأمني
-      if (res.error) {
-        console.log("Login error:", res.error.message);
-        toast.error(res.error.message || "Login failed.");
-        setLoading(false);
-        return;
-      }
+
+      // if (res.error) {
+      //   console.log("Login error:", res.error.message);
+      //   toast.error(res.error.message || "Login failed.");
+      //   setLoading(false);
+      //   return;
+      // }
 
       if (res.payload) {
         if (res.payload.token) {
           const token = res.payload.token;
           localStorage.setItem("token", token);
-          localStorage.setItem("user", JSON.stringify(res.payload.data)); // تخزين التوكن
+          localStorage.setItem("user", JSON.stringify(res.payload.data)); 
           toast.success("Login successful!"); 
           setTimeout(() => {
             navigate("/");
@@ -70,7 +70,7 @@ const useLoginHook = () => {
         if (res.payload.status === "error") {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
-          toast.error(res.payload.message);
+          toast.error("email or password is invalid");
           console.log("email or password is invalid");
           setLoading(false);
           return;

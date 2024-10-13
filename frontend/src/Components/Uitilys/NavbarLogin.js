@@ -34,7 +34,8 @@ const NavbarLogin = () => {
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem("user");
-    window.location.reload(); // Reload the page after logging out
+    localStorage.removeItem("token");
+    window.location.href = "/";  
   };
 
   // Close dropdown on outside click
@@ -96,7 +97,7 @@ const NavbarLogin = () => {
                 <ul>
                   <li>
                     <FontAwesomeIcon icon={faUser} />
-                    <a href="">My Profile</a>
+                    <a href="/user/profile">My Profile</a>
                   </li>
                   <li>
                     <FontAwesomeIcon icon={faEdit} />
