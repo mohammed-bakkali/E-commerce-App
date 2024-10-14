@@ -13,6 +13,7 @@ const LoginPage = () => {
     onChangePassword,
     handleLogin,
   } = useLoginHook();
+
   return (
     <div className="container center-flex" style={{ height: "670px" }}>
       <ToastContainer
@@ -53,22 +54,31 @@ const LoginPage = () => {
             {loading ? "Loading..." : "Continue"}
           </button>
         </form>
+
+        {/* Forgot password link */}
+        <div className="form-footer">
+          <Link to="/user/request-password" style={{ textDecoration: "none" }}>
+            <span className="ml-10" style={{ color: "#3b71ca" }}>
+              Forgot your password?
+            </span>
+          </Link>
+        </div>
+
         <div className="form-footer">
           <span className="c-black">OR</span>
           <p>
-            Not a member?
+            New user?
             <Link to="/register" style={{ textDecoration: "none" }}>
-              <span className="ml-10" style={{ color: "#3b71ca" }}>
+              <span className="ml-10" style={{ color: "##0EA5E9" }}>
                 Register
               </span>
             </Link>
           </p>
         </div>
-        {/*  */}
+
         <div className="form-footer">
-          <span className="c-black"></span>
           <p>
-            Not a member?
+            Admin?
             <Link to="/admin/dashboard" style={{ textDecoration: "none" }}>
               <span className="ml-10" style={{ color: "#3b71ca" }}>
                 Admin Enter
@@ -76,10 +86,10 @@ const LoginPage = () => {
             </Link>
           </p>
         </div>
+
         <div className="form-footer">
-          <span className="c-black"></span>
           <p>
-            Not a member?
+            User?
             <Link to="/user/allorders" style={{ textDecoration: "none" }}>
               <span className="ml-10" style={{ color: "#3b71ca" }}>
                 User Enter
