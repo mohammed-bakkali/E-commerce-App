@@ -15,7 +15,7 @@ const useAddSubcategory = () => {
 
   // Fetch categories on component mount
   useEffect(() => {
-    dispatch(fetchAllCategories(11));
+    dispatch(fetchAllCategories({}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -55,6 +55,9 @@ const useAddSubcategory = () => {
       await dispatch(createSubcategory({ data: { name, category: id } })).unwrap();
       toast.success("Subcategory added successfully.");
       setName("");
+
+      // add chek erros hear
+      
     } catch (error) {
       // Handle errors
       const errorMessage = error.response?.data?.message || error.response?.data || error.message;

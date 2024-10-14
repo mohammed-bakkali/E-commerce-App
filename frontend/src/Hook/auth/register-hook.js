@@ -59,7 +59,7 @@ const useRegisterHook = () => {
 
     return true;
   };
-  // const { user, error } = useSelector((state) => state.user.creatUsers);
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -76,8 +76,6 @@ const useRegisterHook = () => {
         phone,
       })
     );
-
-    console.log("Response:", res);
 
     if (loading === false) {
       if (res) {

@@ -11,7 +11,7 @@ const AdminAllOrdersPage = () => {
         <div className="">
         <AdminSideMenu />
         </div>
-        <div style={{ flex: "1" }}>
+        <div style={{ flex: "1",height:"670px" }}>
         <AdminAllOrders />
         <Pagination/>
         </div>

@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useAddBrandHook from "../../Hook/brand/add-brand-hook";
 import Spinner from "../Uitilys/Spinner";
 import { ToastContainer } from "react-toastify";
+import InternetConnectionChecker from "../../network/InternetConnectionChecker";
 const AdminAddBrand = () => {
   const {
     img,
@@ -28,6 +29,7 @@ const AdminAddBrand = () => {
         draggable
         pauseOnHover
       />
+      <InternetConnectionChecker />
       <h1 className="page-title">Add New Brand</h1>
       <form className="add-category-form" onSubmit={handleAddBrand}>
         <div className="form-group">

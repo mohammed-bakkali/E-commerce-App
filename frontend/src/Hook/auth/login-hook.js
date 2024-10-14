@@ -43,8 +43,6 @@ const useLoginHook = () => {
           password,
         })
       );
-
-
       // if (res.error) {
       //   console.log("Login error:", res.error.message);
       //   toast.error(res.error.message || "Login failed.");
@@ -71,7 +69,6 @@ const useLoginHook = () => {
           localStorage.removeItem("token");
           localStorage.removeItem("user");
           toast.error("email or password is invalid");
-          console.log("email or password is invalid");
           setLoading(false);
           return;
         }

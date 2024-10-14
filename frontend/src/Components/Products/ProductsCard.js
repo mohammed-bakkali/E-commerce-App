@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 const ProductsCard = ({ element }) => {
   // Ensure the image has a valid URL or use a default image
   const imageUrl = element.imageCover
+
     ? `http://${element.imageCover}`
     : "default-image-url.png"; // Replace with your default image URL
+    console.log("test",imageUrl)
   return (
     <div className="product-card">
       <div className="product-image-container">

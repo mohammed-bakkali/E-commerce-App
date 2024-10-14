@@ -16,7 +16,6 @@ const checkInternetConnection = async () => {
     return false;
   }
 };
-
 const InternetConnectionChecker = () => {
   const [online, setOnline] = useState(navigator.onLine);
 

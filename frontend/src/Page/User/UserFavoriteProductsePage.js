@@ -6,7 +6,7 @@ const UserFavoriteProductsePage = () => {
   return (
     <div className="container">
       <div
-        className=" d-flex column-direction mt-20 mb-10"  style={{ gap: "30px" }}>
+        className="d-flex column-direction mt-20 mb-10"  style={{ gap: "30px" }}>
         <div className="">
           <UserMenu />
         </div>

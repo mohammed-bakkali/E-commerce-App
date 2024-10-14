@@ -128,7 +128,7 @@ const NavbarLogin = () => {
               <span className="icon-label">Login</span>
             </a>
           )}
-          <a href="/favorites" className="d-flex flex-column align-items-center">
+          <a href="/user/favoriteproducts" className="d-flex flex-column align-items-center">
             <FontAwesomeIcon icon={faHeart} size="2x" className="fa-icon" />
             <span className="icon-label">Favorites</span>
           </a>

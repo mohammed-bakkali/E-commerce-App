@@ -40,7 +40,7 @@ function App() {
           <Route path="/allbrand" element={<AllBrandPage />} />
           <Route path="/products" element={<ShopProductsPage />} />
           <Route path="/products/:id" element={<ProductsDetalisPage />} />
-          <Route path="/card" element={<CartPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/order/payment-method" element={<PaymentMethodPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
           <Route path="/admin/allproducts" element={<AdminAllProductsPages />} />
