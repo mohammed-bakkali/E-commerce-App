@@ -21,6 +21,7 @@ const useAddSubcategory = () => {
 
   // Extract categories from Redux store
   const categories = useSelector((state) => state.category.categories);
+  console.log("test1", categories);
 
   // Handle dropdown category change
   const handleChange = (e) => setID(e.target.value);
@@ -52,21 +53,13 @@ const useAddSubcategory = () => {
 
     try {
       // Dispatch action to create subcategory
-      await dispatch(createSubcategory({ data: { name, category: id } })).unwrap();
+      await dispatch(
+        createSubcategory({ data: { name, category: id } })
+      ).unwrap();
       toast.success("Subcategory added successfully.");
       setName("");
-
-      // add chek erros hear
-      
     } catch (error) {
-      // Handle errors
-      const errorMessage = error.response?.data?.message || error.response?.data || error.message;
-      if (errorMessage.includes("Duplicate field value")) {
-        toast.error("Subcategory name already exists. Please use another name.");
-      } else {
-        toast.error("Failed to add subcategory. Please try again.");
-      }
-      console.error("Error response:", errorMessage);
+      toast.error("Failed to add Sub Category");
     } finally {
       setLoading(false);
     }

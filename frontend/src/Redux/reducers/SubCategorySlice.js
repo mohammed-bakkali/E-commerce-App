@@ -7,10 +7,10 @@ import { postData, fetchData } from "../../Hooks/httpRequests";
 // Create an AsyncThunk to creat sub-category
 export const createSubcategory = createAsyncThunk(
   "category/createsubCategory",
-  async ({ formData }, { rejectWithValue }) => {
+  async ({ data }, { rejectWithValue }) => {
     try {
-      console.log("Data being sent:", formData);
-      const response = await postData(`/api/v1/subcategories`, formData);
+      console.log("Data being sent:", data);
+      const response = await postData(`/api/v1/subcategories`, data);
       console.log("API Response:", response);
       
       console.log("TEST RESPONSE", response);
