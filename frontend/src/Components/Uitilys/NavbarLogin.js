@@ -143,6 +143,9 @@ const NavbarLogin = () => {
         </div>
       </div>
     </header>
+    <a href="https://www.df.com">
+      <img src="" alt="" />
+    </a>
   );
 };
 
