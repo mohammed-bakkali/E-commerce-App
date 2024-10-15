@@ -25,6 +25,7 @@ const NavbarLogin = () => {
   
   // Retrieve user info
   let user = JSON.parse(localStorage.getItem("user")) || null;
+  console.log("user", user);
 
   // Toggle dropdown
   const toggleDropdown = () => {
@@ -96,9 +97,14 @@ const NavbarLogin = () => {
                 </h3>
                 <ul>
                   <li>
-                    <FontAwesomeIcon icon={faUser} />
-                    <a href="/user/profile">My Profile</a>
+                    <FontAwesomeIcon icon={user.role === "admin" ? faCog : faUser} />
+                    {user.role === "admin" ? (
+                      <a href="/admin/dashboard">Dashboard</a>
+                    ) : (
+                      <a href="/user/profile">My Profile</a>
+                    )}
                   </li>
+
                   <li>
                     <FontAwesomeIcon icon={faEdit} />
                     <a href="#">Edit Profile</a>
@@ -143,7 +149,6 @@ const NavbarLogin = () => {
         </div>
       </div>
     </header>
-    
   );
 };
 

@@ -75,28 +75,6 @@ const LoginPage = () => {
             </Link>
           </p>
         </div>
-
-        <div className="form-footer">
-          <p>
-            Admin?
-            <Link to="/admin/dashboard" style={{ textDecoration: "none" }}>
-              <span className="ml-10" style={{ color: "#3b71ca" }}>
-                Admin Enter
-              </span>
-            </Link>
-          </p>
-        </div>
-
-        <div className="form-footer">
-          <p>
-            User?
-            <Link to="/user/allorders" style={{ textDecoration: "none" }}>
-              <span className="ml-10" style={{ color: "#3b71ca" }}>
-                User Enter
-              </span>
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   );
