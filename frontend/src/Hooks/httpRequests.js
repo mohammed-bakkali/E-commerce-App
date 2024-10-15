@@ -5,7 +5,7 @@ import baseURL from "../Api/BaseURL";
  *
  * @param {string} url - The API endpoint to send the request to.
  * @param {object} params - The query parameters to be sent with the request (optional).
- * @returns {object} - The response from the API.
+ * @returns {object} - The response data from the API.
  * @throws {Error} - Throws an error if the request fails.
  */
 const fetchData = async (url, data) => {
@@ -64,7 +64,7 @@ const postData = async (url, data) => {
  * Delete data from the API via a DELETE request.
  *
  * @param {string} url - The API endpoint to send the request to.
- * @returns {object} - The response from the API.
+ * @returns {object} - The response data from the API.
  * @throws {Error} - Throws an error if the request fails.
  */
 const deleteData = async (url) => {
@@ -76,6 +76,16 @@ const deleteData = async (url) => {
     throw error;
   }
 };
+
+/**
+ * Update data with image via a PUT request.
+ *
+ * @param {string} url - The API endpoint to send the request to.
+ * @param {object} params - The form data (including images) to be sent in the request.
+ * @param {number} [timeout=10000] - Optional timeout for the request in milliseconds.
+ * @returns {object} - The response data from the API.
+ * @throws {Error} - Throws an error if the request fails.
+ */
 
 const UpdatetDataWithImage = async (url, params) => {
   const config = {
@@ -93,6 +103,13 @@ const UpdatetDataWithImage = async (url, params) => {
   }
 };
 
+/**
+ * Update data via a PUT request.
+ *
+ * @param {string} url - The API endpoint to send the request to.
+ * @returns {object} - The response data from the API.
+ * @throws {Error} - Throws an error if the request fails.
+ */
 const UpdateData = async (url) => {
   try {
     const response = await baseURL.put(url);
@@ -104,4 +121,11 @@ const UpdateData = async (url) => {
 };
 
 // Export the functions for use in other parts of the application
-export { fetchData, postData, postDataWithImage, deleteData ,UpdatetDataWithImage, UpdateData};
+export {
+  fetchData,
+  postData,
+  postDataWithImage,
+  deleteData,
+  UpdatetDataWithImage,
+  UpdateData,
+};

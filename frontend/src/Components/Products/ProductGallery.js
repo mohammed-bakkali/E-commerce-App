@@ -6,6 +6,7 @@ import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 import { useParams } from "react-router-dom";
 import useViewProductsDetailsHook from "../../Hook/product/view-products-details-hook";
+import Spinner from "../Uitilys/Spinner";
 
 const ProductGallery = () => {
   // Extract the id from the URL
@@ -13,10 +14,14 @@ const ProductGallery = () => {
   // Fetch product details using hook
   const { item, loading, images } = useViewProductsDetailsHook(id);
 
-
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="gallery-container">
+        <Spinner />
+      </div>
+    );
   }
+
   if (!item || !item.images || item.images.length === 0) {
     return <div>No images available for this product.</div>;
   }
