@@ -69,8 +69,8 @@ const LoginPage = () => {
           <p>
             New user?
             <Link to="/register" style={{ textDecoration: "none" }}>
-              <span className="ml-10" style={{ color: "##0EA5E9" }}>
-                Register
+              <span className="ml-10" style={{ color: "#0EA5E9" }}>
+              Create an account
               </span>
             </Link>
           </p>

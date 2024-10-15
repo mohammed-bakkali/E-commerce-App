@@ -1,18 +1,12 @@
 import React from "react";
 import "../../styles/LoginPage.css";
 import { Link } from "react-router-dom";
-import useLoginHook from "../../Hook/auth/login-hook";
 import { ToastContainer } from "react-toastify";
+import useForgetPasswordHook from "../../Hook/auth/forget-password-hook";
 
-const RequestPasswordResetPage = () => {
-  const {
-    email,
-    password,
-    loading,
-    onChangeEmail,
-    onChangePassword,
-    handleLogin,
-  } = useLoginHook();
+const ForgetPasswordPage = () => {
+  const { OnchangeEmail, email, handleForgetPasswor, loading } =
+    useForgetPasswordHook();
   return (
     <div className="container center-flex" style={{ height: "670px" }}>
       <ToastContainer
@@ -27,13 +21,13 @@ const RequestPasswordResetPage = () => {
         pauseOnHover
       />
       <div className="form-container">
-      <h2>Request Password Reset</h2>
-        <form onSubmit={handleLogin}>
+        <h2>Request Password Reset</h2>
+        <form onSubmit={handleForgetPasswor}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
               value={email}
-              onChange={onChangeEmail}
+              onChange={OnchangeEmail}
               type="email"
               id="email"
               placeholder="Enter your email"
@@ -48,4 +42,4 @@ const RequestPasswordResetPage = () => {
   );
 };
 
-export default RequestPasswordResetPage;
+export default ForgetPasswordPage;

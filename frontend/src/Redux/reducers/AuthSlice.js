@@ -30,6 +30,20 @@ export const LoginUser = createAsyncThunk(
     }
   }
 );
+// Create an AsyncThunk to foregt password 
+export const LoginUser = createAsyncThunk(
+  "LoginUser/LoginUser",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await postData(`/api/v1/auth/login`, data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "Network Error"
+      );
+    }
+  }
+);
 
 const initialState = {
   creatUsers: [],
