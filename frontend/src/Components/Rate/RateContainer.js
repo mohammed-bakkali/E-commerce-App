@@ -3,32 +3,28 @@ import rate from "../../assets/images/rate.png";
 import RateItem from "./RateItem";
 import "../../styles/RateContainer.css";
 import RatePost from "./RatePost";
-import Pagination from "../Uitilys/Pagination"
+import Pagination from "../Uitilys/Pagination";
 
-const RateContainer = () => {
+const RateContainer = ({ rateAvg, rateQty }) => {
   return (
     <div className="rate">
       <div className="rate-header">
         <div className="rate-title">Ratings</div>
         <div className="rate-header-right">
           <img src={rate} alt="Rating" />
-          <div className="rate-value">4.4</div>
-          <div className="evaluation-count">180 evaluations</div>
+          <div className="rate-value">{rateAvg}</div>
+          <div className="evaluation-count">({`${rateQty} evaluations`})</div>
         </div>
       </div>
-
       <RatePost />
-
       <div className="rate-items">
         <RateItem />
         <RateItem />
         <RateItem />
         <RateItem />
         <RateItem />
-
-    
       </div>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 };

@@ -23,10 +23,10 @@ const useViewProductsDetailsHook = (id) => {
 
   const loading = useSelector((state) => state.product.loading);
 
-  console.log("Selected Product:", selectedProduct);
-  console.log("Selected Category:", selectedCategory);
-  console.log("Selected Brand:", selectedBrand); 
-  console.log("selectedProductLike",selectedProductLike);
+  // console.log("Selected Product:", selectedProduct);
+  // console.log("Selected Category:", selectedCategory);
+  // console.log("Selected Brand:", selectedBrand); 
+  // console.log("selectedProductLike",selectedProductLike);
 
   let item = selectedProduct || [];
 
