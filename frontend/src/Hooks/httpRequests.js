@@ -28,7 +28,10 @@ const fetchData = async (url, data) => {
  */
 const postDataWithImage = async (url, params) => {
   const config = {
-    headers: { "Content-Type": "multipart/form-data" }, // Required for sending images/files
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }, // Required for sending images/files
     timeout: 10000, // Set a timeout of 10 seconds for the request
   };
 
@@ -51,8 +54,12 @@ const postDataWithImage = async (url, params) => {
  * @throws {Error} - Throws an error if the request fails.
  */
 const postData = async (url, data) => {
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Required for sending images/files
+    timeout: 10000, // Set a timeout of 10 seconds for the request
+  };
   try {
-    const response = await baseURL.post(url, data);
+    const response = await baseURL.post(url, data, config);
     return response;
   } catch (error) {
     // Log or handle the error as necessary
