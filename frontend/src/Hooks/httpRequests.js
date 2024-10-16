@@ -74,9 +74,15 @@ const postData = async (url, data) => {
  * @returns {object} - The response data from the API.
  * @throws {Error} - Throws an error if the request fails.
  */
+// deleteData function
 const deleteData = async (url) => {
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Required for sending authorization token
+    timeout: 10000, // Set a timeout of 10 seconds for the request
+  };
+
   try {
-    const response = await baseURL.delete(url);
+    const response = await baseURL.delete(url, config);
     return response;
   } catch (error) {
     // Log or handle the error as necessary
@@ -96,7 +102,7 @@ const deleteData = async (url) => {
 
 const UpdatetDataWithImage = async (url, params) => {
   const config = {
-    headers: { "Content-Type": "multipart/form-data" }, // Required for sending images/files
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Required for sending images/files
     timeout: 10000, // Set a timeout of 10 seconds for the request
   };
 
@@ -118,8 +124,12 @@ const UpdatetDataWithImage = async (url, params) => {
  * @throws {Error} - Throws an error if the request fails.
  */
 const UpdateData = async (url) => {
+  const config = {
+    headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Required for sending images/files
+    timeout: 10000, // Set a timeout of 10 seconds for the request
+  };
   try {
-    const response = await baseURL.put(url);
+    const response = await baseURL.put(url, config);
     return response;
   } catch (error) {
     // Log or handle the error as necessary

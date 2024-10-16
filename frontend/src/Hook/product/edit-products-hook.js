@@ -143,12 +143,12 @@ const useEditProductsHook = (id) => {
       );
       return false;
     }
-    if (priceAftr < 0 || isNaN(priceAftr) || priceAftr >= priceBefore) {
-      toast.error(
-        "Price after discount must be a valid number less than the original price."
-      );
-      return false;
-    }
+    // if (priceAftr < 0 || isNaN(priceAftr) || priceAftr >= priceBefore) {
+    //   toast.error(
+    //     "Price after discount must be a valid number less than the original price."
+    //   );
+    //   return false;
+    // }
     if (qty <= 0 || !Number.isInteger(qty)) {
       toast.error("Quantity must be a whole number greater than 0.");
       return false;
@@ -193,7 +193,6 @@ const useEditProductsHook = (id) => {
   // Handle Edit a product
   const handleEditProduct = async (e) => {
     e.preventDefault();
-    console.log("Converting image:", images);
 
     // Validate before proceeding
     if (!validate()) return;
@@ -201,68 +200,71 @@ const useEditProductsHook = (id) => {
     const formData = new FormData();
 
     try {
-      setLoading(true);
+        setLoading(true);
 
-      // Convert cover image
-      console.log("Converting cover image...");
-      const imgCover = await convertImageToFile(
-        images[0],
-        `${Math.random()}.png`
-      );
-      formData.append("imageCover", imgCover);
-      console.log("Cover image converted.");
+        // Convert cover image
+        console.log("Converting cover image...");
+        const imgCover = await convertImageToFile(images[0], `${Math.random()}.png`);
+        formData.append("imageCover", imgCover);
+        console.log("Cover image converted.");
 
-      // Convert and append all images
-      console.log("Converting all images...");
-      const itemImages = await Promise.all(
-        Object.keys(images).map(async (key) => {
-          try {
-            return await convertImageToFile(
-              images[key],
-              `${Math.random()}.png`
-            );
-          } catch (error) {
-            console.error(`Error converting image: ${error.message}`);
-            return null; // Return null on error
-          }
-        })
-      );
+        // Convert and append all images
+        console.log("Converting all images...");
+        const itemImages = await Promise.all(
+            Object.keys(images).map(async (key) => {
+                try {
+                    return await convertImageToFile(images[key], `${Math.random()}.png`);
+                } catch (error) {
+                    console.error(`Error converting image: ${error.message}`);
+                    return null; // Return null on error
+                }
+            })
+        );
 
-      // Filter out invalid images
-      const validImages = itemImages.filter((imageFile) => imageFile !== null);
-      if (validImages.length === 0) {
-        toast.error("No valid images found. Please check the images uploaded.");
-        return;
-      }
+        // Filter out invalid images
+        const validImages = itemImages.filter((imageFile) => imageFile !== null);
+        if (validImages.length === 0) {
+            toast.error("No valid images found. Please check the images uploaded.");
+            return;
+        }
 
-      validImages.forEach((imageFile) => {
-        formData.append("images", imageFile);
-      });
+        validImages.forEach((imageFile) => {
+            formData.append("images", imageFile);
+        });
 
-      // Continue with adding other form fields...
-      formData.append("title", prodName);
-      formData.append("description", prodDescription);
-      formData.append("price", priceBefore);
-      formData.append("priceAftr", priceAftr);
-      formData.append("quantity", qty);
-      formData.append("category", CatID);
-      formData.append("brand", BrandID);
-      formData.append("colors", JSON.stringify(colors));
+        // Continue with adding other form fields...
+        formData.append("title", prodName);
+        formData.append("description", prodDescription);
+        formData.append("price", priceBefore);
+        formData.append("priceAftr", priceAftr);
+        formData.append("quantity", qty);
+        formData.append("category", CatID);
+        formData.append("brand", BrandID);
+        formData.append("colors", JSON.stringify(colors));
 
-      // Dispatch an action to edit the product
-      await dispatch(editProduct({ id, formData }));
-      toast.success("Product edited successfully!");
-      resetForm();
+        // Dispatch an action to edit the product
+        const res = await dispatch(editProduct({ id, formData }));
+
+        // Check the result after submitting
+        if (res && res.meta && res.meta.requestStatus === "fulfilled") {
+            toast.success("Product edited successfully!");
+            resetForm();
+        } else {
+            toast.error("Failed to edit product"); 
+        }
     } catch (error) {
-      toast.error(
-        `Failed to edit product: ${
-          error.response?.data?.message || error.message
-        }`
-      );
+        console.error("Error during product editing:", error);
+        if (error.response) {
+            console.log("Response error data:", error.response.data);
+            toast.error("Failed to edit product: " + (error.response.data.message || "Unknown error"));
+        } else {
+            toast.error("Failed to edit product: " + error.message || "Network error");
+        }
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
+
 
   // Function to convert image based on its format
   const convertImageToFile = async (images, filename) => {

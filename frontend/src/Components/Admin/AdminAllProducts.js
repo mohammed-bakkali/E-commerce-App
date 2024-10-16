@@ -5,7 +5,7 @@ const AdminAllProducts = ({ products }) => {
   return (
     <>
       <div className=" mb-10 fw-bold fs-20">Management all Product </div>
-      <div className="responsive-grid-250">
+      <div className="responsive-grid-250" style={{gap: "6px"}}>
         {products ? (
           products.map((element, index) => (
             // eslint-disable-next-line no-undef

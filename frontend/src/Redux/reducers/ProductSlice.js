@@ -5,6 +5,7 @@ import {
   fetchData,
   UpdatetDataWithImage,
 } from "../../Hooks/httpRequests";
+import { config } from "@fortawesome/fontawesome-svg-core";
 
 // AsyncThunk to create a product
 export const createProduct = createAsyncThunk(
@@ -114,7 +115,7 @@ export const deletProduct = createAsyncThunk(
   "product/deletProduct",
   async ({ id }, { rejectWithValue }) => {
     try {
-      const response = await deleteData(`api/v1/products/${id}`, "DELETE");
+      const response = await deleteData(`api/v1/products/${id}`, "DELETE",config);
       return {
         deletProduct: response.data.data || [],
       };
@@ -139,9 +140,7 @@ export const editProduct = createAsyncThunk(
         editProduct: response.data.data || [],
       };
     } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+      return rejectWithValue(error);
     }
   }
 );
