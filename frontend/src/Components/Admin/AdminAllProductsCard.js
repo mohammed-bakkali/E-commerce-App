@@ -36,7 +36,6 @@ const AdminAllProductsCard = ({ element }) => {
         toast.error("Failed to delete product");
       }
     } catch (error) {
-      console.error("Error deleting product:", error);
       toast.error(error.message || "Failed to delete product");
     } finally {
       setIsModalOpen(false);

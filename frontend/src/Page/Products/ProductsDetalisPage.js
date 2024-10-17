@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 const ProductsDetalisPage = () => {
   const { id } = useParams();
   const  { item, selectedCategory, selectedProductLike, cat, brand, loading, images } =useViewProductsDetailsHook(id)
-  console.log("item",item)
   if (item) {
     var rateAvg = item.ratingsAverage
     var rateQty = item.ratingsQuantity

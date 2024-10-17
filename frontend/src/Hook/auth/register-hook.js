@@ -79,9 +79,7 @@ const useRegisterHook = () => {
 
     if (loading === false) {
       if (res) {
-        console.log(res);
         if (res.payload.token) {
-          console.log(res.payload.token);
           const token = res.payload.token;
           localStorage.setItem("token", token);
           toast.success("Registration successful!");
@@ -93,7 +91,6 @@ const useRegisterHook = () => {
       }
       if (res.payload.errors && res.payload.errors.length > 0) {
         if (res.payload.errors[0].msg) {
-          console.log(res.payload.errors);
           toast.error(res.payload.errors[0].msg);
           localStorage.removeItem("token");
           setLoading(false);

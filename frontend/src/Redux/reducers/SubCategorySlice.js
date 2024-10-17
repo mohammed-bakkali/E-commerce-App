@@ -9,12 +9,7 @@ export const createSubcategory = createAsyncThunk(
   "category/createsubCategory",
   async ({ data }, { rejectWithValue }) => {
     try {
-      console.log("Data being sent:", data);
       const response = await postData(`/api/v1/subcategories`, data);
-      console.log("API Response:", response);
-      
-      console.log("TEST RESPONSE", response);
-
       if (response) {
         return {
           subcategories: response.data.data,

@@ -10,7 +10,6 @@ const ProductsCard = ({ element }) => {
 
     ? `http://${element.imageCover}`
     : "default-image-url.png"; // Replace with your default image URL
-    console.log("test",imageUrl)
   return (
     <div className="product-card">
       <div className="product-image-container">

@@ -33,7 +33,6 @@ const useViewSearchProductsHook = () => {
       const queryString = createQueryString();
       await dispatch(fetchAllProductsSearch({ queryString }));
     } catch (error) {
-      console.error("Error fetching products:", error);
     }
   };
 
@@ -47,7 +46,6 @@ const useViewSearchProductsHook = () => {
       const queryString = createQueryString(page);
       await dispatch(fetchAllProductsPages({ queryString }));
     } catch (error) {
-      console.error("Error fetching products for page:", error);
     }
   };
 

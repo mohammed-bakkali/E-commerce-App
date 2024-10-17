@@ -68,8 +68,7 @@ export const fetchOneBrand = createAsyncThunk(
   "brand/fetchOneBrand",
   async ({ id }, { rejectWithValue }) => {
     try {
-      const response = await fetchData(`api/v1/brands/${id}`);
-      console.log("test",response.data.data.name)
+      const response = await fetchData(`api/v1/brands/${id}`)
       if (response.data) {
         return {
           oneBrand: response.data.data || [], // Return the brand details

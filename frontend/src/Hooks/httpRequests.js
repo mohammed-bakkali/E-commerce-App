@@ -37,7 +37,6 @@ const postDataWithImage = async (url, params) => {
 
   try {
     const res = await baseURL.post(url, params, config);
-    console.log("Status:", res.status); // Log the status of the response
     return res;
   } catch (error) {
     // Log or handle the error as necessary

@@ -9,7 +9,6 @@ const checkInternetConnection = async () => {
       });
       return response.ok;
     } catch (error) {
-      console.error("Fetch error:", error);
       return false;
     }
   } else {
@@ -23,7 +22,6 @@ const InternetConnectionChecker = () => {
     const checkConnection = async () => {
       const isOnline = await checkInternetConnection();
       if (!isOnline && online) {
-        console.log("You are offline", online);
         toast.error("You are offline");
         setOnline(false);
       } else if (isOnline && !online) {

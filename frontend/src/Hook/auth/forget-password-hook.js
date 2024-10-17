@@ -23,20 +23,14 @@ const useForgetPasswordHook = () => {
         email: email,
       })
     );
-    setLoading(false)
+    setLoading(false);
   };
   const response = useSelector((state) => state.user.forgetPassword);
   console.log("test10", response);
   useEffect(() => {
-    console.log("test1", response);
-    // console.log("test2", response.payload);
-    console.log("test3", response.data);
-
     if (loading === false) {
       if (response) {
-        console.log("test4",response)
         toast.error("teste");
-        // console.log("test", response.payload);
       }
     }
 

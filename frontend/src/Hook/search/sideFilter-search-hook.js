@@ -4,7 +4,7 @@ import { fetchAllCategories } from "../../Redux/reducers/categorySlice";
 import { fetchAllBrands } from "../../Redux/reducers/BrandSlice";
 import useViewSearchProductsHook from "../product/view-search-products";
 
-// Page Fetch categories and Brands and return values 
+// Page Fetch categories and Brands and return values
 
 const useSideFilterSearchHook = () => {
   const { getProduct } = useViewSearchProductsHook();
@@ -40,15 +40,13 @@ const useSideFilterSearchHook = () => {
       }
     }
   };
-useEffect(() => {
-    querCat = catChecked.map((val) => "category[in][]=" + val).join("&")
+  useEffect(() => {
+    querCat = catChecked.map((val) => "category[in][]=" + val).join("&");
     localStorage.setItem("catChecked", querCat);
     setTimeout(() => {
       getProduct();
     }, 1000);
-  
-}, [catChecked]);
-
+  }, [catChecked]);
 
   var querBrand = "";
   const [brandChecked, setBrandChecked] = useState([]);
@@ -66,51 +64,55 @@ useEffect(() => {
     }
   };
   useEffect(() => {
-    querBrand = brandChecked.map((val) => "brand[in][]=" + val).join("&")
+    querBrand = brandChecked.map((val) => "brand[in][]=" + val).join("&");
     localStorage.setItem("brandChecked", querBrand);
     setTimeout(() => {
       getProduct();
     }, 1000);
-  
-}, [brandChecked]);
+  }, [brandChecked]);
 
-const [priceFrom, setPriceFrom] = useState();
-const [priceTo, setPriceTo] = useState();
+  const [priceFrom, setPriceFrom] = useState();
+  const [priceTo, setPriceTo] = useState();
 
-const handlePriceFromChange = (e) => {
-  const value = e.target.value;
-  setPriceFrom(value);
-  localStorage.setItem("priceFrom", value);
-  console.log("Price from:", value);
-}
+  const handlePriceFromChange = (e) => {
+    const value = e.target.value;
+    setPriceFrom(value);
+    localStorage.setItem("priceFrom", value);
+  };
 
-const handlePriceToChange = (e) => {
-  const value = e.target.value;
-  setPriceTo(value);
-  localStorage.setItem("priceTo", value);
-  console.log("Price to:", value);
-}
+  const handlePriceToChange = (e) => {
+    const value = e.target.value;
+    setPriceTo(value);
+    localStorage.setItem("priceTo", value);
+  };
 
-useEffect(() => {
-  setTimeout(() => {
+  useEffect(() => {
+    setTimeout(() => {
+      getProduct();
+    }, 1000);
+  }, [priceFrom, priceTo]);
+
+  //
+  const handleClearFilter = () => {
+    localStorage.clear();
+
+    setPriceFrom(100);
+    setPriceTo(500);
+    setcatChecked([]);
+    setBrandChecked([]);
+
     getProduct();
-  }, 1000);
-}, [priceFrom,priceTo]);
+  };
 
-// 
-const handleClearFilter = () => {
-  localStorage.clear();
-
-  setPriceFrom(100);
-  setPriceTo(500);
-  setcatChecked([]);
-  setBrandChecked([]);
-
-  getProduct();
-};
-
-return { categories, brands, clickCategory, clickBrand, handlePriceFromChange, handlePriceToChange,handleClearFilter };
-
+  return {
+    categories,
+    brands,
+    clickCategory,
+    clickBrand,
+    handlePriceFromChange,
+    handlePriceToChange,
+    handleClearFilter,
+  };
 };
 
 export default useSideFilterSearchHook;

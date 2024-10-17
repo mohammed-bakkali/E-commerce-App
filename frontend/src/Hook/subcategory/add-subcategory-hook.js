@@ -21,7 +21,6 @@ const useAddSubcategory = () => {
 
   // Extract categories from Redux store
   const categories = useSelector((state) => state.category.categories);
-  console.log("test1", categories);
 
   // Handle dropdown category change
   const handleChange = (e) => setID(e.target.value);

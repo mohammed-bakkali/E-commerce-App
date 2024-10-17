@@ -2,10 +2,21 @@ import React from "react";
 import ReactStars from "react-rating-stars-component";
 import "../../styles/RatePost.css";
 import useAddRateHook from "../../Hook/review/add-rate-hook";
+import { ToastContainer } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const RatePost = () => {
-  const { rateText, rateValue, HandleRateText, HandleRateValue, user, onSubmit } =
-    useAddRateHook();
+  const { id } = useParams();
+  const {
+    rateText,
+    rateValue,
+    HandleRateText,
+    HandleRateValue,
+    user,
+    onSubmit,
+  } = useAddRateHook(id);
+
+
 
   const settings = {
     size: 20,
@@ -25,6 +36,17 @@ const RatePost = () => {
 
   return (
     <div className="rate-post">
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="rate-post-header">
         <h3>{user.name}</h3>
         <ReactStars {...settings} />
@@ -35,7 +57,9 @@ const RatePost = () => {
         className="rate-post-comment"
         placeholder="Write your comment here..."
       ></textarea>
-      <button onClick={onSubmit} className="rate-post-button">Add Rate</button>
+      <button onClick={onSubmit} className="rate-post-button">
+        Add Rate
+      </button>
     </div>
   );
 };

@@ -25,7 +25,6 @@ const NavbarLogin = () => {
   
   // Retrieve user info
   let user = JSON.parse(localStorage.getItem("user")) || null;
-  console.log("user", user);
 
   // Toggle dropdown
   const toggleDropdown = () => {
