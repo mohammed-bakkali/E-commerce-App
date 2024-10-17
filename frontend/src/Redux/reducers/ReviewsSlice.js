@@ -10,22 +10,20 @@ export const createReview = createAsyncThunk(
   async ({ id, body }, { rejectWithValue }) => {
     try {
       const response = await postData(`/api/v1/products/${id}/reviews`, body);
-      console.log("Response:", response); // Log the response to see its structure
-      return {
-        review: response.data, // Make sure response.data is what you expect
-        status: response.status,
-      };
+      return response; // Return the data if the request is successful
     } catch (error) {
-      console.log("Error:", error); // Log the error if it occurs
-      return rejectWithValue(error.response?.data || error.message); // Handle error correctly
-    }
+      // Pass the error message to the rejected action
+      return rejectWithValue(error.response.data); // تعديل هنا لتمرير رسالة الخطأ
+  }
+  
   }
 );
 
 
+
 // Initial state for the slice
 const initialState = {
-  createReviews: null,
+  createReviews: [],
   loading: false,
   error: null,
 };
@@ -45,7 +43,7 @@ const ReviewtSlice = createSlice({
       })
       .addCase(createReview.fulfilled, (state, action) => {
         state.loading = false;
-        state.createReviews = action.payload; // Store the payload directly
+        state.createReviews.push(action.payload);
       })
       .addCase(createReview.rejected, (state, action) => {
         state.loading = false;

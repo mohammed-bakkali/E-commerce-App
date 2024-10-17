@@ -7,11 +7,9 @@ import { createReview } from "../../Redux/reducers/ReviewsSlice";
 const useAddRateHook = (id) => {
   const [rateText, setRateText] = useState("");
   const [rateValue, setRateValue] = useState(0);
-
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
 
   const HandleRateText = (e) => {
     setRateText(e.target.value);
@@ -37,39 +35,64 @@ const useAddRateHook = (id) => {
 
     // Review data to be sent
     const reviewData = {
-      id, 
+      id,
       body: {
         rating: rateValue,
         review: rateText,
       },
     };
 
-    await dispatch(createReview(reviewData));
+    const res = await dispatch(createReview(reviewData));
 
+    if (loading === false) {
+      if (res) {
+        console.log("test1", res.payload.status);
+        console.log("test2", res.payload);
+        console.log("test3", res.payload.status);
+    
 
+        if (res.payload.message === "You already added review on this product") {
+          console.log("test2", res.payload.message);
+          toast.error("You already added review on this product");
+    
+        } else if (res.payload.message === "You are not allowed to perform this action") {
+          console.log("test300");
+          toast.error("You are not allowed to perform this action!");
+    
+        }
+      }
+      console.log(res);
+    }
+    
   };
 
-  const loading = useSelector((state) => state.review.loading);
-  const res = useSelector((state) => state.review.createReviews);
-  const error = useSelector((state) => state.review.error);
-// In your component's useEffect hook
-useEffect(() => {
-  if (!loading) {
-    if (res) {
-      console.log("ss", res); // This should now log the payload
-      console.log("review:", res.review);
-      console.log("status:", res.status);
-    } else if (error) {
-      console.error("Error creating review:", error);
-      // Display the error message to the user
-      toast.error(error?.errors[0]?.msg || "An error occurred while creating the review.");
-    }
-  }
-}, [loading, res, error]);
+  // const res = useSelector((state) => state.review.createReviews);
 
-
-  
-  
+  // In your component's useEffect hook
+  // useEffect(() => {
+  //   if (!loading) {
+  //     if (res) {
+  //       console.log("ss", res); // This should now log the payload
+  //       console.log("review:", res.review);
+  //       console.log("status:", res.status);
+  //       if (res.status === 201) {
+  //         toast.success("Review added successfully!");
+  //         setRateText("");
+  //         setRateValue(0);
+  //       }
+  //       if (res.status === 403) {
+  //         toast.success("You are not allowed to do this!");
+  //       }
+  //     } else if (error) {
+  //       console.error("Error creating review:", error);
+  //       // Display the error message to the user
+  //       toast.error(
+  //         error?.errors[0]?.msg ||
+  //           "An error occurred while creating the review."
+  //       );
+  //     }
+  //   }
+  // }, [loading, res, error]);
 
   return {
     rateText,
@@ -78,7 +101,6 @@ useEffect(() => {
     HandleRateValue,
     user,
     onSubmit,
-    loading,
   };
 };
 
