@@ -72,12 +72,6 @@ const useAddCategoryHook = () => {
     }
   };
 
-  // Effect to log success message when category is added
-  // useEffect(() => {
-  //   if (!loading && response?.status === 201) {
-  //     console.log("Category added successfully");
-  //   }
-  // }, [loading, response]);
 
   // Return state and handlers for use in the component
   return { img, name, loading, isPress, onNameChange, onImageChange, handleAddCategory };

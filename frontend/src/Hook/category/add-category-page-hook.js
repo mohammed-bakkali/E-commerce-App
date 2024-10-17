@@ -26,7 +26,6 @@ const useAddCategoryPageHook = () => {
 
   // Handle page change events
   const handlePageClick = (pageNumber) => {
-    console.log("Selected Page:", pageNumber); // Log selected page for debugging
     dispatch(fetchAllCategoriesPage({ page: pageNumber }));
   };
 

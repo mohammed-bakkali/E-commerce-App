@@ -48,19 +48,27 @@ const useAddRateHook = (id) => {
 
 
   };
-  // Get loading state and response from Redux
+
   const loading = useSelector((state) => state.review.loading);
   const res = useSelector((state) => state.review.createReviews);
-  useEffect(() => {
-    if (!loading && res) {
-      if (res.length > 0) {
-        toast.success("Rating submitted successfully!");
-        console.log("Review submission response:", res);
-      } else {
-        console.log("No reviews returned or review list is empty.");
-      }
+  const error = useSelector((state) => state.review.error);
+// In your component's useEffect hook
+useEffect(() => {
+  if (!loading) {
+    if (res) {
+      console.log("ss", res); // This should now log the payload
+      console.log("review:", res.review);
+      console.log("status:", res.status);
+    } else if (error) {
+      console.error("Error creating review:", error);
+      // Display the error message to the user
+      toast.error(error?.errors[0]?.msg || "An error occurred while creating the review.");
     }
-  }, [loading, res]);
+  }
+}, [loading, res, error]);
+
+
+  
   
 
   return {

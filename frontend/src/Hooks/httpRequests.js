@@ -107,7 +107,6 @@ const UpdatetDataWithImage = async (url, params) => {
 
   try {
     const res = await baseURL.put(url, params, config);
-    console.log("Status:", res.status); // Log the status of the response
     return res;
   } catch (error) {
     // Log or handle the error as necessary

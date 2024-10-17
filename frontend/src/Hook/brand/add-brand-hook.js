@@ -69,12 +69,6 @@ const useAddBrandHook = () => {
     setImg(avatar);
     setSelectedFile(null);
   };
-  useEffect(() => {
-    // Reset form and state based on response or loading state
-    if (!loading && response.status === 201) {
-      console.log("Brand added successfully");
-    }
-  }, [loading, response]);
 
   return {
     img,

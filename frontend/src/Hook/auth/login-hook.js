@@ -43,12 +43,7 @@ const useLoginHook = () => {
           password,
         })
       );
-      // if (res.error) {
-      //   console.log("Login error:", res.error.message);
-      //   toast.error(res.error.message || "Login failed.");
-      //   setLoading(false);
-      //   return;
-      // }
+
 
       if (res.payload) {
         if (res.payload.token) {

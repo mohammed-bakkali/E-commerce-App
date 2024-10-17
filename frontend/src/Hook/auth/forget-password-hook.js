@@ -26,7 +26,6 @@ const useForgetPasswordHook = () => {
     setLoading(false);
   };
   const response = useSelector((state) => state.user.forgetPassword);
-  console.log("test10", response);
   useEffect(() => {
     if (loading === false) {
       if (response) {
@@ -36,8 +35,7 @@ const useForgetPasswordHook = () => {
 
     // Check server response
     if (response) {
-      console.log(response);
-      // toast.error(response.payload.message);
+      toast.error(response.payload.message);
       setLoading(false);
       return;
     }
