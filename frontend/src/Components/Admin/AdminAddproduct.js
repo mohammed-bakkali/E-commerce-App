@@ -10,6 +10,7 @@ import useAddProductHook from "../../Hook/product/add-product-hook";
 
 
 import { CompactPicker } from "react-color";
+import InternetConnectionChecker from "../../network/InternetConnectionChecker";
 const AdminAddProduct = () => {
   const {
     prodName,
@@ -65,6 +66,7 @@ const AdminAddProduct = () => {
         draggable
         pauseOnHover
       />
+        <InternetConnectionChecker />
       <h1 className="page-title">Add New Product</h1>
       {/* Product Images Section */}
       <div className="form-group">

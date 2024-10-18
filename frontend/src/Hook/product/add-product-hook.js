@@ -1,5 +1,4 @@
 // logic
-
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchAllCategories } from "../../Redux/reducers/categorySlice";
@@ -54,13 +53,13 @@ const useAddProductHook = () => {
     }
     setCatID(el.target.value);
   };
-
   useEffect(() => {
     if (CatID !== 0 && subCategorys) {
       setOptions(subCategorys);
     }
   }, [CatID, subCategorys]);
 
+  
   // Handle brand selection
   const onSeletBrand = (el) => {
     SetBrandID(el.target.value);
@@ -98,7 +97,6 @@ const useAddProductHook = () => {
 
   // Input validation
   const validate = () => {
-    // Check if product name is valid
     if (!prodName.trim()) {
       toast.error("Product name is required.");
       return false;
@@ -107,8 +105,6 @@ const useAddProductHook = () => {
       toast.error("Product name must be between 3 and 50 characters.");
       return false;
     }
-
-    // Check if description is valid
     if (!prodDescription.trim()) {
       toast.error("Description is required.");
       return false;
@@ -117,8 +113,6 @@ const useAddProductHook = () => {
       toast.error("Description must be between 10 and 1000 characters.");
       return false;
     }
-
-    // Check price before discount
     if (priceBefore <= 0) {
       toast.error("Price before discount must be greater than 0.");
       return false;
@@ -127,7 +121,6 @@ const useAddProductHook = () => {
       toast.error("Price before discount must be a valid number.");
       return false;
     }
-
     // Check price after discount
     if (priceAftr < 0) {
       toast.error("Price after discount cannot be negative.");
@@ -143,7 +136,6 @@ const useAddProductHook = () => {
       );
       return false;
     }
-
     // Check quantity
     if (qty <= 0) {
       toast.error("Quantity must be greater than 0.");
@@ -154,19 +146,16 @@ const useAddProductHook = () => {
       toast.error("Quantity must be a whole number.");
       return false;
     }
-
     // Category selection check
     if (!CatID) {
       toast.error("Please select a category.");
       return false;
     }
-
     // Brand selection check
     if (!BrandID) {
       toast.error("Please select a brand.");
       return false;
     }
-
     // Color selection check
     if (colors.length === 0) {
       toast.error("At least one color must be selected.");
@@ -226,7 +215,6 @@ const useAddProductHook = () => {
     try {
       await dispatch(createProduct({ formData })).unwrap();
       toast.success("Product added successfully");
-      // Reset form fields after successful submission
       resetForm();
     } catch (error) {
       if (error.response && error.response.data) {

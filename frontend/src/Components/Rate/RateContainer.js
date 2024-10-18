@@ -19,10 +19,6 @@ const RateContainer = ({ rateAvg, rateQty }) => {
       <RatePost />
       <div className="rate-items">
         <RateItem />
-        <RateItem />
-        <RateItem />
-        <RateItem />
-        <RateItem />
       </div>
       <Pagination />
     </div>

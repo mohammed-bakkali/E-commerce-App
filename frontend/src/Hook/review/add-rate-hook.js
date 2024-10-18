@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { createReview } from "../../Redux/reducers/ReviewsSlice";
 
@@ -8,8 +7,9 @@ const useAddRateHook = (id) => {
   const [rateText, setRateText] = useState("");
   const [rateValue, setRateValue] = useState(0);
   const [loading, setLoading] = useState(false);
+  
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
 
   const HandleRateText = (e) => {
     setRateText(e.target.value);

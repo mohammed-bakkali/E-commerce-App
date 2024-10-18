@@ -8,6 +8,7 @@ import MultiImageInput from 'react-multiple-image-input';
 
 import add from "../../assets/icons/add-icon-1.png";
 import useEditProductsHook from '../../Hook/product/edit-products-hook';
+import InternetConnectionChecker from '../../network/InternetConnectionChecker';
 // import { MultiImageInput } from 'react-multiple-image-input';
 const AdminEditproduct = () => {
 const {id} =  useParams();
@@ -63,6 +64,7 @@ const {
         draggable
         pauseOnHover
       />
+        <InternetConnectionChecker />
       <h1 className="page-title">Edit  Product {}</h1>
       {/* Product Images Section */}
       <div className="form-group">

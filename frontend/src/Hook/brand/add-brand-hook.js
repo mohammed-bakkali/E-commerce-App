@@ -5,15 +5,14 @@ import { toast } from "react-toastify";
 import avatar from "../../assets/images/avatar.png";
 
 const useAddBrandHook = () => {
-  const dispatch = useDispatch();
-  const response = useSelector((state) => state.brand.brands);
-
   // State variables
   const [name, setName] = useState("");
   const [img, setImg] = useState(avatar);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false); // Initial loading state
   const [isPress, setIsPress] = useState(false);
+
+  const dispatch = useDispatch();
 
   // Handle image change
   const onImageChange = (e) => {
@@ -48,7 +47,6 @@ const useAddBrandHook = () => {
     formData.append("name", name);
     formData.append("image", selectedFile);
 
-    // Set loading and submit form
     setLoading(true);
     setIsPress(true);
 
@@ -63,7 +61,6 @@ const useAddBrandHook = () => {
       setIsPress(false);
     }
   };
-  // Reset form after successful submission
   const resetForm = () => {
     setName("");
     setImg(avatar);

@@ -119,21 +119,7 @@ const categorySlice = createSlice({
         state.loading = false; // 
         state.error = action.payload; 
       })
-      //========================== Handle fetchAllCategoriesPage ========================== //
-      // .addCase(fetchAllCategoriesPage.pending, (state) => {
-      //   state.loading = true;
-      //   state.error = null;
-      // })
-      // .addCase(fetchAllCategoriesPage.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.categories = action.payload.categories;
-      //   state.totalPages = action.payload.totalPages;
-      // })
-      // .addCase(fetchAllCategoriesPage.rejected, (state, action) => {
-      //   state.loading = false;
-      //   state.error = action.payload;
-      // })
-      //========================== Handle fetchOneCategory ========================== //
+
       .addCase(fetchOneCategory.pending, (state) => {
         state.loading = true;
         state.error = null;

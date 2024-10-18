@@ -6,17 +6,14 @@ import avatar from "../../assets/images/avatar.png";
 
 // Custom hook for handling category addition logic
 const useAddCategoryHook = () => {
-  const dispatch = useDispatch();
-  
-  // Get response from the Redux store
-  // const response = useSelector((state) => state.category.categories);
-
-  // Local state variables for handling form input and submission status
+  // State variables
   const [name, setName] = useState("");
   const [img, setImg] = useState(avatar);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isPress, setIsPress] = useState(false);
+
+  const dispatch = useDispatch();
 
   // Handler for image input change
   const onImageChange = (e) => {
@@ -59,11 +56,7 @@ const useAddCategoryHook = () => {
     try {
       await dispatch(createCategory({ formData })).unwrap();
       toast.success("Category added successfully");
-      
-      // Reset form fields after successful submission
-      setName("");
-      setImg(avatar); // Reset image to default
-      setSelectedFile(null);
+      resetForm();
     } catch (error) {
       toast.error("Failed to add category");
     } finally {
@@ -71,10 +64,22 @@ const useAddCategoryHook = () => {
       setIsPress(false);
     }
   };
-
+  const resetForm = () => {
+    setName("");
+    setImg(avatar);
+    setSelectedFile(null);
+  };
 
   // Return state and handlers for use in the component
-  return { img, name, loading, isPress, onNameChange, onImageChange, handleAddCategory };
+  return {
+    img,
+    name,
+    loading,
+    isPress,
+    onNameChange,
+    onImageChange,
+    handleAddCategory,
+  };
 };
 
 export default useAddCategoryHook;

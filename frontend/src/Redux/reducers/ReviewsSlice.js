@@ -19,6 +19,20 @@ export const createReview = createAsyncThunk(
   }
 );
 
+export const fetchAllProductsReview = createAsyncThunk(
+  "review/createReview",
+  async ({ id, body }, { rejectWithValue }) => {
+    try {
+      const response = await postData(`/api/v1/products/${id}/reviews`, body);
+      return response; // Return the data if the request is successful
+    } catch (error) {
+      // Pass the error message to the rejected action
+      return rejectWithValue(error.response.data); // تعديل هنا لتمرير رسالة الخطأ
+  }
+  
+  }
+);
+
 
 
 // Initial state for the slice
