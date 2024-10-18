@@ -7,7 +7,9 @@ const useViewAllReviewHook = (id) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setLoading(false);
+    setLoading(true);
+
+
   }, []);
 };
 

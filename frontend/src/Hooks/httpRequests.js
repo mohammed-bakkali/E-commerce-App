@@ -18,6 +18,16 @@ const fetchData = async (url, data) => {
   }
 };
 
+const fetchData = async (url, data) => {
+  try {
+    const response = await baseURL.get(url, { data });
+    return response;
+  } catch (error) {
+    // Log the error or handle it as necessary
+    throw error;
+  }
+};
+
 /**
  * Send a POST request with image data using "multipart/form-data" format.
  *

@@ -13,36 +13,32 @@ export const createReview = createAsyncThunk(
       return response; // Return the data if the request is successful
     } catch (error) {
       // Pass the error message to the rejected action
-      return rejectWithValue(error.response.data); // تعديل هنا لتمرير رسالة الخطأ
+      return rejectWithValue(error.response.data); 
   }
   
   }
 );
 
-export const fetchAllProductsReview = createAsyncThunk(
-  "review/createReview",
-  async ({ id, body }, { rejectWithValue }) => {
+export const fetchAllProductReview = createAsyncThunk(
+  "review/fetchAllProductsReview",
+  async ({ id }, { rejectWithValue }) => {
     try {
-      const response = await postData(`/api/v1/products/${id}/reviews`, body);
-      return response; // Return the data if the request is successful
+      const response = await postData(`/api/v1/reviews/${id}/reviews`);
+      return response; 
     } catch (error) {
-      // Pass the error message to the rejected action
-      return rejectWithValue(error.response.data); // تعديل هنا لتمرير رسالة الخطأ
+      return rejectWithValue(error.response.data); 
   }
   
   }
 );
 
 
-
-// Initial state for the slice
 const initialState = {
   createReviews: [],
   loading: false,
   error: null,
 };
 
-// Create the product slice
 const ReviewtSlice = createSlice({
   name: "review",
   initialState,
