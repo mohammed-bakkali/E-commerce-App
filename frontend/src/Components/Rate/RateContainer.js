@@ -8,8 +8,9 @@ import useViewAllReviewHook from "../../Hook/review/view-all-review-hook";
 import { useParams } from "react-router-dom";
 
 const RateContainer = ({ rateAvg, rateQty }) => {
-  const { loading, allReview, onPageChange } = useViewAllReviewHook();
   const { id } = useParams();
+  const { loading, allReview, onPageChange } = useViewAllReviewHook(id);
+
   return (
     <div className="rate">
       <div className="rate-header">

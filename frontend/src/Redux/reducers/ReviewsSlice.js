@@ -11,7 +11,7 @@ export const createReview = createAsyncThunk(
   async ({ id, body }, { rejectWithValue }) => {
     try {
       const response = await postData(`/api/v1/products/${id}/reviews`, body);
-      return response; // Return the data if the request is successful
+      return response.data; // Return the data if the request is successful
     } catch (error) {
       // Pass the error message to the rejected action
       return rejectWithValue(error.response.data); 
@@ -22,16 +22,17 @@ export const createReview = createAsyncThunk(
 
 export const fetchAllProductReview = createAsyncThunk(
   "review/fetchAllProductsReview",
-  async ({ id,page ,limit }, { rejectWithValue }) => {
+  async ({ id, page, limit }, { rejectWithValue }) => {
     try {
-      const response = await fetchDatatoken(`/api/v1/reviews/${id}/reviews?page=${page}&limit=${limit}`);
-      return response; 
+      const response = await fetchDatatoken(`/api/v1/products/${id}/reviews?page=${page}&limit=${limit}`);
+      console.log("API Response:", response); // Log the response
+      return response.data; 
     } catch (error) {
       return rejectWithValue(error.response.data); 
-  }
-  
+    }
   }
 );
+
 
 
 const initialState = {
@@ -68,7 +69,7 @@ const ReviewtSlice = createSlice({
       })
       .addCase(fetchAllProductReview.fulfilled, (state, action) => {
         state.loading = false;
-        state.allReviewsProduct = action.payload; 
+        state.allReviewsProduct = action.payload.allReviewsProduct; 
       })
       .addCase(fetchAllProductReview.rejected, (state, action) => {
         state.loading = false;
