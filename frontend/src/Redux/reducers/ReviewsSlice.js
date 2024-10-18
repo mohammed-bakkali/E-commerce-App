@@ -14,9 +14,8 @@ export const createReview = createAsyncThunk(
       return response.data; // Return the data if the request is successful
     } catch (error) {
       // Pass the error message to the rejected action
-      return rejectWithValue(error.response.data); 
-  }
-  
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -24,11 +23,26 @@ export const fetchAllProductReview = createAsyncThunk(
   "review/fetchAllProductsReview",
   async ({ id, page, limit }, { rejectWithValue }) => {
     try {
-      const response = await fetchDatatoken(`/api/v1/products/${id}/reviews?page=${page}&limit=${limit}`);
-      console.log("API Response:", response); // Log the response
-      return response.data; 
+      const response = await fetchDatatoken(
+        `/api/v1/products/${id}/reviews?page=${page}&limit=${limit}`
+      );
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data); 
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteAllProductReview = createAsyncThunk(
+  "review/fetchAllProductsReview",
+  async ({ id}, { rejectWithValue }) => {
+    try {
+      const response = await fetchDatatoken(
+        `/api/v1/reviews/${id}`
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -62,14 +76,14 @@ const ReviewtSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-       // Fetch All Reviews
+      // Fetch All Reviews
       .addCase(fetchAllProductReview.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchAllProductReview.fulfilled, (state, action) => {
         state.loading = false;
-        state.allReviewsProduct = action.payload; 
+        state.allReviewsProduct = action.payload;
       })
       .addCase(fetchAllProductReview.rejected, (state, action) => {
         state.loading = false;

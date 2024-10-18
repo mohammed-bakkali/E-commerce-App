@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 
 const RateContainer = ({ rateAvg, rateQty }) => {
   const { id } = useParams();
-  const { loading, allReview, onPageChange } = useViewAllReviewHook(id);
+  const {allReview, onPageChange } = useViewAllReviewHook(id);
 
   return (
     <div className="rate">
