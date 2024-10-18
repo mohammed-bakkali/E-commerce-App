@@ -18,9 +18,16 @@ const fetchData = async (url, data) => {
   }
 };
 
-const fetchData = async (url, data) => {
+const fetchDatatoken = async (url, data) => {
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }, 
+    timeout: 10000, // Set a timeout of 10 seconds for the request
+  };
   try {
-    const response = await baseURL.get(url, { data });
+    const response = await baseURL.get(url, config);
     return response;
   } catch (error) {
     // Log the error or handle it as necessary
@@ -148,6 +155,7 @@ const UpdateData = async (url) => {
 // Export the functions for use in other parts of the application
 export {
   fetchData,
+  fetchDatatoken,
   postData,
   postDataWithImage,
   deleteData,

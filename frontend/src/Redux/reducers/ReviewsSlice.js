@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   fetchData,
+  fetchDatatoken,
   postData,
   postDataWithImage,
 } from "../../Hooks/httpRequests";
@@ -21,9 +22,9 @@ export const createReview = createAsyncThunk(
 
 export const fetchAllProductReview = createAsyncThunk(
   "review/fetchAllProductsReview",
-  async ({ id }, { rejectWithValue }) => {
+  async ({ id,page ,limit }, { rejectWithValue }) => {
     try {
-      const response = await postData(`/api/v1/reviews/${id}/reviews`);
+      const response = await fetchDatatoken(`/api/v1/reviews/${id}/reviews?page=${page}&limit=${limit}`);
       return response; 
     } catch (error) {
       return rejectWithValue(error.response.data); 
@@ -35,6 +36,7 @@ export const fetchAllProductReview = createAsyncThunk(
 
 const initialState = {
   createReviews: [],
+  allReviews: [],
   loading: false,
   error: null,
 };
@@ -46,7 +48,7 @@ const ReviewtSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      // Creat product
+      // Create Review
       .addCase(createReview.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -56,6 +58,19 @@ const ReviewtSlice = createSlice({
         state.createReviews.push(action.payload);
       })
       .addCase(createReview.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+       // Fetch All Reviews
+      .addCase(fetchAllProductReview.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllProductReview.fulfilled, (state, action) => {
+        state.loading = false;
+        state.allReviews = action.payload; 
+      })
+      .addCase(fetchAllProductReview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
