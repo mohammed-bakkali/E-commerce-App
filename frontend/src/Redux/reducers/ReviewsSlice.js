@@ -36,7 +36,7 @@ export const fetchAllProductReview = createAsyncThunk(
 
 const initialState = {
   createReviews: [],
-  allReviews: [],
+  allReviewsProduct: [],
   loading: false,
   error: null,
 };
@@ -68,7 +68,7 @@ const ReviewtSlice = createSlice({
       })
       .addCase(fetchAllProductReview.fulfilled, (state, action) => {
         state.loading = false;
-        state.allReviews = action.payload; 
+        state.allReviewsProduct = action.payload; 
       })
       .addCase(fetchAllProductReview.rejected, (state, action) => {
         state.loading = false;

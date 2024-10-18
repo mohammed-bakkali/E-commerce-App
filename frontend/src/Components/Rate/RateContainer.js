@@ -4,8 +4,12 @@ import RateItem from "./RateItem";
 import "../../styles/RateContainer.css";
 import RatePost from "./RatePost";
 import Pagination from "../Uitilys/Pagination";
+import useViewAllReviewHook from "../../Hook/review/view-all-review-hook";
+import { useParams } from "react-router-dom";
 
 const RateContainer = ({ rateAvg, rateQty }) => {
+  const { loading, allReview, onPageChange } = useViewAllReviewHook();
+  const { id } = useParams();
   return (
     <div className="rate">
       <div className="rate-header">
