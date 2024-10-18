@@ -31,7 +31,15 @@ const RateContainer = ({ rateAvg, rateQty }) => {
           <div>No reviews found.</div>
         )}
       </div>
-      <Pagination onPageChange={onPageChange} />
+      <Pagination
+  totalPages={
+    allReview.paginationResult
+      ? allReview.paginationResult.numberOfPages
+      : 0
+  }
+  onPageChange={onPageChange}
+/>
+
     </div>
   );
 };
