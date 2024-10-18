@@ -2,17 +2,16 @@ import React from "react";
 import "../../styles/RateItem.css";
 import rate from "../../assets/images/rate.png";
 
-const RateItem = () => {
+const RateItem = ({ review }) => {
   return (
     <div className="rate-item">
       <div className="rate-item-header">
-        <div>Mohammed</div>
+        <div>{review.user.name || "Unknown User"}</div>
         <img src={rate} alt="Rating" height="16px" width="16px" />
-        <div className="rate-value">4.3</div>
+        <div className="rate-value">{review.rating || "N/A"}</div> 
       </div>
-
       <div className="rate-description">
-        A product that is reasonably priced for the time being. It has a very good face and comes with an extra arm.
+        {review.review || "No description available."}
       </div>
     </div>
   );

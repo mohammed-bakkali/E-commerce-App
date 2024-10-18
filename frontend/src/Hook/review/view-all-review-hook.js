@@ -12,23 +12,13 @@ const useViewAllReviewHook = (id) => {
     console.log("test", allReview);
   }
   useEffect(() => {
-    const fetchReviews = async () => {
-      setLoading(true);
-      try {
-        await dispatch(fetchAllProductReview({ id, page: 1, limit: 10 })).unwrap();
-      } catch (error) {
-        console.error("Failed to fetch reviews:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    fetchReviews();
-  }, [dispatch, id]);
-  
+    setLoading(true);
+    dispatch(fetchAllProductReview({ id, page: 1, limit: 10 }));
+    setLoading(false);
+  }, [dispatch]);
 
   const onPageChange = async (page) => {
-    await dispatch(fetchAllProductReview({ id, page: 1, limit: 10 }));
+    await dispatch(fetchAllProductReview({ id, page, limit: 10 }));
   };
 
   return { loading, allReview, onPageChange };

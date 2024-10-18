@@ -23,9 +23,15 @@ const RateContainer = ({ rateAvg, rateQty }) => {
       </div>
       <RatePost />
       <div className="rate-items">
-        <RateItem />
+        {allReview.data ? (
+          allReview.data.map((review, index) => (
+            <RateItem key={index} review={review} />
+          ))
+        ) : (
+          <div>No reviews found.</div>
+        )}
       </div>
-      <Pagination />
+      <Pagination onPageChange={onPageChange} />
     </div>
   );
 };
