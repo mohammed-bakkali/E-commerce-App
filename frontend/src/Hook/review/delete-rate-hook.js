@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import  { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteProductReview } from "../../Redux/reducers/ReviewsSlice";
 import { toast } from "react-toastify";
 
-const useDeleteRateHook = ( review ) => {
+const useDeleteRateHook = (review) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUser, setIsUser] = useState(false);
   const dispatch = useDispatch();
 
   let user = JSON.parse(localStorage.getItem("user"));
 
+  useEffect(() => {
+    if (review && review.user && user && review.user._id === user._id) {
+      setIsUser(true);
+    }
+  }, [isUser, review, user]);
   
-
-  if (review && review.user && user && review.user._id === user._id) {
-    setIsUser(true);
-  }
-
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -27,7 +27,7 @@ const useDeleteRateHook = ( review ) => {
 
   const handleEdit = () => {};
 
-  const onConfirm = async () => {
+  const onConfirmDelete = async () => {
     try {
       const res = await dispatch(deleteProductReview({ id: review._id }));
       if (res.type === "review/deleteProductReview/fulfilled") {
@@ -43,7 +43,7 @@ const useDeleteRateHook = ( review ) => {
     }
   };
 
-  return { isModalOpen,isUser, openModal, closeModal, onConfirm, handleEdit };
+  return { isModalOpen, isUser, openModal, closeModal, onConfirmDelete, handleEdit };
 };
 
 export default useDeleteRateHook;

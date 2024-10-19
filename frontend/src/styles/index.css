@@ -603,7 +603,9 @@ body {
 
 /* Buttons for Delete and Cancel */
 #confirmDelete,
-#cancelDelete {
+#cancelDelete,
+#cancelEdit,
+#confirmEdit {
   width: 100%;
   height: 30px;
   padding: 10px 20px;
@@ -612,31 +614,34 @@ body {
   margin-bottom: 0;
   border: none;
   cursor: pointer;
-  font-size: 12px; 
+  font-size: 12px;
   transition: background-color 0.3s, transform 0.2s;
   font-weight: bold; /* Make text bold */
 }
 
 /* Delete Button */
-#confirmDelete {
-  background-color: #f00; /* Red background */
+#confirmDelete,
+#confirmEdit {
+  background-color: #f00;
   color: white;
 }
 
-#confirmDelete:hover {
-  background-color: #c00; /* Darker red for hover */
-  transform: scale(1.02); /* Slight scaling effect on hover */
+#confirmDelete,
+#confirmEdit:hover {
+  background-color: #c00; 
+  transform: scale(1.02); 
 }
 
 /* Cancel Button */
-#cancelDelete {
-  background-color: #ccc; /* Gray background */
+#cancelDelete,
+#cancelEdit {
+  background-color: #ccc; 
   color: black;
 }
 
 #cancelDelete:hover {
-  background-color: #bbb; /* Darker gray for hover */
-  transform: scale(1.02); /* Slight scaling effect on hover */
+  background-color: #bbb; 
+  transform: scale(1.02); 
 }
 
 /* End css Molada */

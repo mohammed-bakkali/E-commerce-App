@@ -46,7 +46,7 @@ export const deleteProductReview = createAsyncThunk(
     }
   }
 );
-export const editeAllProductReview = createAsyncThunk(
+export const editeProductReview = createAsyncThunk(
   "review/editeAllProductReview",
   async ({ id }, { rejectWithValue }) => {
     try {
@@ -114,15 +114,15 @@ const ReviewtSlice = createSlice({
         state.error = action.payload;
       })
       // Edite Reviews
-      .addCase(editeAllProductReview.pending, (state) => {
+      .addCase(editeProductReview.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(editeAllProductReview.fulfilled, (state, action) => {
+      .addCase(editeProductReview.fulfilled, (state, action) => {
         state.loading = false;
         state.editeReviewsProduct = action.payload;
       })
-      .addCase(editeAllProductReview.rejected, (state, action) => {
+      .addCase(editeProductReview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });

@@ -43,9 +43,6 @@ const useAddRateHook = (id) => {
     };
 
     const res = await dispatch(createReview(reviewData));
-    console.log("test1",res)
-    console.log("test2",res.payload)
-    console.log("test3",res.payload.requestStatus)
 
     if (loading === false) {
       if (res) {
