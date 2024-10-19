@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  deleteData,
   fetchData,
   fetchDatatoken,
   postData,
   postDataWithImage,
+  UpdateData,
 } from "../../Hooks/httpRequests";
 
 export const createReview = createAsyncThunk(
@@ -34,12 +36,21 @@ export const fetchAllProductReview = createAsyncThunk(
 );
 
 export const deleteAllProductReview = createAsyncThunk(
-  "review/fetchAllProductsReview",
-  async ({ id}, { rejectWithValue }) => {
+  "review/deleteAllProductReview",
+  async ({ id }, { rejectWithValue }) => {
     try {
-      const response = await fetchDatatoken(
-        `/api/v1/reviews/${id}`
-      );
+      const response = await deleteData(`/api/v1/reviews/${id}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+export const editeAllProductReview = createAsyncThunk(
+  "review/editeAllProductReview",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await UpdateData(`/api/v1/reviews/${id}`);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -47,11 +58,11 @@ export const deleteAllProductReview = createAsyncThunk(
   }
 );
 
-
-
 const initialState = {
   createReviews: [],
   allReviewsProduct: [],
+  deleteReviewsProduct: [],
+  editeReviewsProduct: [],
   loading: false,
   error: null,
 };
@@ -86,6 +97,32 @@ const ReviewtSlice = createSlice({
         state.allReviewsProduct = action.payload;
       })
       .addCase(fetchAllProductReview.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Delete Reviews
+      .addCase(deleteAllProductReview.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteAllProductReview.fulfilled, (state, action) => {
+        state.loading = false;
+        state.deleteReviewsProduct = action.payload;
+      })
+      .addCase(deleteAllProductReview.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      // Edite Reviews
+      .addCase(editeAllProductReview.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(editeAllProductReview.fulfilled, (state, action) => {
+        state.loading = false;
+        state.editeReviewsProduct = action.payload;
+      })
+      .addCase(editeAllProductReview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
