@@ -1,10 +1,11 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editeProductReview } from "../../Redux/reducers/ReviewsSlice";
 import { toast } from "react-toastify";
 
 const useEditRateHook = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [newRateText, setNewRateText] = useState("");
   const [isUser, setIsUser] = useState(false);
 
   const dispatch = useDispatch();
@@ -17,9 +18,13 @@ const useEditRateHook = () => {
     setIsEditModalOpen(false);
   };
 
+  const onChangeRateText = (e) => {
+    setNewRateText(e.target.value);
+  };
+
   const onConfirmEdit = async () => {
     try {
-      const res = await dispatch(editeProductReview({ }));
+      const res = await dispatch(editeProductReview({}));
       if (res.type === "review/editProductReview/fulfilled") {
         toast.success("Rating edit successfully");
         // window.location.reload();
@@ -33,7 +38,14 @@ const useEditRateHook = () => {
     }
   };
 
-  return { isEditModalOpen, openEditModal, closeEditModal, onConfirmEdit };
+  return {
+    isEditModalOpen,
+    openEditModal,
+    closeEditModal,
+    onConfirmEdit,
+    onChangeRateText,
+    newRateText,
+  };
 };
 
 export default useEditRateHook;

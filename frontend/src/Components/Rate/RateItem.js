@@ -9,8 +9,14 @@ const RateItem = ({ review }) => {
   const { isModalOpen, isUser, openModal, closeModal, onConfirm } =
     useDeleteRateHook(review);
 
-  const { isEditModalOpen, openEditModal, closeEditModal, onConfirmEdit } =
-    useEditRateHook(review);
+  const {
+    isEditModalOpen,
+    openEditModal,
+    closeEditModal,
+    onConfirmEdit,
+    onChangeRateText,
+    newRateText,
+  } = useEditRateHook(review);
 
   if (!review || !review.user) {
     return <div>No review available</div>;
@@ -75,13 +81,11 @@ const RateItem = ({ review }) => {
                 min="1"
                 max="5"
                 placeholder="Enter new rating"
+                onChange={onChangeRateText}
+                value={newRateText}
               />
               <label htmlFor="reviewInput">New Review:</label>
-              <textarea
-                id="reviewInput"
-                placeholder="Enter new review"
-
-              />
+              <textarea id="reviewInput" placeholder="Enter new review" />
             </div>
             <button id="confirmEdit" onClick={onConfirmEdit}>
               Edit
