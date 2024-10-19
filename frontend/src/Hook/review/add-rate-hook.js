@@ -43,11 +43,15 @@ const useAddRateHook = (id) => {
     };
 
     const res = await dispatch(createReview(reviewData));
+    console.log("test1",res)
+    console.log("test2",res.payload)
+    console.log("test3",res.payload.requestStatus)
 
     if (loading === false) {
       if (res) {
         // Check if there are errors
         if (res.payload.errors && res.payload.errors[0]) {
+          console.log(res.payload)
           if (res.payload.errors[0].msg === "You already added review on this product") {
             toast.error("You already added review on this product");
           } else if (res.payload.errors[0].msg === "You are not allowed to perform this action") {
@@ -56,12 +60,13 @@ const useAddRateHook = (id) => {
         } 
         // Check if there's a message field
         else if (res.payload.message) {
+          console.log(res.payload.message)
           if (res.payload.message === "You are not allowed to perform this action") {
             toast.error("You are not allowed to perform this action!");
           }
         } 
         // Check for success
-        else if (res.payload.status === "success" || res.payload.status === 201) {
+        else if (res.type === "review/createReview/fulfilled") {
           toast.success("Review added successfully!");
           // Optionally reset the fields if needed
           setRateText("");

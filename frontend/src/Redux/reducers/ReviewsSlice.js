@@ -35,8 +35,8 @@ export const fetchAllProductReview = createAsyncThunk(
   }
 );
 
-export const deleteAllProductReview = createAsyncThunk(
-  "review/deleteAllProductReview",
+export const deleteProductReview = createAsyncThunk(
+  "review/deleteProductReview",
   async ({ id }, { rejectWithValue }) => {
     try {
       const response = await deleteData(`/api/v1/reviews/${id}`);
@@ -101,15 +101,15 @@ const ReviewtSlice = createSlice({
         state.error = action.payload;
       })
       // Delete Reviews
-      .addCase(deleteAllProductReview.pending, (state) => {
+      .addCase(deleteProductReview.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(deleteAllProductReview.fulfilled, (state, action) => {
+      .addCase(deleteProductReview.fulfilled, (state, action) => {
         state.loading = false;
-        state.deleteReviewsProduct = action.payload;
+        state.deleteReviewsProduct = action.payload.deleteReviewsProduct;
       })
-      .addCase(deleteAllProductReview.rejected, (state, action) => {
+      .addCase(deleteProductReview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
