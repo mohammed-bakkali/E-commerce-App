@@ -36,7 +36,7 @@
   padding: 0.5rem 1rem;
   font-size: 1rem;
   color: #fff;
-  background-color: #3b71ca;
+  background-color: black;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -44,5 +44,5 @@
 }
 
 .rate-post-button:hover {
-  background-color: #2a5a9b;
+  background-color: #333;
 }

@@ -44,8 +44,8 @@ const ProductText = () => {
       <p className="product-brand">Brand: {brand?.name || "Brand Name"}</p>
 
       <div className="rating">
-        <span className="rating-value">{item.ratingsQuantity || "0.0"}</span>(
-        {item.ratingsQuantity || "0"} reviews)
+        <span className="rating-value">{item.ratingsAverage || "0.0"} (customer reviews)</span>
+        {/* {item.ratingsQuantity || "0"} reviews) */}
       </div>
       <button className="detail-add-to-cart">Add to Cart</button>
       <button className="detail-back-to-products" onClick={handleBackClick}>

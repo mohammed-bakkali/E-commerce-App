@@ -58,10 +58,10 @@
   line-height: 40px;
   padding: 0 !important;
   margin-top: 12px !important;
-  background: #1f6bc7;
+  background: black;
   text-align: center;
   color: white;
 }
 .add-to-cart:hover {
-  background: #1f6bc7;
+  background-color: #333;
 }
