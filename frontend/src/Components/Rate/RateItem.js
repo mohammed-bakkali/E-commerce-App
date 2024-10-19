@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import useDeleteRateHook from "../../Hook/review/delete-rate-hook";
 import useEditRateHook from "../../Hook/review/edit-rate-hook";
+import ReactStars from "react-rating-stars-component";
 
 const RateItem = ({ review }) => {
   const { isModalOpen, isUser, openModal, closeModal, onConfirm } =
@@ -16,11 +17,29 @@ const RateItem = ({ review }) => {
     onConfirmEdit,
     onChangeRateText,
     newRateText,
+    HandleRateValue,
+    newRateValue,
   } = useEditRateHook(review);
 
   if (!review || !review.user) {
     return <div>No review available</div>;
   }
+
+  const settings = {
+    size: 20,
+    count: 5,
+    color: "#979797",
+    activeColor: "#ffc107",
+    value: newRateValue,
+    a11y: true,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    filledIcon: <i className="fa fa-star" />,
+    onChange: (newValue) => {
+      HandleRateValue(newValue);
+    },
+  };
 
   return (
     <div className="rate-item">
@@ -72,20 +91,15 @@ const RateItem = ({ review }) => {
             <span className="close" onClick={closeEditModal}>
               &times;
             </span>
-            <p id="OnePro">Are you sure you want to edit this Rating?</p>
+            <p id="OnePro"> Edit this Rating?</p>
             <div className="edit-form">
-              <label htmlFor="ratingInput">New Rating:</label>
-              <input
-                type="number"
-                id="ratingInput"
-                min="1"
-                max="5"
-                placeholder="Enter new rating"
+              <ReactStars {...settings} />
+              <textarea
                 onChange={onChangeRateText}
                 value={newRateText}
+                id="reviewInput"
+                placeholder="Enter new review"
               />
-              <label htmlFor="reviewInput">New Review:</label>
-              <textarea id="reviewInput" placeholder="Enter new review" />
             </div>
             <button id="confirmEdit" onClick={onConfirmEdit}>
               Edit

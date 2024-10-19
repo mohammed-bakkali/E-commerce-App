@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 import { editeProductReview } from "../../Redux/reducers/ReviewsSlice";
 import { toast } from "react-toastify";
 
-const useEditRateHook = () => {
+const useEditRateHook = (review) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [newRateText, setNewRateText] = useState("");
+  const [newRateText, setNewRateText] = useState(review.review);
+  const [newRateValue, setNewRateValue] = useState(review.rating);
   const [isUser, setIsUser] = useState(false);
 
   const dispatch = useDispatch();
@@ -20,6 +21,10 @@ const useEditRateHook = () => {
 
   const onChangeRateText = (e) => {
     setNewRateText(e.target.value);
+  };
+
+  const HandleRateValue = (e) => {
+    setNewRateValue(e.target.value);
   };
 
   const onConfirmEdit = async () => {
@@ -45,6 +50,8 @@ const useEditRateHook = () => {
     onConfirmEdit,
     onChangeRateText,
     newRateText,
+    HandleRateValue,
+    newRateValue,
   };
 };
 

@@ -2,7 +2,7 @@
   font-size: 1.25rem;
   font-weight: 600;
   color: #333;
-  border: 1px solid black;
+  border: 1px solid var(--clr-primary);
   padding: 8px;
   border-radius: 5px;
   cursor: pointer;
@@ -14,7 +14,7 @@
 }
 
 .shopping-now {
-  background-color: #000;
+  background: var(--clr-primary);
   color: #fff;
   padding: 10px 20px;
   border-radius: 5px;

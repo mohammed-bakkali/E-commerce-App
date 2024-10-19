@@ -58,7 +58,7 @@
   line-height: 40px;
   padding: 0 !important;
   margin-top: 12px !important;
-  background: black;
+  background: var(--clr-primary);
   text-align: center;
   color: white;
 }

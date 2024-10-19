@@ -1,4 +1,6 @@
 :root {
+  --clr-primary: black;
+  --clr-primary--hover: #333;
   --blue-color: #3b71ca;
   --blue-alt-color: #0d69d5;
   --orange-color: #f59e0b;
@@ -17,7 +19,12 @@ body {
   font-family: "Roboto", sans-serif;
   background: #f2f2f7;
 }
-
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
 /* Start Container */
 .container {
   padding-left: 15px;
@@ -182,7 +189,7 @@ body {
 
 /* Start Color */
 .c-black {
-  color: black;
+  color: var(--clr-primary);
 }
 .c-white {
   color: white;
@@ -573,6 +580,7 @@ body {
 }
 .modal #OnePro {
   text-align: left;
+  margin-bottom: 20px;
 }
 
 /* Modal Content */
@@ -636,7 +644,7 @@ body {
 #cancelDelete,
 #cancelEdit {
   background-color: #ccc;
-  color: black;
+  color: var(--clr-primary);
 }
 
 #cancelDelete:hover,
@@ -656,11 +664,14 @@ body {
   box-sizing: border-box;
 }
 
-
 #ratingInput:focus,
 #reviewInput:focus {
-  border-color: #007bff; 
+  border-color: #007bff;
   outline: none;
+}
+
+textarea {
+  resize: vertical;
 }
 
 /* End css Molada */

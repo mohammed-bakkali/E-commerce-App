@@ -73,8 +73,8 @@ const NavbarLogin = () => {
             className="c-white"
             style={{
               width: "64px",
-              backgroundColor: "#3b71ca",
-              border: "1px solid #3b71ca",
+              backgroundColor: "black",
+              border: "1px solid black",
               cursor: "pointer",
             }}
           >

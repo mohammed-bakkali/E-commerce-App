@@ -41,7 +41,7 @@
 }
 
 .product-info {
-  display: flex ;
+  display: flex;
   align-items: center;
 }
 
@@ -62,7 +62,7 @@
 .remove-item {
   background-color: transparent;
   border: 1px solid #e7e7e7;
-  color: black !important;
+  color: var(--clr-primary) !important;
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;

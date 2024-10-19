@@ -38,7 +38,7 @@ header .search-bar {
   padding: 0.5rem;
   border: 1px solid #ddd;
   width: 100%;
-  border-color: #0082e6;
+  border-color: var(--clr-primary);
 }
 
 /* Icons styling */
@@ -46,12 +46,12 @@ header .search-bar {
   display: flex;
   text-decoration: none;
   flex-direction: column;
-  color: #000;
+  color: var(--clr-primary);
   margin: 0 10px;
 }
 
 .icons a:hover {
-  color: #3b71ca;
+  color: var(--clr-primary--hover);
 }
 
 header .fa-icon {
