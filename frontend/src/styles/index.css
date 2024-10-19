@@ -616,7 +616,7 @@ body {
   cursor: pointer;
   font-size: 12px;
   transition: background-color 0.3s, transform 0.2s;
-  font-weight: bold; /* Make text bold */
+  font-weight: bold;
 }
 
 /* Delete Button */
@@ -626,22 +626,23 @@ body {
   color: white;
 }
 
-#confirmDelete,
+#confirmDelete:hover,
 #confirmEdit:hover {
-  background-color: #c00; 
-  transform: scale(1.02); 
+  background-color: #900;
+  transform: scale(1.02);
 }
 
 /* Cancel Button */
 #cancelDelete,
 #cancelEdit {
-  background-color: #ccc; 
+  background-color: #ccc;
   color: black;
 }
 
-#cancelDelete:hover {
-  background-color: #bbb; 
-  transform: scale(1.02); 
+#cancelDelete:hover,
+#cancelEdit:hover {
+  background-color: #bbb;
+  transform: scale(1.02);
 }
 
 /* End css Molada */
