@@ -7,12 +7,12 @@ const AdminAddBrandPage = () => {
     <div className="container">
       <div
         className=" d-flex column-direction mt-20 mb-10"
-        style={{ gap: "30px" }}
+        style={{ gap: "30px", marginTop: "30px" }}
       >
         <div className="">
           <AdminSideMenu />
         </div>
-        <div style={{ flex: "1",height: "670px" }}>
+        <div style={{ flex: "1", height: "670px" }}>
           <AdminAddBrand />
         </div>
       </div>

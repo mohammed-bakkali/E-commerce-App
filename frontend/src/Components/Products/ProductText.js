@@ -17,7 +17,19 @@ const ProductText = () => {
   return (
     <div className="product-info-details">
       <h1 className="product-title">{item?.title || "Product Name"}</h1>
+      
       <p className="product-category">{cat.name}:</p>
+      <h3 className="Specifications">Description:</h3>
+      <p className="product-description">
+        {item?.description || "No description available for this product."}
+      </p>
+      <div className="price-section">
+        <span className="price">${item?.price || "0.00"}</span>
+        {item?.originalPrice && (
+          <span className="original-price">${item.originalPrice}</span>
+        )}
+      </div>
+      <h3>Color:</h3>
       <div className="product-colors">
         {item.availableColors && item.availableColors.length > 0 ? (
           item.availableColors.map((color, index) => (
@@ -31,16 +43,7 @@ const ProductText = () => {
           <p>No colors available</p>
         )}
       </div>
-      <h3 className="Specifications">Description:</h3>
-      <p className="product-description">
-        {item?.description || "No description available for this product."}
-      </p>
-      <div className="price-section">
-        <span className="price">${item?.price || "0.00"}</span>
-        {item?.originalPrice && (
-          <span className="original-price">${item.originalPrice}</span>
-        )}
-      </div>
+
       <p className="product-brand">Brand: {brand?.name || "Brand Name"}</p>
 
       <div className="rating">

@@ -1,4 +1,3 @@
-/* AdminSideMenu.css */
 .sidmenu {
   width: 250px;
   padding: 20px;
@@ -10,7 +9,7 @@
 .sidmenu .menu-item {
   display: flex;
   align-items: center;
-  padding: 10px 0px 10px 15px;;
+  padding: 10px 0px 10px 15px;
   margin-bottom: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -27,10 +26,14 @@
 .sidmenu .menu-item .icon-dashboard,
 .sidmenu .menu-item .icon-orders,
 .sidmenu .menu-item .icon-products,
-.sidmenu .menu-item .icon-brand,
-.sidmenu .menu-item .icon-category,
-.sidmenu .menu-item .icon-subcategory,
-.sidmenu .menu-item .icon-add-product {
+.sidmenu .menu-item .icon-manage-brand,
+.sidmenu .menu-item .icon-manage-category,
+.sidmenu .menu-item .icon-manage-subcategory,
+.sidmenu .menu-item .icon-add-brand,
+.sidmenu .menu-item .icon-add-category,
+.sidmenu .menu-item .icon-add-subcategory,
+.sidmenu .menu-item .icon-add-product,
+.sidmenu .menu-item .icon-users {
   margin-right: 10px;
   font-size: 18px;
 }
@@ -48,27 +51,35 @@
   color: #2ecc71;
 }
 
-.icon-brand {
-  color: #f39c12;
+.icon-manage-brand,
+.icon-add-brand {
+  color: #f39c12; /* Same color for managing and adding brand */
 }
 
-.icon-category {
-  color: #9b59b6;
+.icon-manage-category,
+.icon-add-category {
+  color: #9b59b6; /* Same color for managing and adding category */
 }
 
-.icon-subcategory {
-  color: #34495e;
+.icon-manage-subcategory,
+.icon-add-subcategory {
+  color: #34495e; /* Same color for managing and adding subcategory */
 }
 
 .icon-add-product {
   color: #1abc9c;
 }
 
+/* Color for Manage Users */
+.icon-users {
+  color: #e67e22; /* لون مخصص لإدارة المستخدمين */
+}
+
 .sidmenu .menu-item span {
   font-size: 16px;
 }
 
-
+/* Responsive styling */
 @media (max-width: 992px) {
   .sidmenu {
     width: 100%;

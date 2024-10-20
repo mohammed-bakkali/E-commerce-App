@@ -53,6 +53,7 @@ a {
     width: 95%;
   }
 }
+
 /* End Container */
 /* Start Box */
 .d-flex {
@@ -473,7 +474,7 @@ a {
 /* Start Modal */
 /* End Modal */
 /* Add responsive media query */
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .column-direction {
     flex-direction: column;
   }

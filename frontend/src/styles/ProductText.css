@@ -5,7 +5,7 @@
 .product-title {
   font-size: 2rem;
   margin: 0;
-  color: #333;
+  color: #222;
 }
 
 .product-category {
@@ -20,16 +20,18 @@
 }
 
 .color-option {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   margin-right: 0.5rem;
   cursor: pointer;
 }
-
+.Specifications{
+  color: #222;
+}
 .product-description {
   margin: 1rem 0;
-  color: rgb(109, 116, 131);
+  color: rgb(118,118,118);
   line-height: 1.5rem;
   font-size: 0.875rem;
 }
