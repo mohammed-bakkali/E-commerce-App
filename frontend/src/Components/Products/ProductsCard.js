@@ -29,6 +29,7 @@ const ProductsCard = ({ element }) => {
         <div className="favorite-icon">
           <FontAwesomeIcon
             onClick={handleFavourite}
+            // condition ? value_if_true : value_if_false;
             icon={fav ? faHeart : faHeartOutline} // Toggle between filled and outline heart
             size="lg"
             className="fa-icon"
@@ -44,7 +45,8 @@ const ProductsCard = ({ element }) => {
       <p>Accessories</p>
 
       <div className="rating">
-        <span>{element.ratingsAverage || 0}</span> ({element.ratingsQuantity || 0})
+        <span>{element.ratingsAverage || 0}</span> (
+        {element.ratingsQuantity || 0})
       </div>
 
       <div className="add-to-cart">

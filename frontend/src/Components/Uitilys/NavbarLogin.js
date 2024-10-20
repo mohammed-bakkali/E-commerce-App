@@ -74,7 +74,7 @@ const NavbarLogin = () => {
             style={{
               width: "64px",
               backgroundColor: "black",
-              border: "1px solid black",
+              border: "1px solid bl",
               cursor: "pointer",
             }}
           >
