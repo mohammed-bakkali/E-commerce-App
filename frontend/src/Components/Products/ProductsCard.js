@@ -1,23 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons"; // Import the icons
+import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons"; // Import outline heart icon
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
 
 const ProductsCard = ({ element }) => {
+  const [fav, setFav] = useState(false); // Start with fav set to false
+
+  const handleFavourite = () => {
+    setFav((prevFav) => !prevFav); // Toggle fav between true and false
+  };
+
   // Ensure the image has a valid URL or use a default image
   const imageUrl = element.imageCover
-
     ? `http://${element.imageCover}`
     : "default-image-url.png"; // Replace with your default image URL
+
   return (
     <div className="product-card">
       <div className="product-image-container">
-        <Link to={`/products/${element._id}`} style={{ textDecoration: "none" }}>
+        <Link
+          to={`/products/${element._id}`}
+          style={{ textDecoration: "none" }}
+        >
           <img src={imageUrl} alt="Product" className="product-image" />
         </Link>
         <div className="favorite-icon">
-          <FontAwesomeIcon icon={faHeart} size="lg" className="fa-icon" />
+          <FontAwesomeIcon
+            onClick={handleFavourite}
+            icon={fav ? faHeart : faHeartOutline} // Toggle between filled and outline heart
+            size="lg"
+            className="fa-icon"
+            style={{ color: fav ? "red" : "gray" }} // Change color based on fav state
+          />
         </div>
       </div>
 
@@ -28,8 +44,7 @@ const ProductsCard = ({ element }) => {
       <p>Accessories</p>
 
       <div className="rating">
-        <span>{element.ratingsAverage || 0}</span> (
-        {element.ratingsQuantity || 0})
+        <span>{element.ratingsAverage || 0}</span> ({element.ratingsQuantity || 0})
       </div>
 
       <div className="add-to-cart">
