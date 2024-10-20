@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { createReview } from "../../Redux/reducers/ReviewsSlice";
@@ -7,9 +7,8 @@ const useAddRateHook = (id) => {
   const [rateText, setRateText] = useState("");
   const [rateValue, setRateValue] = useState(0);
   const [loading, setLoading] = useState(false);
-  
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
 
   const HandleRateText = (e) => {
     setRateText(e.target.value);
@@ -48,20 +47,28 @@ const useAddRateHook = (id) => {
       if (res) {
         // Check if there are errors
         if (res.payload.errors && res.payload.errors[0]) {
-          console.log(res.payload)
-          if (res.payload.errors[0].msg === "You already added review on this product") {
+          console.log(res.payload);
+          if (
+            res.payload.errors[0].msg ===
+            "You already added review on this product"
+          ) {
             toast.error("You already added review on this product");
-          } else if (res.payload.errors[0].msg === "You are not allowed to perform this action") {
+          } else if (
+            res.payload.errors[0].msg ===
+            "You are not allowed to perform this action"
+          ) {
             toast.error("You are not allowed to perform this action!");
           }
-        } 
+        }
         // Check if there's a message field
         else if (res.payload.message) {
-          console.log(res.payload.message)
-          if (res.payload.message === "You are not allowed to perform this action") {
+          console.log(res.payload.message);
+          if (
+            res.payload.message === "You are not allowed to perform this action"
+          ) {
             toast.error("You are not allowed to perform this action!");
           }
-        } 
+        }
         // Check for success
         else if (res.type === "review/createReview/fulfilled") {
           toast.success("Review added successfully!");
@@ -71,12 +78,7 @@ const useAddRateHook = (id) => {
         }
       }
     }
-    
-    
-    
   };
-
-
 
   return {
     rateText,

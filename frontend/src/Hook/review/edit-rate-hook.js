@@ -7,7 +7,6 @@ const useEditRateHook = (review) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [newRateText, setNewRateText] = useState(review.review);
   const [newRateValue, setNewRateValue] = useState(review.rating);
-  const [isUser, setIsUser] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -23,13 +22,21 @@ const useEditRateHook = (review) => {
     setNewRateText(e.target.value);
   };
 
-  const HandleRateValue = (e) => {
+  const onChangeRateValue = (e) => {
     setNewRateValue(e.target.value);
   };
 
   const onConfirmEdit = async () => {
+    const editreview = {
+      id: review._id,
+      body: {
+        review: newRateText,
+        rating: newRateValue,
+      },
+    };
+
     try {
-      const res = await dispatch(editeProductReview({}));
+      const res = await dispatch(editeProductReview(editreview));
       if (res.type === "review/editProductReview/fulfilled") {
         toast.success("Rating edit successfully");
         // window.location.reload();
@@ -50,7 +57,7 @@ const useEditRateHook = (review) => {
     onConfirmEdit,
     onChangeRateText,
     newRateText,
-    HandleRateValue,
+    onChangeRateValue,
     newRateValue,
   };
 };

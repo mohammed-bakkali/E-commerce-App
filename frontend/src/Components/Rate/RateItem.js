@@ -7,7 +7,7 @@ import useEditRateHook from "../../Hook/review/edit-rate-hook";
 import ReactStars from "react-rating-stars-component";
 
 const RateItem = ({ review }) => {
-  const { isModalOpen, isUser, openModal, closeModal, onConfirm } =
+  const { isModalOpen, isUser, openModal, closeModal, onConfirmDelete } =
     useDeleteRateHook(review);
 
   const {
@@ -17,7 +17,7 @@ const RateItem = ({ review }) => {
     onConfirmEdit,
     onChangeRateText,
     newRateText,
-    HandleRateValue,
+    onChangeRateValue,
     newRateValue,
   } = useEditRateHook(review);
 
@@ -37,7 +37,7 @@ const RateItem = ({ review }) => {
     halfIcon: <i className="fa fa-star-half-alt" />,
     filledIcon: <i className="fa fa-star" />,
     onChange: (newValue) => {
-      HandleRateValue(newValue);
+      onChangeRateValue(newValue);
     },
   };
 
@@ -75,7 +75,7 @@ const RateItem = ({ review }) => {
               &times;
             </span>
             <p id="OnePro">Are you sure you want to delete this Rating?</p>
-            <button id="confirmDelete" onClick={onConfirm}>
+            <button id="confirmDelete" onClick={onConfirmDelete}>
               Delete
             </button>
             <button id="cancelDelete" onClick={closeModal}>
