@@ -7,6 +7,7 @@ const useEditRateHook = (review) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [newRateText, setNewRateText] = useState(review.review);
   const [newRateValue, setNewRateValue] = useState(review.rating);
+  const [loading, setLoading] = useState(false); // حالة التحميل
 
   const dispatch = useDispatch();
 
@@ -35,10 +36,12 @@ const useEditRateHook = (review) => {
       },
     };
 
+    setLoading(true); // بدء التحميل
+
     try {
       const res = await dispatch(editeProductReview(editreview));
       if (res.type === "review/editProductReview/fulfilled") {
-        toast.success("Rating edit successfully");
+        toast.success("Rating edited successfully");
         // window.location.reload();
       } else {
         toast.error("Failed to edit Rating");
@@ -46,6 +49,7 @@ const useEditRateHook = (review) => {
     } catch (error) {
       toast.error(error.message || "Failed to edit Rating");
     } finally {
+      setLoading(false); // إيقاف التحميل
       setIsEditModalOpen(false);
     }
   };
@@ -59,6 +63,7 @@ const useEditRateHook = (review) => {
     newRateText,
     onChangeRateValue,
     newRateValue,
+    loading,
   };
 };
 
