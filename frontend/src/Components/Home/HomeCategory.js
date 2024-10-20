@@ -13,7 +13,7 @@ const HomeCategory = () => {
         {loading === false ? (
           categories.length > 0 ? (
             categories
-              .slice(0, 6)
+              .slice(0, 7)
               .map((el, index) => (
                 <CategoryCard
                   key={index}

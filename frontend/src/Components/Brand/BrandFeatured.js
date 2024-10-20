@@ -16,7 +16,7 @@ const BrandFeatured = ({ title, btntitle, pathText }) => {
         {loading === false ? (
           brands.length > 0 ? (
             brands
-              .slice(0,6)
+              .slice(0,5)
               .map((el, index) => (
                 <BrandCard
                   key={index}

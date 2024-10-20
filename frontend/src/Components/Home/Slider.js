@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/Slider.css";
 
 import banner1 from "../../assets/images/banner-1.jpg";
 import banner2 from "../../assets/images/banner-2.jpg";
 import banner3 from "../../assets/images/banner-3.jpg";
 import banner4 from "../../assets/images/slide-1.webp";
-import banner5 from "../../assets/images/banner4.png";
 
 const Slider = () => {
-  const images = [banner1, banner2, banner3, banner4, banner5];
+  const images = [banner1, banner2, banner3, banner4];
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [images.length]);
 
   const handleDotClick = (index) => {
     setCurrentIndex(index);
@@ -19,7 +25,12 @@ const Slider = () => {
     <div className="slider-container">
       <div
         className="slider-content"
-        style={{ backgroundImage: `url(${images[currentIndex]})` }}
+        style={{
+          backgroundImage: `url(${images[currentIndex]})`,
+          height: "100vh",
+          backgroundSize: "cover",
+          backgroundPosition: "center center", 
+        }}
       >
         <div className="slider-text">
           <p>Starting from: $49.99</p>
