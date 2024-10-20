@@ -15,7 +15,7 @@
   align-items: center;
   justify-content: center;
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-repeat: no-repeat;
   padding: 2rem;
   position: relative;
@@ -27,18 +27,18 @@
   max-width: 50%;
   padding-left: 2rem;
   line-height: 1.5;
-  color: #000; /* لون النص الأسود */
+  color: #000;
 }
 
 .slider-text p {
   font-size: 1rem;
-  color: #000; /* لون النص الأسود */
+  color: #000;
 }
 
 .slider-text h1 {
   font-size: 2.5rem;
   margin: 1rem 0;
-  color: #000; /* لون النص الأسود */
+  color: #000;
 }
 
 .explore-button {
