@@ -40,13 +40,20 @@ const useEditRateHook = (review) => {
       },
     };
 
+
+
     setLoading(true); 
 
     try {
+
+
       const res = await dispatch(editeProductReview(editreview));
       console.log("test",res)
       if (res.type === "review/editeProductReview/fulfilled") {
         toast.success("Rating edited successfully");
+        setTimeout(() => {
+            window.location.reload();
+        }, 1000);
         // window.location.reload();
       } else {
         toast.error("Failed to edit Rating");

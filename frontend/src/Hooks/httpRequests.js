@@ -23,7 +23,7 @@ const fetchDatatoken = async (url, data) => {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-    }, 
+    },
     timeout: 10000, // Set a timeout of 10 seconds for the request
   };
   try {
@@ -138,13 +138,13 @@ const UpdatetDataWithImage = async (url, params) => {
  * @returns {object} - The response data from the API.
  * @throws {Error} - Throws an error if the request fails.
  */
-const UpdateData = async (url) => {
+const UpdateData = async (url, body) => {
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, // Required for sending images/files
     timeout: 10000, // Set a timeout of 10 seconds for the request
   };
   try {
-    const response = await baseURL.put(url, config);
+    const response = await baseURL.put(url, body, config);
     return response;
   } catch (error) {
     // Log or handle the error as necessary
