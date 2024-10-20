@@ -47,7 +47,7 @@ export const deleteProductReview = createAsyncThunk(
   }
 );
 export const editeProductReview = createAsyncThunk(
-  "review/editeAllProductReview",
+  "review/editeProductReview",
   async ({ id, body }, { rejectWithValue }) => {
     try {
       const response = await UpdateData(`/api/v1/reviews/${id}`, body);

@@ -23,8 +23,12 @@ const useEditRateHook = (review) => {
     setNewRateText(e.target.value);
   };
 
-  const onChangeRateValue = (e) => {
-    setNewRateValue(e.target.value);
+  // const onChangeRateValue = (e) => {
+  //   setNewRateValue(e.target.value);
+  // };
+
+  const onChangeRateValue = (newValue) => {
+    setNewRateValue(newValue); 
   };
 
   const onConfirmEdit = async () => {
@@ -40,7 +44,8 @@ const useEditRateHook = (review) => {
 
     try {
       const res = await dispatch(editeProductReview(editreview));
-      if (res.type === "review/editProductReview/fulfilled") {
+      console.log("test",res)
+      if (res.type === "review/editeProductReview/fulfilled") {
         toast.success("Rating edited successfully");
         // window.location.reload();
       } else {

@@ -26,20 +26,19 @@ const RateItem = ({ review }) => {
   }
 
   const settings = {
-    size: 20,
-    count: 5,
-    color: "#979797",
-    activeColor: "#ffc107",
-    value: newRateValue,
-    a11y: true,
-    isHalf: true,
-    emptyIcon: <i className="far fa-star" />,
-    halfIcon: <i className="fa fa-star-half-alt" />,
-    filledIcon: <i className="fa fa-star" />,
-    onChange: (newValue) => {
-      onChangeRateValue(newValue);
-    },
+    size: 20,             // Size of the stars (in pixels)
+    count: 5,             // Number of stars (5 stars in this case)
+    color: "#979797",     // Color of the empty stars
+    activeColor: "#ffc107", // Color of the filled stars (when rated)
+    value: newRateValue,  // Current rating value (updates when the user changes the rating)
+    a11y: true,           // Enable accessibility
+    isHalf: true,         // Allow half ratings (e.g., 4.5)
+    emptyIcon: <i className="far fa-star" />,  // Icon when not rated
+    halfIcon: <i className="fa fa-star-half-alt" />,  // Icon for half rating
+    filledIcon: <i className="fa fa-star" />,  // Icon for a full rating
+    onChange: onChangeRateValue,  // Function called when the user changes the rating
   };
+  
 
   return (
     <div className="rate-item">
