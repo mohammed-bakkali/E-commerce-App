@@ -6,10 +6,10 @@ import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
 
 const ProductsCard = ({ element }) => {
-  const [fav, setFav] = useState(false); // Start with fav set to false
+  const [fav, setFav] = useState(false); 
 
   const handleFavourite = () => {
-    setFav((prevFav) => !prevFav); // Toggle fav between true and false
+    setFav((prevFav) => !prevFav); 
   };
 
   // Ensure the image has a valid URL or use a default image
@@ -30,10 +30,10 @@ const ProductsCard = ({ element }) => {
           <FontAwesomeIcon
             onClick={handleFavourite}
             // condition ? value_if_true : value_if_false;
-            icon={fav ? faHeart : faHeartOutline} // Toggle between filled and outline heart
+            icon={fav ? faHeart : faHeartOutline}
             size="lg"
             className="fa-icon"
-            style={{ color: fav ? "red" : "gray" }} // Change color based on fav state
+            style={{ color: fav ? "red" : "gray" }} 
           />
         </div>
       </div>
