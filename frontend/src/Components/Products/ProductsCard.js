@@ -4,12 +4,38 @@ import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons"; // Import outline heart icon
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addProductToWishList } from "../../Redux/reducers/WishListSlice";
+import { toast, ToastContainer } from "react-toastify";
 
 const ProductsCard = ({ element }) => {
-  const [fav, setFav] = useState(false); 
+  const [fav, setFav] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleFavourite = () => {
-    setFav((prevFav) => !prevFav); 
+  const handleFavourite = async () => {
+    if (loading) return;
+
+    
+    setLoading(true);
+    setFav((prevFav) => !prevFav);
+
+    const productData = {
+      productId: element._id,
+    };
+    try {
+      const res = await dispatch(addProductToWishList({ body: productData }));
+      if (res && res.type === "wishlist/addProductToWishList/fulfilled") {
+        toast.success("Product added to wishlist successfully");
+        // window.location.reload();
+      } else {
+        toast.error("Could not add product to wishlist. Please try again.");
+      }
+    } catch (error) {
+      toast.error(error.message || "Failed to add product to wishlist");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Ensure the image has a valid URL or use a default image
@@ -19,6 +45,17 @@ const ProductsCard = ({ element }) => {
 
   return (
     <div className="product-card">
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div className="product-image-container">
         <Link
           to={`/products/${element._id}`}
@@ -33,7 +70,7 @@ const ProductsCard = ({ element }) => {
             icon={fav ? faHeart : faHeartOutline}
             size="lg"
             className="fa-icon"
-            style={{ color: fav ? "red" : "gray" }} 
+            style={{ color: fav ? "red" : "gray" }}
           />
         </div>
       </div>
