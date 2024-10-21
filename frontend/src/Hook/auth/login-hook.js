@@ -44,13 +44,12 @@ const useLoginHook = () => {
         })
       );
 
-
       if (res.payload) {
         if (res.payload.token) {
           const token = res.payload.token;
           localStorage.setItem("token", token);
-          localStorage.setItem("user", JSON.stringify(res.payload.data)); 
-          toast.success("Login successful!"); 
+          localStorage.setItem("user", JSON.stringify(res.payload.data));
+          toast.success("Login successful!");
           setTimeout(() => {
             navigate("/");
           }, 1500);

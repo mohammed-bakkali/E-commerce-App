@@ -4,7 +4,7 @@ import categoryReducer from "./reducers/categorySlice";
 import brandReducer from "./reducers/BrandSlice";
 import subcategoryReducer from "./reducers/SubCategorySlice";
 import userReducer from "./reducers/AuthSlice";
-import reviewsReducer from "./reducers/WishListSlice";
+import reviewsReducer from "./reducers/ReviewsSlice";
 import wishlistSliceReducer from "./reducers/ReviewsSlice";
 // import cartReducer from "./reducers/cartSlice";
 // import adminReducer from "./reducers/adminSlice";

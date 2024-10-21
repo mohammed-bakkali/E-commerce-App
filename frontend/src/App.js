@@ -1,4 +1,7 @@
 import React from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import InternetConnectionChecker from "./network/InternetConnectionChecker";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./Page/Home/HomePage";
 import NavbarLogin from "./Components/Uitilys/NavbarLogin";
@@ -23,16 +26,29 @@ import UserFavoriteProductsePage from "./Page/User/UserFavoriteProductsePage";
 import UserAllAddreesPage from "./Page/User/UserAllAddreesPage";
 import UserAddAddressPage from "./Page/User/UserAddAddressPage";
 import UserEditAddressPage from "./Page/User/UserEditAddressPage";
-import UserProfilePage from "./Page/User/UserProfilePage"
+import UserProfilePage from "./Page/User/UserProfilePage";
 import AdminDashboardPage from "./Page/Admin/AdminDashboardPage";
 import AdminEditProductsPage from "./Page/Admin/AdminEditProductsPage";
-import RequestPasswordResetPage from "./Page/Auth/ForgetPasswordPage";
+// import RequestPasswordResetPage from "./Page/Auth/ForgetPasswordPage";
 import ForgetPasswordPage from "./Page/Auth/ForgetPasswordPage";
+
 
 function App() {
   return (
-    <div>
+    <>
       <NavbarLogin />
+      <ToastContainer
+        position="bottom-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <InternetConnectionChecker />
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
@@ -45,27 +61,40 @@ function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/order/payment-method" element={<PaymentMethodPage />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-          <Route path="/admin/allproducts" element={<AdminAllProductsPages />} />
+          <Route
+            path="/admin/allproducts"
+            element={<AdminAllProductsPages />}
+          />
           <Route path="/admin/allorders" element={<AdminAllOrdersPage />} />
           <Route path="/admin/order/01" element={<AdminOrderDetalisPage />} />
           <Route path="/admin/addbrand" element={<AdminAddBrandPage />} />
           <Route path="/admin/addcategory" element={<AdminAddCategoryPage />} />
-          <Route path="/admin/addsubcategory" element={<AdminAddSubcategoryPage />} />
+          <Route
+            path="/admin/addsubcategory"
+            element={<AdminAddSubcategoryPage />}
+          />
           <Route path="/admin/addproduct" element={<AdminAddproductPage />} />
           <Route path="/user/allorders" element={<UserAllOrdersPage />} />
-          <Route path="/user/favoriteproducts" element={<UserFavoriteProductsePage />} />
+          <Route
+            path="/user/favoriteproducts"
+            element={<UserFavoriteProductsePage />}
+          />
           <Route path="/user/addresses" element={<UserAllAddreesPage />} />
           <Route path="/user/add-addresses" element={<UserAddAddressPage />} />
           <Route path="/user/edite-address" element={<UserEditAddressPage />} />
           <Route path="/user/profile" element={<UserProfilePage />} />
-          <Route path="/admin/editproduct/:id" element={<AdminEditProductsPage />} />
-          <Route path="/user/request-password" element={<ForgetPasswordPage />} />
-          
-          
+          <Route
+            path="/admin/editproduct/:id"
+            element={<AdminEditProductsPage />}
+          />
+          <Route
+            path="/user/request-password"
+            element={<ForgetPasswordPage />}
+          />
         </Routes>
       </BrowserRouter>
       <Footer />
-    </div>
+    </>
   );
 }
 

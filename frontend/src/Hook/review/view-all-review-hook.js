@@ -8,15 +8,16 @@ const useViewAllReviewHook = (id) => {
   const dispatch = useDispatch();
 
   const allReview = useSelector((state) => state.review.allReviewsProduct);
+  console.log(allReview)
 
   useEffect(() => {
     setLoading(true);
-    dispatch(fetchAllProductReview({ id, page: 1, limit: 5 }));
+    dispatch(fetchAllProductReview({ id, page: 1, limit: 1 }));
     setLoading(false);
   }, [dispatch, id]);
 
   const onPageChange = async (page) => {
-    await dispatch(fetchAllProductReview({ id, page, limit: 5 }));
+    await dispatch(fetchAllProductReview({ id, page, limit: 1 }));
   };
 
   return { loading, allReview, onPageChange };

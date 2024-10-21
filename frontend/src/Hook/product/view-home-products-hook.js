@@ -11,6 +11,7 @@ const useViewHomeProductsHook = () => {
 
   // Extract categories and loading state from the Redux store
   const Allproducts = useSelector((state) => state.product.Allproducts);
+  console.log("test444444444444444444",Allproducts)
 
 
   let items = [];
@@ -18,7 +19,6 @@ const useViewHomeProductsHook = () => {
     items = Allproducts.slice(0,5);
   } else {
     items = [];
-
   }
 
   // const loading = useSelector((state) => state.product.loading);

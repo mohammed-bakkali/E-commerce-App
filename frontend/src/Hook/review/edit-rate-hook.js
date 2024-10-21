@@ -23,10 +23,6 @@ const useEditRateHook = (review) => {
     setNewRateText(e.target.value);
   };
 
-  // const onChangeRateValue = (e) => {
-  //   setNewRateValue(e.target.value);
-  // };
-
   const onChangeRateValue = (newValue) => {
     setNewRateValue(newValue);
   };

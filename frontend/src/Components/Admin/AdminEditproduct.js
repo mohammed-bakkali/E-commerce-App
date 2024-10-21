@@ -1,71 +1,56 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-
-import { ToastContainer } from 'react-toastify';
-import { CompactPicker } from 'react-color';
-import Multiselect from 'multiselect-react-dropdown';
-import MultiImageInput from 'react-multiple-image-input';
+import React from "react";
+import { useParams } from "react-router-dom";
+import { CompactPicker } from "react-color";
+import Multiselect from "multiselect-react-dropdown";
+import MultiImageInput from "react-multiple-image-input";
 
 import add from "../../assets/icons/add-icon-1.png";
-import useEditProductsHook from '../../Hook/product/edit-products-hook';
-import InternetConnectionChecker from '../../network/InternetConnectionChecker';
+import useEditProductsHook from "../../Hook/product/edit-products-hook";
 // import { MultiImageInput } from 'react-multiple-image-input';
 const AdminEditproduct = () => {
-const {id} =  useParams();
-const {
-  prodName,
-  setProdName,
-  prodDescription,
-  setProdDescription,
-  priceBefore,
-  crop,
-  options,
-  setPriceBefore,
-  priceAftr,
-  setPriceAftr,
-  qty,
-  categories,
-  brands,
-  setQty,
-  CatID,
-  setCatID,
-  BrandID,
-  SetBrandID,
-  subCatID,
-  setSubCatID,
-  selectSubID,
-  setselectSubID,
-  loading,
-  setLoading,
-  images,
-  setImages,
-  colors,
-  setColor,
-  showColor,
-  setShowColor,
-  onSeletCategory,
-  onSeletBrand,
-  onSelect,
-  onRemove,
-  handelChangeComplete,
-  removeColor,
-  handleEditProduct,
-} = useEditProductsHook(id);
+  const { id } = useParams();
+  const {
+    prodName,
+    setProdName,
+    prodDescription,
+    setProdDescription,
+    priceBefore,
+    crop,
+    options,
+    setPriceBefore,
+    priceAftr,
+    setPriceAftr,
+    qty,
+    categories,
+    brands,
+    setQty,
+    CatID,
+    setCatID,
+    BrandID,
+    SetBrandID,
+    subCatID,
+    setSubCatID,
+    selectSubID,
+    setselectSubID,
+    loading,
+    setLoading,
+    images,
+    setImages,
+    colors,
+    setColor,
+    showColor,
+    setShowColor,
+    onSeletCategory,
+    onSeletBrand,
+    onSelect,
+    onRemove,
+    handelChangeComplete,
+    removeColor,
+    handleEditProduct,
+  } = useEditProductsHook(id);
   return (
     <div className="admin-add">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-        <InternetConnectionChecker />
-      <h1 className="page-title">Edit  Product {}</h1>
+      <h1 className="page-title">Edit Product {}</h1>
       {/* Product Images Section */}
       <div className="form-group">
         <label htmlFor="productImages" className="form-label">
@@ -249,6 +234,6 @@ const {
       </form>
     </div>
   );
-}
+};
 
 export default AdminEditproduct;

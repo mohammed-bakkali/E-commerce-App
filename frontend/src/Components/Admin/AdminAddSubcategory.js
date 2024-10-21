@@ -1,7 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import "../../styles/AdminAddSubcategory.css";
 import useAddSubcategory from "../../Hook/subcategory/add-subcategory-hook";
-import InternetConnectionChecker from "../../network/InternetConnectionChecker";
 
 const AdminAddSubcategory = () => {
   const {
@@ -27,7 +26,7 @@ const AdminAddSubcategory = () => {
         draggable
         pauseOnHover
       />
-      <InternetConnectionChecker />
+
 
       <h1 className="page-title">Add New Subcategory</h1>
       <form className="add-subcategory-form" onSubmit={handleSubmit}>

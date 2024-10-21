@@ -2,9 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   deleteData,
   fetchData,
-  fetchDatatoken,
   postData,
-  postDataWithImage,
   UpdateData,
 } from "../../Hooks/httpRequests";
 
@@ -25,10 +23,10 @@ export const fetchAllProductReview = createAsyncThunk(
   "review/fetchAllProductsReview",
   async ({ id, page, limit }, { rejectWithValue }) => {
     try {
-      const response = await fetchDatatoken(
+      const response = await fetchData(
         `/api/v1/products/${id}/reviews?page=${page}&limit=${limit}`
       );
-      return response.data;
+      return response.data; 
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -67,7 +65,7 @@ const initialState = {
   error: null,
 };
 
-const ReviewtSlice = createSlice({
+const ReviewSlice = createSlice({
   name: "review",
   initialState,
   reducers: {},
@@ -92,10 +90,13 @@ const ReviewtSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
+
       .addCase(fetchAllProductReview.fulfilled, (state, action) => {
         state.loading = false;
         state.allReviewsProduct = action.payload;
-      })
+    })
+    
+
       .addCase(fetchAllProductReview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
@@ -130,4 +131,4 @@ const ReviewtSlice = createSlice({
 });
 
 // Export the reducer as the default export
-export default ReviewtSlice.reducer;
+export default ReviewSlice.reducer;

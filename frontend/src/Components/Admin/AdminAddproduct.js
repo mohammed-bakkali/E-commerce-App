@@ -5,12 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "../../styles/AdminAddProduct.css";
 import add from "../../assets/icons/add-icon-1.png";
 import MultiImageInput from "react-multiple-image-input";
-import {  ToastContainer } from "react-toastify";
 import useAddProductHook from "../../Hook/product/add-product-hook";
 
-
 import { CompactPicker } from "react-color";
-import InternetConnectionChecker from "../../network/InternetConnectionChecker";
 const AdminAddProduct = () => {
   const {
     prodName,
@@ -51,22 +48,9 @@ const AdminAddProduct = () => {
     removeColor,
     handleAddProduct,
   } = useAddProductHook();
-  
 
   return (
     <div className="admin-add">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-        <InternetConnectionChecker />
       <h1 className="page-title">Add New Product</h1>
       {/* Product Images Section */}
       <div className="form-group">
@@ -171,7 +155,7 @@ const AdminAddProduct = () => {
               <option key={category._id} value={category._id}>
                 {category.name}
               </option>
-            ))} 
+            ))}
           </select>
         </div>
         <div className="form-group">

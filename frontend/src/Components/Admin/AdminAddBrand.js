@@ -1,10 +1,7 @@
 import React from "react";
 import "../../styles/AdminAddBrand.css";
-import "react-toastify/dist/ReactToastify.css";
 import useAddBrandHook from "../../Hook/brand/add-brand-hook";
 import Spinner from "../Uitilys/Spinner";
-import { ToastContainer } from "react-toastify";
-import InternetConnectionChecker from "../../network/InternetConnectionChecker";
 const AdminAddBrand = () => {
   const {
     img,
@@ -18,18 +15,6 @@ const AdminAddBrand = () => {
 
   return (
     <div className="admin-add">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <InternetConnectionChecker />
       <h1 className="page-title">Add New Brand</h1>
       <form className="add-category-form" onSubmit={handleAddBrand}>
         <div className="form-group">

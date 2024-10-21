@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons"; // Import outline heart icon
+import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addProductToWishList } from "../../Redux/reducers/WishListSlice";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const ProductsCard = ({ element }) => {
   const [fav, setFav] = useState(false);
@@ -16,7 +16,6 @@ const ProductsCard = ({ element }) => {
   const handleFavourite = async () => {
     if (loading) return;
 
-    
     setLoading(true);
     setFav((prevFav) => !prevFav);
 
@@ -25,9 +24,9 @@ const ProductsCard = ({ element }) => {
     };
     try {
       const res = await dispatch(addProductToWishList({ body: productData }));
+      console.log("teset", res);
       if (res && res.type === "wishlist/addProductToWishList/fulfilled") {
         toast.success("Product added to wishlist successfully");
-        // window.location.reload();
       } else {
         toast.error("Could not add product to wishlist. Please try again.");
       }
@@ -45,17 +44,6 @@ const ProductsCard = ({ element }) => {
 
   return (
     <div className="product-card">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <div className="product-image-container">
         <Link
           to={`/products/${element._id}`}
