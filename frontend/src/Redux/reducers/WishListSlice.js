@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { postData } from "../../Hooks/httpRequests";
+import { deleteData, postData } from "../../Hooks/httpRequests";
 
 // Create an AsyncThunk to add a product to the wishlist
 // Create an AsyncThunk to add a product to the wishlist
@@ -10,10 +10,30 @@ export const addProductToWishList = createAsyncThunk(
       const response = await postData(`/api/v1/wishlist/`, body);
       if (response.data.data) {
         return {
-          wishlist: response.data.data, 
+          wishlist: response.data.data,
         };
       } else {
-        return { wishlist: [] }; 
+        return { wishlist: [] };
+      }
+    } catch (error) {
+      return rejectWithValue(
+        error.response ? error.response.data : "Network Error"
+      );
+    }
+  }
+);
+
+export const deleteProductToWishList = createAsyncThunk(
+  "wishlist/deleteProductToWishList",
+  async ({ id }, { rejectWithValue }) => {
+    try {
+      const response = await deleteData(`/api/v1/wishlist/${id}`);
+      if (response.data.data) {
+        return {
+          wishlist: response.data.data,
+        };
+      } else {
+        return { wishlist: [] };
       }
     } catch (error) {
       return rejectWithValue(
@@ -25,27 +45,39 @@ export const addProductToWishList = createAsyncThunk(
 
 const initialState = {
   addWishlistList: [],
+  deleteWishlistList: [],
   loading: false,
   error: null,
 };
 
-const wishlistSlice  = createSlice({
+const wishlistSlice = createSlice({
   name: "wishlist",
   initialState,
   reducers: {},
 
   extraReducers: (builder) => {
     builder
-      // Handling fetchAllBrands actions
       .addCase(addProductToWishList.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(addProductToWishList.fulfilled, (state, action) => {
         state.loading = false;
-        state.brands = action.payload.addWishlistList;
+        state.addWishlistList = action.payload.addWishlistList;
       })
       .addCase(addProductToWishList.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(deleteProductToWishList.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteProductToWishList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.deleteWishlistList = action.payload.deleteWishlistList;
+      })
+      .addCase(deleteProductToWishList.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
