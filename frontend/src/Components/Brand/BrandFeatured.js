@@ -2,11 +2,10 @@ import React from "react";
 import BrandCard from "./BrandCard";
 import SubTitle from "../Uitilys/SubTitle";
 import useHomeBrandHooks from "../../Hook/brand/home-brand-hook";
-import Spinner from "../Uitilys/Spinner"; // Import the spinner
+import Spinner from "../Uitilys/Spinner"; 
 
 // Page Home
 const BrandFeatured = ({ title, btntitle, pathText }) => {
-
   const { brands, loading } = useHomeBrandHooks();
 
   return (

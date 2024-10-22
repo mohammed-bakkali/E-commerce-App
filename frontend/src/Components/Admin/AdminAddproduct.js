@@ -6,8 +6,8 @@ import "../../styles/AdminAddProduct.css";
 import add from "../../assets/icons/add-icon-1.png";
 import MultiImageInput from "react-multiple-image-input";
 import useAddProductHook from "../../Hook/product/add-product-hook";
-
 import { CompactPicker } from "react-color";
+
 const AdminAddProduct = () => {
   const {
     prodName,

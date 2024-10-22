@@ -12,7 +12,7 @@ const ProductText = () => {
   // Extract the id from the URL
   const { id } = useParams();
   // Fetch product details using hook
-  const { item, cat, brand } = useViewProductsDetailsHook(id);
+  const { item, cat, brand } = useViewProductsDetailsHook(id); 
 
   return (
     <div className="product-info-details">

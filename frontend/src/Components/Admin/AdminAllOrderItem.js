@@ -8,8 +8,8 @@ const AdminAllOrderItem = ({ orderId }) => {
   return (
     <tr className="order-item-row">
       <td>
-        <Link to="/admin/order/01"  className="order-link">
-        1d564b921
+        <Link to="/admin/order/01" className="order-link">
+          1d564b921
         </Link>
       </td>
 
@@ -17,11 +17,11 @@ const AdminAllOrderItem = ({ orderId }) => {
       <td>Aug 20, 2021</td>
       <td>3000 EGP</td>
       <td>
-        <button className="show-item" style={{marginRight: "6px"}}>
-          <FontAwesomeIcon icon={faEye} /> 
+        <button className="show-item" style={{ marginRight: "6px" }}>
+          <FontAwesomeIcon icon={faEye} />
         </button>
         <button className="remove-item">
-          <FontAwesomeIcon icon={faTrash} /> 
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </td>
     </tr>

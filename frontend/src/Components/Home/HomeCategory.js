@@ -4,8 +4,9 @@ import CategoryCard from "../Category/CategoryCard";
 import Spinner from "../Uitilys/Spinner"; // Import the spinner
 import useHomeCategoryHooks from "../../Hook/category/home-category-hooks";
 const HomeCategory = () => {
-  const { categories, loading,colors } = useHomeCategoryHooks();
+  const { categories, loading, colors } = useHomeCategoryHooks();
 
+  // Page Home
   return (
     <div className="container">
       <SubTitle title="Category" btntitle="More" pathText="allcategory" />

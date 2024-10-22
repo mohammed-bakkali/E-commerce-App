@@ -63,8 +63,9 @@ const wishlistSlice = createSlice({
       })
       .addCase(addProductToWishList.fulfilled, (state, action) => {
         state.loading = false;
-        state.addWishlistList = action.payload.addWishlistList;
+        state.addWishlistList = action.payload.wishlist || [];
       })
+
       .addCase(addProductToWishList.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;

@@ -10,11 +10,8 @@ import useViewHomeProductsHook from "../../Hook/product/view-home-products-hook"
 
 const HomePage = () => {
 
-const {
-  items
-
-}= useViewHomeProductsHook();
-
+const { items } = useViewHomeProductsHook();
+  
 
   return (
     <div>

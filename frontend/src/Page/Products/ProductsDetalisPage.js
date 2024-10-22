@@ -7,6 +7,7 @@ import useViewProductsDetailsHook from "../../Hook/product/view-products-details
 import { useParams } from "react-router-dom";
 const ProductsDetalisPage = () => {
   const { id } = useParams();
+  
   const  { item, selectedCategory, selectedProductLike, cat, brand, loading, images } =useViewProductsDetailsHook(id)
   if (item) {
     var rateAvg = item.ratingsAverage

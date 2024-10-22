@@ -11,7 +11,7 @@ import {
   faFolder,
   faCartPlus,
   faTasks,
-  faUsers // أيقونة المستخدمين
+  faUsers
 } from '@fortawesome/free-solid-svg-icons';
 
 const AdminSideMenu = () => {

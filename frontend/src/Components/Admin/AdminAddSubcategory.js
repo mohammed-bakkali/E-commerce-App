@@ -1,4 +1,3 @@
-import { ToastContainer } from "react-toastify";
 import "../../styles/AdminAddSubcategory.css";
 import useAddSubcategory from "../../Hook/subcategory/add-subcategory-hook";
 
@@ -15,19 +14,6 @@ const AdminAddSubcategory = () => {
 
   return (
     <div className="admin-add">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-
-
       <h1 className="page-title">Add New Subcategory</h1>
       <form className="add-subcategory-form" onSubmit={handleSubmit}>
         <div className="form-group">

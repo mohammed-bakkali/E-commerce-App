@@ -4,36 +4,36 @@ import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProductToWishList } from "../../Redux/reducers/WishListSlice";
 import { toast } from "react-toastify";
 
 const ProductsCard = ({ element }) => {
   const [fav, setFav] = useState(false);
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const handleFavourite = async () => {
-    if (loading) return;
+  const res = useSelector((state) => state.wishlist.addWishlistList);
+  console.log("wishlist response:", res);
 
-    setLoading(true);
-    setFav((prevFav) => !prevFav);
+  const handelFav = async () => {
+    const newFavState = !fav; 
+    setFav(newFavState); 
 
-    const productData = {
-      productId: element._id,
-    };
+    if (newFavState) {
+      // if true add to WishLis
+      await addToWishListData();
+    } else {
+      // remove
+      toast.info(`${element.title} has been removed from your wishlist.`);
+    }
+  };
+
+  const addToWishListData = async () => {
     try {
-      const res = await dispatch(addProductToWishList({ body: productData }));
-      console.log("teset", res);
-      if (res && res.type === "wishlist/addProductToWishList/fulfilled") {
-        toast.success("Product added to wishlist successfully");
-      } else {
-        toast.error("Could not add product to wishlist. Please try again.");
-      }
+      await dispatch(addProductToWishList({ id: element._id }));
+      toast.success(`${element.title} has been added to your wishlist!`);
     } catch (error) {
-      toast.error(error.message || "Failed to add product to wishlist");
-    } finally {
-      setLoading(false);
+      toast.error("Error adding product to wishlist.");
     }
   };
 
@@ -51,10 +51,8 @@ const ProductsCard = ({ element }) => {
         >
           <img src={imageUrl} alt="Product" className="product-image" />
         </Link>
-        <div className="favorite-icon">
+        <div className="favorite-icon" onClick={handelFav}>
           <FontAwesomeIcon
-            onClick={handleFavourite}
-            // condition ? value_if_true : value_if_false;
             icon={fav ? faHeart : faHeartOutline}
             size="lg"
             className="fa-icon"

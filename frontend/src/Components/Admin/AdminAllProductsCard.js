@@ -4,7 +4,7 @@ import "../../styles/AdminAllProductsCard.css";
 import "../../styles/ProductsCard.css";
 import { useDispatch } from "react-redux";
 import { deletProduct } from "../../Redux/reducers/ProductSlice";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AdminAllProductsCard = ({ element }) => {
@@ -25,10 +25,7 @@ const AdminAllProductsCard = ({ element }) => {
 
   const onConfirm = async () => {
     try {
-      // Await the result of the deletion action
       const res = await dispatch(deletProduct({ id: element._id }));
-
-      // Check if the deletion was successful
       if (res.type === "product/deletProduct/fulfilled") {
         toast.success("Product deleted successfully");
         // window.location.reload();
@@ -49,17 +46,6 @@ const AdminAllProductsCard = ({ element }) => {
   return (
     <>
       <div className="product-card">
-        <ToastContainer
-          position="bottom-left"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
         <Link
           to={`/products/${element._id}`}
           style={{ textDecoration: "none" }}

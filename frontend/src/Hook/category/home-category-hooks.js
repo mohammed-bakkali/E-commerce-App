@@ -12,6 +12,7 @@ const useHomeCategoryHooks = () => {
 
   // Extract categories and loading state from the Redux store
   const categories = useSelector((state) =>
+    
     state.category.categories.map((el) => ({
       image: el.image ? `http://${el.image}` : "default-image-url.png", // Ensure valid image URL
       name: el.name,

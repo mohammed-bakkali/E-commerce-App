@@ -17,17 +17,6 @@ const AdminAddCategory = () => {
 
   return (
     <div className="admin-add">
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <h1 className="page-title">Add New Category</h1>
       <form className="add-category-form" onSubmit={handleAddCategory}>
         <div className="form-group">
