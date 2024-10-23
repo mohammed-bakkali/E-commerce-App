@@ -11,8 +11,8 @@ import {
 } from "../../Redux/reducers/WishListSlice";
 import { toast } from "react-toastify";
 
-const ProductsCard = ({ element }) => {
-  const [fav, setFav] = useState(false);
+const ProductsCard = ({ element, favoriteProds }) => {
+  // const [fav, setFav] = useState(false);
   const dispatch = useDispatch();
 
   const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
@@ -21,7 +21,16 @@ const ProductsCard = ({ element }) => {
   );
 
   const handelFav = async () => {
-    const newFavState = !fav;
+
+    const hasGreaterThanThree = numbers.some((num) => num > 3);
+
+    if (favoriteProds.some(idProduct => idProduct === element._id)) {
+      
+    }
+
+
+
+    // const newFavState = !fav;
     setFav(newFavState);
 
     if (newFavState) {
@@ -33,8 +42,10 @@ const ProductsCard = ({ element }) => {
     }
   };
   const addToWishListData = async () => {
-    const result = await dispatch(addProductToWishList({ productId: element._id }));
-  
+    const result = await dispatch(
+      addProductToWishList({ productId: element._id })
+    );
+
     // التحقق من النتيجة باستخدام `result.payload`، والذي يحتوي على الرد من Redux
     if (result.payload && result.payload.status === "success") {
       toast.success(`${element.title} تمت إضافته إلى قائمة الأمنيات!`);
@@ -43,12 +54,13 @@ const ProductsCard = ({ element }) => {
       toast.error("فشل في إضافة المنتج إلى قائمة الأمنيات. حاول مرة أخرى.");
     }
   };
-  
 
   // delet
   const deleteToWishListData = async () => {
-    const result = await dispatch(deleteProductToWishList({ productId: element._id }));
-  
+    const result = await dispatch(
+      deleteProductToWishList({ productId: element._id })
+    );
+
     // التحقق من النتيجة باستخدام `result.payload` كما هو موضح في `addToWishListData`
     if (result.payload && result.payload.status === "success") {
       toast.success(`${element.title} تمت إزالته من قائمة الأمنيات!`);
@@ -57,7 +69,6 @@ const ProductsCard = ({ element }) => {
       toast.error("فشل في إزالة المنتج من قائمة الأمنيات. حاول مرة أخرى.");
     }
   };
-  
 
   // Ensure the image has a valid URL or use a default image
   const imageUrl = element.imageCover

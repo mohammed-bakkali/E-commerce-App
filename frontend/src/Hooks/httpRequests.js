@@ -76,8 +76,6 @@ const postData = async (url, data) => {
   };
   try {
     const response = await baseURL.post(url, data, config);
-    console.log("test1",response.data)
-    console.log("test2",response.status)
     return response;
   } catch (error) {
     // Log or handle the error as necessary
