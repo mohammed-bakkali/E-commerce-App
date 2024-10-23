@@ -5,37 +5,59 @@ import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductToWishList } from "../../Redux/reducers/WishListSlice";
+import {
+  addProductToWishList,
+  deleteProductToWishList,
+} from "../../Redux/reducers/WishListSlice";
 import { toast } from "react-toastify";
 
 const ProductsCard = ({ element }) => {
   const [fav, setFav] = useState(false);
   const dispatch = useDispatch();
 
-  const res = useSelector((state) => state.wishlist.addWishlistList);
-  console.log("wishlist response:", res);
+  const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
+  const responseRemov = useSelector(
+    (state) => state.wishlist.deleteWishlistList
+  );
 
   const handelFav = async () => {
-    const newFavState = !fav; 
-    setFav(newFavState); 
+    const newFavState = !fav;
+    setFav(newFavState);
 
     if (newFavState) {
       // if true add to WishLis
       await addToWishListData();
     } else {
-      // remove
-      toast.info(`${element.title} has been removed from your wishlist.`);
+      // remove id false
+      await deleteToWishListData();
     }
   };
-
   const addToWishListData = async () => {
-    try {
-      await dispatch(addProductToWishList({ id: element._id }));
-      toast.success(`${element.title} has been added to your wishlist!`);
-    } catch (error) {
-      toast.error("Error adding product to wishlist.");
+    const result = await dispatch(addProductToWishList({ productId: element._id }));
+  
+    // التحقق من النتيجة باستخدام `result.payload`، والذي يحتوي على الرد من Redux
+    if (result.payload && result.payload.status === "success") {
+      toast.success(`${element.title} تمت إضافته إلى قائمة الأمنيات!`);
+      setFav(true);
+    } else {
+      toast.error("فشل في إضافة المنتج إلى قائمة الأمنيات. حاول مرة أخرى.");
     }
   };
+  
+
+  // delet
+  const deleteToWishListData = async () => {
+    const result = await dispatch(deleteProductToWishList({ productId: element._id }));
+  
+    // التحقق من النتيجة باستخدام `result.payload` كما هو موضح في `addToWishListData`
+    if (result.payload && result.payload.status === "success") {
+      toast.success(`${element.title} تمت إزالته من قائمة الأمنيات!`);
+      setFav(false);
+    } else {
+      toast.error("فشل في إزالة المنتج من قائمة الأمنيات. حاول مرة أخرى.");
+    }
+  };
+  
 
   // Ensure the image has a valid URL or use a default image
   const imageUrl = element.imageCover

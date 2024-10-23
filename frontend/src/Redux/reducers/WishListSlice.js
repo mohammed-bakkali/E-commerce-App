@@ -1,88 +1,100 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteData, postData } from "../../Hooks/httpRequests";
+import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
+import "../../styles/ProductsCard.css";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addProductToWishList,
+  deleteProductToWishList,
+} from "../../Redux/reducers/WishListSlice";
+import { toast } from "react-toastify";
 
-// Create an AsyncThunk to add a product to the wishlist
-// Create an AsyncThunk to add a product to the wishlist
-export const addProductToWishList = createAsyncThunk(
-  "wishlist/addProductToWishList",
-  async ({ id, body }, { rejectWithValue }) => {
-    try {
-      const response = await postData(`/api/v1/wishlist/`, body);
-      if (response.data.data) {
-        return {
-          wishlist: response.data.data,
-        };
-      } else {
-        return { wishlist: [] };
-      }
-    } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+const ProductsCard = ({ product }) => {
+  const [isFav, setIsFav] = useState(false);
+  const dispatch = useDispatch();
+
+  const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
+  const responseRemove = useSelector(
+    (state) => state.wishlist.deleteWishlistList
+  );
+
+  const handleFav = async () => {
+    const newFavState = !isFav;
+    setIsFav(newFavState);
+
+    if (newFavState) {
+      // if true, add to WishList
+      await addToWishList();
+    } else {
+      // if false, remove
+      await removeFromWishList();
     }
-  }
-);
+  };
 
-export const deleteProductToWishList = createAsyncThunk(
-  "wishlist/deleteProductToWishList",
-  async ({ id }, { rejectWithValue }) => {
-    try {
-      const response = await deleteData(`/api/v1/wishlist/${id}`);
-      if (response.data.data) {
-        return {
-          wishlist: response.data.data,
-        };
-      } else {
-        return { wishlist: [] };
-      }
-    } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+  const addToWishList = async () => {
+    const result = await dispatch(addProductToWishList({ productId: product._id }));
+
+    // Check the result using `result.payload`, which contains the response from Redux
+    if (result.payload && result.payload.status === "success") {
+      toast.success(`${product.title} added to wishlist!`);
+      setIsFav(true);
+    } else {
+      toast.error("Failed to add product to wishlist. Try again.");
     }
-  }
-);
+  };
 
-const initialState = {
-  addWishlistList: [],
-  deleteWishlistList: [],
-  loading: false,
-  error: null,
+  const removeFromWishList = async () => {
+    const result = await dispatch(deleteProductToWishList({ productId: product._id }));
+
+    // Check the result using `result.payload` as done in `addToWishList`
+    if (result.payload && result.payload.status === "success") {
+      toast.success(`${product.title} removed from wishlist!`);
+      setIsFav(false);
+    } else {
+      toast.error("Failed to remove product from wishlist. Try again.");
+    }
+  };
+
+  // Ensure the image has a valid URL or use a default image
+  const imageUrl = product.imageCover
+    ? `http://${product.imageCover}`
+    : "default-image-url.png"; // Replace with your default image URL
+
+  return (
+    <div className="product-card">
+      <div className="product-image-container">
+        <Link to={`/products/${product._id}`} style={{ textDecoration: "none" }}>
+          <img src={imageUrl} alt="Product" className="product-image" />
+        </Link>
+        <div className="favorite-icon" onClick={handleFav}>
+          <FontAwesomeIcon
+            icon={isFav ? faHeart : faHeartOutline}
+            size="lg"
+            className="fa-icon"
+            style={{ color: isFav ? "red" : "gray" }}
+          />
+        </div>
+      </div>
+
+      <div className="between-flex">
+        <h4>{product.title}</h4>
+        <h4 className="price">${product.price}</h4>
+      </div>
+      <p>Accessories</p>
+
+      <div className="rating">
+        <span>{product.ratingsAverage || 0}</span> (
+        {product.ratingsQuantity || 0})
+      </div>
+
+      <div className="add-to-cart">
+        <FontAwesomeIcon icon={faShoppingCart} className="fa-icon" /> Add to
+        Cart
+      </div>
+    </div>
+  );
 };
 
-const wishlistSlice = createSlice({
-  name: "wishlist",
-  initialState,
-  reducers: {},
-
-  extraReducers: (builder) => {
-    builder
-      .addCase(addProductToWishList.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(addProductToWishList.fulfilled, (state, action) => {
-        state.loading = false;
-        state.addWishlistList = action.payload.wishlist || [];
-      })
-
-      .addCase(addProductToWishList.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(deleteProductToWishList.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(deleteProductToWishList.fulfilled, (state, action) => {
-        state.loading = false;
-        state.deleteWishlistList = action.payload.deleteWishlistList;
-      })
-      .addCase(deleteProductToWishList.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      });
-  },
-});
-
-export default wishlistSlice.reducer;
+export default ProductsCard;

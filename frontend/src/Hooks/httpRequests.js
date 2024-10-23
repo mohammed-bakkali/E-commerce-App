@@ -10,7 +10,7 @@ import baseURL from "../Api/BaseURL";
  */
 const fetchData = async (url, data) => {
   try {
-    const response = await baseURL.get(url, { data });
+    const response = await baseURL.get(url, { data }); // or data
     return response;
   } catch (error) {
     // Log the error or handle it as necessary
@@ -76,7 +76,8 @@ const postData = async (url, data) => {
   };
   try {
     const response = await baseURL.post(url, data, config);
-    console.log("test",response)
+    console.log("test1",response.data)
+    console.log("test2",response.status)
     return response;
   } catch (error) {
     // Log or handle the error as necessary
