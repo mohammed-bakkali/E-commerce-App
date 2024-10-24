@@ -14,7 +14,7 @@ import favon from "../../assets/icons/fav-on.png";
 import favoff from "../../assets/icons/fav-off.png";
 
 const ProductsCard = ({ element, favoriteProds }) => {
-  const [favImg, setFavImg] = useState(favoff);
+  const [loading, setLoading] = useState(true); 
 
   const Fav = favoriteProds.some((idProduct) => idProduct === element._id); // true
 
@@ -49,13 +49,16 @@ const ProductsCard = ({ element, favoriteProds }) => {
   // add
   const addToWishListData = async () => {
     await dispatch(addProductToWishList({ productId: element._id }));
-    // Check the result using `result.payload`, which contains the response from Redux
+
+
     if (responseAdd && responseAdd.status === "success") {
       console.log("test3",responseAdd)
       toast.success(`${element.title} has been added to the wishlist!`);
       setIsFav(true);
       setFavImg(favon);
-    } else {
+    }
+    
+    else {
       toast.error(
         "Failed to add the product to the wishlist. Please try again."
       );
