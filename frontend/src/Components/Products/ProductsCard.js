@@ -4,7 +4,7 @@ import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addProductToWishList,
   deleteProductToWishList,
@@ -15,59 +15,53 @@ const ProductsCard = ({ element, favoriteProds }) => {
   const [fav, setFav] = useState(false);
   const dispatch = useDispatch();
 
-  // const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
-  // const responseRemov = useSelector(
-  //   (state) => state.wishlist.deleteWishlistList
-  // );
+  const isFav = favoriteProds.some((idProduct) => idProduct === element._id);
 
-  const handelFav =  () => {
-    if (favoriteProds.some((idProduct) => idProduct === element._id)) {
+  const handelFav = () => {
+    if (isFav) {
       deleteToWishListData();
     } else {
       addToWishListData();
     }
   };
 
-
   useEffect(() => {
-    if (favoriteProds.some((idProduct) => idProduct === element._id)  === true) {
+    if (isFav === true) {
       setFav(true);
     } else {
       setFav(false);
     }
-  }, [favoriteProds.some((idProduct) => idProduct === element._id)]);
-
-
-
+  }, [isFav]);
 
   // add
   const addToWishListData = async () => {
     const result = await dispatch(
       addProductToWishList({ productId: element._id })
     );
-    // التحقق من النتيجة باستخدام `result.payload`، والذي يحتوي على الرد من Redux
+    // Check the result using `result.payload`, which contains the response from Redux
     if (result.payload && result.payload.status === "success") {
-      toast.success(`${element.title} تمت إضافته إلى قائمة الأمنيات!`);
+      toast.success(`${element.title} has been added to the wishlist!`);
       setFav(true);
     } else {
-      toast.error("فشل في إضافة المنتج إلى قائمة الأمنيات. حاول مرة أخرى.");
+      toast.error("Failed to add the product to the wishlist. Please try again.");
     }
   };
-
-  // delet
+  
+  // Delete
   const deleteToWishListData = async () => {
     const result = await dispatch(
       deleteProductToWishList({ productId: element._id })
     );
-
-    // التحقق من النتيجة باستخدام `result.payload` كما هو موضح في `addToWishListData`
+  
+    // Check the result using `result.payload` as explained in `addToWishListData`
     if (result.payload && result.payload.status === "success") {
-      toast.success(`${element.title} تمت إزالته من قائمة الأمنيات!`);
+      toast.success(`${element.title} has been removed from the wishlist!`);
       setFav(false);
     } else {
-      toast.error("فشل في إزالة المنتج من قائمة الأمنيات. حاول مرة أخرى.");
+      toast.error("Failed to remove the product from the wishlist. Please try again.");
     }
   };
+  
 
   // Ensure the image has a valid URL or use a default image
   const imageUrl = element.imageCover
