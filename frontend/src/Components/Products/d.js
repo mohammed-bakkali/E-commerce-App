@@ -4,7 +4,7 @@ import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addProductToWishList,
   deleteProductToWishList,
@@ -15,6 +15,7 @@ import favoff from "../../assets/icons/fav-off.png";
 
 const ProductsCard = ({ element, favoriteProds }) => {
   const [favImg, setFavImg] = useState(favoff);
+  
 
   const Fav = favoriteProds.some((idProduct) => idProduct === element._id); // true
 
@@ -38,20 +39,15 @@ const ProductsCard = ({ element, favoriteProds }) => {
     }
   }, [isFav]);
 
-  const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
-  console.log("test0",responseAdd)
-  console.log("test1",responseAdd.status)
-  const responseRemov = useSelector((state) => state.wishlist.deleteWishlistList  );
-    console.log("test2",responseRemov)
-    
-
+  
 
   // add
   const addToWishListData = async () => {
-    await dispatch(addProductToWishList({ productId: element._id }));
+    const result = await dispatch(
+      addProductToWishList({ productId: element._id })
+    );
     // Check the result using `result.payload`, which contains the response from Redux
-    if (responseAdd && responseAdd.status === "success") {
-      console.log("test3",responseAdd)
+    if (result.payload && result.payload.status === "success") {
       toast.success(`${element.title} has been added to the wishlist!`);
       setIsFav(true);
       setFavImg(favon);
@@ -64,10 +60,12 @@ const ProductsCard = ({ element, favoriteProds }) => {
 
   // Delete
   const deleteToWishListData = async () => {
-    await dispatch(deleteProductToWishList({ productId: element._id }));
+    const result = await dispatch(
+      deleteProductToWishList({ productId: element._id })
+    );
 
     // Check the result using `result.payload` as explained in `addToWishListData`
-    if (responseRemov && responseRemov.status === "success") {
+    if (result.payload && result.payload.status === "success") {
       toast.success(`${element.title} has been removed from the wishlist!`);
       setIsFav(false);
       setFavImg(favoff);
@@ -127,3 +125,7 @@ const ProductsCard = ({ element, favoriteProds }) => {
 };
 
 export default ProductsCard;
+const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
+const responseRemov = useSelector(
+  (state) => state.wishlist.deleteWishlistList
+);

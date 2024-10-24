@@ -22,7 +22,6 @@ const CradProductContent = ({ products }) => {
 
   useEffect(() => {
     if (loading === false) {
-      // console.log("Products 78:", response);
       console.log("Products fetched:", response.allProductWishlistList.data.map(item=> item._id));
       setFavoriteProds(response.allProductWishlistList.data.map(item=> item._id));
     }
