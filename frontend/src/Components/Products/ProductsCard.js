@@ -14,7 +14,8 @@ import favon from "../../assets/icons/fav-on.png";
 import favoff from "../../assets/icons/fav-off.png";
 
 const ProductsCard = ({ element, favoriteProds }) => {
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true); // Initial loading state
+  const [favImg, setFavImg] = useState(favoff);
 
   const Fav = favoriteProds.some((idProduct) => idProduct === element._id); // true
 
@@ -48,22 +49,31 @@ const ProductsCard = ({ element, favoriteProds }) => {
 
   // add
   const addToWishListData = async () => {
+    setIsFav(true);
+    setFavImg(favon);
+
+    setLoading(true)
     await dispatch(addProductToWishList({ productId: element._id }));
+    setLoading(false)
 
-
-    if (responseAdd && responseAdd.status === "success") {
-      console.log("test3",responseAdd)
-      toast.success(`${element.title} has been added to the wishlist!`);
-      setIsFav(true);
-      setFavImg(favon);
-    }
-    
-    else {
-      toast.error(
-        "Failed to add the product to the wishlist. Please try again."
-      );
-    }
+  
   };
+
+  useEffect(() => {
+    if (loading === false) {
+      if (responseAdd && responseAdd.status === "success") {
+        console.log("test3",responseAdd)
+        toast.success(`${element.title} has been added to the wishlist!`);
+      }
+      else {
+        toast.error(
+          "Failed to add the product to the wishlist. Please try again."
+        );
+      }
+    } else {
+      
+    }
+  }, [loading]);
 
   // Delete
   const deleteToWishListData = async () => {

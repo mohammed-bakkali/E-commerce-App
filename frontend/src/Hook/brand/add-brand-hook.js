@@ -9,7 +9,7 @@ const useAddBrandHook = () => {
   const [name, setName] = useState("");
   const [img, setImg] = useState(avatar);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [loading, setLoading] = useState(false); // Initial loading state
+  const [loading, setLoading] = useState(false);
   const [isPress, setIsPress] = useState(false);
 
   const dispatch = useDispatch();
