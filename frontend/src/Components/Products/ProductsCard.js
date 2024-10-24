@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartOutline } from "@fortawesome/free-regular-svg-icons";
@@ -12,40 +12,39 @@ import {
 import { toast } from "react-toastify";
 
 const ProductsCard = ({ element, favoriteProds }) => {
-  // const [fav, setFav] = useState(false);
+  const [fav, setFav] = useState(false);
   const dispatch = useDispatch();
 
-  const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
-  const responseRemov = useSelector(
-    (state) => state.wishlist.deleteWishlistList
-  );
+  // const responseAdd = useSelector((state) => state.wishlist.addWishlistList);
+  // const responseRemov = useSelector(
+  //   (state) => state.wishlist.deleteWishlistList
+  // );
 
-  const handelFav = async () => {
-
-    const hasGreaterThanThree = numbers.some((num) => num > 3);
-
-    if (favoriteProds.some(idProduct => idProduct === element._id)) {
-      
-    }
-
-
-
-    // const newFavState = !fav;
-    setFav(newFavState);
-
-    if (newFavState) {
-      // if true add to WishLis
-      await addToWishListData();
+  const handelFav =  () => {
+    if (favoriteProds.some((idProduct) => idProduct === element._id)) {
+      deleteToWishListData();
     } else {
-      // remove id false
-      await deleteToWishListData();
+      addToWishListData();
     }
   };
+
+
+  useEffect(() => {
+    if (favoriteProds.some((idProduct) => idProduct === element._id)  === true) {
+      setFav(true);
+    } else {
+      setFav(false);
+    }
+  }, [favoriteProds.some((idProduct) => idProduct === element._id)]);
+
+
+
+
+  // add
   const addToWishListData = async () => {
     const result = await dispatch(
       addProductToWishList({ productId: element._id })
     );
-
     // التحقق من النتيجة باستخدام `result.payload`، والذي يحتوي على الرد من Redux
     if (result.payload && result.payload.status === "success") {
       toast.success(`${element.title} تمت إضافته إلى قائمة الأمنيات!`);
