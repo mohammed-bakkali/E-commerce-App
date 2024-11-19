@@ -1,0 +1,75 @@
+.container-discount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.discount-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.discount-text {
+  flex: 1;
+  padding: 20px;
+}
+
+.discount-text p {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #ef476f;
+}
+
+.discount-text h2 {
+  font-size: 24px;
+  margin: 10px 0;
+  color: #000;
+}
+@media (max-width: 768px) {
+  .discount-text h2 {
+    font-size: 18px;
+  }
+}
+
+.discount-text .shop-now {
+  background-color: var(--blue-alt-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+.discount-text .subscrible {
+  background-color: #ef476f;;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+.discount-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.discount-image img {
+  max-width: 100%;
+}
+@media (max-width: 768px) {
+  .discount-image img {
+    height: 200px;
+  }
+}

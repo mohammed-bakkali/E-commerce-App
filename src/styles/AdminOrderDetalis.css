@@ -1,0 +1,217 @@
+/* Main Container */
+.order-details-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.order-details-container .header-title {
+  margin-bottom: 20px;
+}
+
+/* Overview Card Styles */
+.overview-card {
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+}
+
+/* Individual Background Colors */
+.overview-card.order-created {
+  border: 1px solid #4caf50;
+  background-color: #eaf5e9; /* Softer green background for readability */
+}
+
+.overview-card.order-name {
+  border: 1px solid #ff6f61;
+  background-color: #fce4e6; /* Softer red-pink background */
+}
+
+.overview-card.order-email {
+  border: 1px solid #f39c12;
+  background-color: #fff6e0; /* Light yellow background */
+}
+
+.overview-card.order-contact {
+  border: 1px solid #2d9cdb;
+  background-color: #e3f5fc; /* Soft blue background */
+}
+
+/* Adding custom colors for specific overview text */
+.overview-card.order-created .overview-text span {
+  color: #856f2c; /* Deep brown color */
+}
+
+.overview-card.order-name .overview-text span {
+  color: #6d2f35; /* Reddish color */
+}
+
+.overview-card.order-email .overview-text span {
+  color: #1e6573; /* Teal color */
+}
+
+.overview-card.order-contact .overview-text span {
+  color: #3c3f43; /* Dark gray color */
+}
+
+/* Icon and Text */
+.overview-icon {
+  font-size: 36px;
+}
+
+.overview-text {
+  text-align: left;
+}
+
+.overview-text h3 {
+  margin: 5px 0 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Header */
+
+/* Order Info Cards */
+.order-info {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.order-info-card {
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.order-info-card .icon {
+  font-size: 20px;
+}
+
+/* Customer Details Section */
+.customer-details {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.customer-details .section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 15px;
+}
+
+.customer-details p {
+  font-size: 14px;
+  margin: 6px 0;
+  color: #555555;
+}
+
+.customer-details b {
+  color: #333333;
+}
+
+/* Order Items Section */
+.order-items {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.order-items .section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 15px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.order-item div {
+  font-size: 14px;
+  color: #333333;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+/* Order Summary Section */
+.order-summary {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 14px;
+  color: #555555;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.order-summary p {
+  margin: 6px 0;
+}
+
+.order-summary b {
+  font-weight: 600;
+  color: #333333;
+}
+
+/* Update Status Section */
+.update-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.update-status label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #555555;
+}
+
+.update-status select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  outline: none;
+}
+
+.btn-primary {
+  padding: 8px 16px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #45a049;
+}
+
+

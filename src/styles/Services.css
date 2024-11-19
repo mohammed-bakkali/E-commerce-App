@@ -1,0 +1,38 @@
+/* Card styling */
+.service-card {
+  background-color: #f4f4f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Icon styling */
+.icon-service {
+  font-size: 24px;
+  color: var(--blue-alt-color); 
+  margin-right: 10px;
+}
+
+/* Heading styling */
+.service-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Paragraph styling */
+.service-card p {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+/* Hover effect */
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}

@@ -1,0 +1,16 @@
+/*  */
+.category-icon {
+  color: #3498db; 
+}
+
+.active-category-icon {
+  color: #2ecc71; 
+}
+
+.recent-category-icon {
+  color: #f39c12; 
+}
+
+.featured-category-icon {
+  color: #9b59b6;
+}

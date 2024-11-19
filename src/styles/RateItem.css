@@ -1,0 +1,68 @@
+.rate-item {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.rate-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.rate-item-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.rate-item-rating {
+  display: flex;
+  align-items: center;
+}
+
+.rate-item-header img {
+  margin-left: 10px;
+}
+
+.rate-value {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-right: 0 !important;
+  color: #333;
+}
+
+.rate-description {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.rate-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.icon {
+  cursor: pointer;
+  color: #888;
+  transition: color 0.3s ease;
+  font-size: 18px;
+}
+
+.icon:hover {
+  color: #000;
+}
+
+.edit-icon {
+  color: #007bff;
+}
+
+.delete-icon {
+  color: #dc3545;
+}

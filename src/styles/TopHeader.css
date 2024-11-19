@@ -1,0 +1,35 @@
+/* TopHeader.css */
+.top-header {
+  background-color: #f8f8f8;
+  padding: 8px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.top-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-header .header-info span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.top-header .divider {
+  margin: 0 8px;
+  color: #ddd;
+}
+
+.top-header .social-icons a {
+  color: #333;
+  margin-left: 10px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.top-header .social-icons a:hover {
+  color: #555;
+}

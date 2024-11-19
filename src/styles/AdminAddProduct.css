@@ -1,0 +1,134 @@
+/* AdminAddProduct.css */
+.admin-add {
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-input,
+.multi-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus,
+.multi-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.form-input option {
+  padding: 10px;
+}
+
+
+.btn-submit {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-submit:hover {
+  background-color: #0056b3;
+}
+
+
+.image-preview-container {
+  margin-bottom: 20px;
+}
+
+.preview-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.image-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+
+.multi-select .multiselect {
+  width: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .admin-add-product-container {
+    padding: 15px;
+  }
+
+  .form-input {
+    padding: 8px;
+  }
+
+  .btn-submit {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .image-preview {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-add-product-container {
+    padding: 10px;
+  }
+
+  .form-input {
+    padding: 6px;
+  }
+
+  .btn-submit {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .image-preview {
+    width: 60px;
+    height: 60px;
+  }
+}
+

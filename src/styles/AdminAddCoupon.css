@@ -1,0 +1,109 @@
+.add-coupon-container {
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.coupon-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.coupon-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.coupon-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #343a40;
+}
+
+.coupon-details {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  margin-top: 20px;
+}
+
+.coupon-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.coupon-discount {
+  font-size: 18px;
+  font-weight: bold;
+  color: #28a745;
+}
+
+.coupon-expiry {
+  font-size: 16px;
+  color: #dc3545;
+}
+
+.btn-edit,
+.btn-delete,
+.btn-add {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-edit {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.btn-edit:hover {
+  background-color: #0056b3;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+.btn-add {
+  background-color: #28a745;
+  color: #fff;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.btn-add:hover {
+  background-color: #218838;
+}
+.coupon-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #343a40;
+}
+
+.coupon-details p strong {
+  margin-bottom: 5px;
+  color: #6c757d;
+  font-size: 16px;
+  display: inline-block;
+}
