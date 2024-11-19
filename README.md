@@ -39,6 +39,9 @@ The E-commerce Website is a fully functional online shopping platform built with
 - **Best Practices**: Follows industry best practices, including PropTypes for type checking and ESLint for code quality maintenance.
 - **Continuous Testing**: Ensures application stability with continuous testing using tools like Jest and React Testing Library.
 
+  ## Screenshots
+![ Screenshot - ](screenshot.png)
+
 ## Installation
 
 To get started with the E-commerce Website, clone the repository and install the dependencies:
