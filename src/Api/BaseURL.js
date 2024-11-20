@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // Create a new instance of Axios with the base URL
-const baseURL = axios.create({ baseURL: "https://back-end-app-commerce.vercel.app" });
+const baseURL = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 export default baseURL;
+
