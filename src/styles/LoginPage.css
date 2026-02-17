@@ -21,19 +21,28 @@ label {
   font-weight: bold;
 }
 
-/* input[type="email"],
+
+input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 10px;
-  padding-right: 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-} */
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
 
-/* input[type="email"]::placeholder,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  border-color: #0EA5E9;
+}
+
+input[type="email"]::placeholder,
 input[type="password"]::placeholder {
   color: #ccc;
-} */
+}
 
 .login {
   width: 100%;
@@ -44,13 +53,18 @@ input[type="password"]::placeholder {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
+
 .login:hover {
   background-color: var(--clr-primary--hover);
 }
 
-.btn:hover {
-  background-color: #16213e;
+/*      disabled state */
+.login:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .form-footer {
@@ -66,7 +80,6 @@ input[type="password"]::placeholder {
   color: #4B5563;
   margin: 0;
 }
-
 
 .form-footer .register:hover {
   text-decoration: underline;
