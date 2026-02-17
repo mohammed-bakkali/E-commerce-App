@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { deleteData, postData, postDataa, UpdateData } from "../../Hooks/httpRequests";
+import { deleteData, postData, UpdateData } from "../../Hooks/httpRequests";
 
-// Create an AsyncThunk to create a New User
 export const createNewUser = createAsyncThunk(
   "createNewUser/createNewUser",
   async (data, { rejectWithValue }) => {
@@ -9,32 +8,26 @@ export const createNewUser = createAsyncThunk(
       const response = await postData(`api/v1/auth/signup`, data);
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+      return rejectWithValue(error.response ? error.response.data : "Network Error");
     }
   }
 );
 
-// Create an AsyncThunk to create a New User
 export const LoginUser = createAsyncThunk(
   "LoginUser/LoginUser",
   async (data, { rejectWithValue }) => {
     try {
       const response = await postData(`/api/v1/auth/login`, data);
       return {
-        data: response.data.data, 
+        data: response.data.data,
         token: response.data.token,
       };
     } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+      return rejectWithValue(error.response ? error.response.data : "Network Error");
     }
   }
 );
 
-// Create an AsyncThunk to foregt password
 export const ForegetPassword = createAsyncThunk(
   "ForegetPassword/ForegetPassword",
   async (data, { rejectWithValue }) => {
@@ -42,13 +35,11 @@ export const ForegetPassword = createAsyncThunk(
       const response = await postData(`/api/v1/auth/forgotPasswords`, data);
       return response.data;
     } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+      return rejectWithValue(error.response ? error.response.data : "Network Error");
     }
   }
 );
-// Update user data
+
 export const updateUserProfileData = createAsyncThunk(
   "updateUser/updateUserProfileData",
   async (body, { rejectWithValue }) => {
@@ -57,9 +48,7 @@ export const updateUserProfileData = createAsyncThunk(
       const { data, status } = response;
       return { data, status };
     } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+      return rejectWithValue(error.response ? error.response.data : "Network Error");
     }
   }
 );
@@ -71,27 +60,20 @@ export const deleteUser = createAsyncThunk(
       const response = await deleteData(`/api/v1/users/deleteMe`);
       return { status: response.status, data: response.data };
     } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+      return rejectWithValue(error.response ? error.response.data : "Network Error");
     }
   }
 );
 
-
-// Create an AsyncThunk to update the user password
 export const updateUserPassword = createAsyncThunk(
   "updateUserPassword/updateUserPassword",
-  async ({body}, { rejectWithValue }) => {
+  async ({ body }, { rejectWithValue }) => {
     try {
       const response = await UpdateData(`/api/v1/users/changeMyPassword`, body);
-      console.log("selicePassword", response);
       const { message, status } = response;
       return { message, status };
     } catch (error) {
-      return rejectWithValue(
-        error.response ? error.response.data : "Network Error"
-      );
+      return rejectWithValue(error.response ? error.response.data : "Network Error");
     }
   }
 );
@@ -110,7 +92,13 @@ const initialState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    //     Reset auth state on page leave
+    resetAuthState: (state) => {
+      state.error = null;
+      state.loginUser = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createNewUser.pending, (state) => {
@@ -126,7 +114,7 @@ const userSlice = createSlice({
         state.error = action.payload;
         state.creatUsers = action.payload;
       })
-      // 
+
       .addCase(deleteUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -152,7 +140,7 @@ const userSlice = createSlice({
       .addCase(LoginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        state.loginUser = action.payload;
+        state.loginUser = [];
       })
 
       .addCase(ForegetPassword.pending, (state) => {
@@ -161,7 +149,7 @@ const userSlice = createSlice({
       })
       .addCase(ForegetPassword.fulfilled, (state, action) => {
         state.loading = false;
-        state.forgetPassword = action.payload;  // Store response correctly
+        state.forgetPassword = action.payload;
       })
       .addCase(ForegetPassword.rejected, (state, action) => {
         state.loading = false;
@@ -169,7 +157,6 @@ const userSlice = createSlice({
         state.error = action.payload;
       })
 
-      //
       .addCase(updateUserProfileData.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -182,21 +169,22 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // 
+
       .addCase(updateUserPassword.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(updateUserPassword.fulfilled, (state, action) => {
         state.loading = false;
-        state.updateUserPassword = action.payload; 
+        state.updateUserPassword = action.payload;
       })
       .addCase(updateUserPassword.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload; 
+        state.error = action.payload;
         state.updateUserPassword = action.payload;
       });
   },
 });
 
+export const { resetAuthState } = userSlice.actions;
 export default userSlice.reducer;
