@@ -50,9 +50,9 @@ const LoginPage = () => {
               placeholder="Password"
             />
           </div>
-          <button type="submit" className="login" onClick={handleLogin}>
-            loading
-          </button>
+          <button type="submit" className="login" onClick={handleLogin} disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </button>
         </form>
 
         <div className="form-footer">
