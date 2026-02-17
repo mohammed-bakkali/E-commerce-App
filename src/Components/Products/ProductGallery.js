@@ -7,30 +7,43 @@ import RightButton from "./RightButton";
 import { useParams } from "react-router-dom";
 import useViewProductsDetailsHook from "../../Hook/product/view-products-details-hook";
 import Spinner from "../Uitilys/Spinner";
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 
 const ProductGallery = () => {
-  // Extract the id from the URL
+  // Extract the product ID from the URL
   const { id } = useParams();
-  // Fetch product details using hook
+  
+  // Fetch product details using custom hook
   const { item, loading, images } = useViewProductsDetailsHook(id);
 
   if (loading) {
-    return (
-      
-        <Spinner />
-    
-    );
+    return <Spinner />;
   }
 
-  // if (!item || !item.images || item.images.length === 0) {
-  //   return <div>No images available for this product.</div>;
-  // }
+  if (!item || !images || images.length === 0) {
+    return <div>No images available for this product.</div>;
+  }
+
+  // Map images to use Zoom for each image
+  const zoomImages = images.map((img) => ({
+    original: img.original,
+    thumbnail: img.thumbnail,
+    renderItem: () => (
+      <Zoom>
+        <img
+          src={img.original}
+          alt={item.name || "Product Image"}
+          style={{ width: "100%", maxHeight: "500px", objectFit: "contain" }}
+        />
+      </Zoom>
+    ),
+  }));
 
   return (
     <div className="gallery-container">
       <ImageGallery
-        items={images}
-        defaultImage={false}
+        items={zoomImages}
         showPlayButton={false}
         autoPlay={true}
         renderRightNav={(onClick, disabled) => (
