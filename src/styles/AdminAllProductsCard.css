@@ -1,34 +1,175 @@
-.action-buttons {
+/* ── AdminAllProductsCard.css ── */
+
+/* Action buttons below each card */
+.admin-card-actions {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.edit-btn,
-.remove-btn {
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  gap: 8px;
+  padding: 0 12px 12px;
 }
 
 .edit-btn {
-  background-color: #007bff;
-  color: #fff;
+  flex: 1;
+  padding: 8px;
+  background: #f3f4f6;
+  color: #111;
   border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
   text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
 }
-
-.edit-btn:hover {
-  background-color: #0056b3;
-}
+.edit-btn:hover { background: #e5e7eb; }
 
 .remove-btn {
-  background-color: #e74c3c;
-  color: #fff;
-  border: none;
+  flex: 1;
+  padding: 8px;
+  background: #fff3f3;
+  color: #e53935;
+  border: 1px solid #ffd0d0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.remove-btn:hover { background: #ffe5e5; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-.remove-btn:hover {
-  background-color: #c0392b;
+.modal-box {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px 24px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 }
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #9ca3af;
+  cursor: pointer;
+  line-height: 1;
+}
+.modal-close:hover { color: #111; }
+
+.modal-icon {
+  width: 52px;
+  height: 52px;
+  background: #fff3f3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 22px;
+  color: #e53935;
+}
+
+.modal-box h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 8px;
+}
+
+.modal-box p {
+  font-size: 13px;
+  color: #6b7280;
+  margin: 0 0 24px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-btn-cancel {
+  flex: 1;
+  padding: 11px;
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-btn-cancel:hover { background: #e5e7eb; }
+
+.modal-btn-delete {
+  flex: 1;
+  padding: 11px;
+  background: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.modal-btn-delete:hover { background: #c62828; }
+
+/* Search & header */
+.admin-products-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.admin-search-input {
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+  padding: 10px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #111;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.admin-search-input:focus { border-color: #e53935; }
+
+.btn-add-product {
+  padding: 10px 20px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-add-product:hover { background: #e53935; }

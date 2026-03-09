@@ -1,134 +1,199 @@
-/* AdminAddProduct.css */
+/* ── AdminAddProduct.css ── */
+
 .admin-add {
-  padding: 20px;
-  margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: white;
+  padding: 28px;
+  flex: 1;
 }
 
+.admin-add .page-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 24px;
+}
+
+/* Form card wrapper */
 .add-product-form {
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
+.form-section {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
 
+.form-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #9ca3af;
+  margin: 0 0 16px;
+}
+
+/* Group */
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 16px;
+}
+.form-group:last-child { margin-bottom: 0; }
+
+/* Two-col grid inside a section */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .form-label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
+  font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
 }
 
 .form-input,
 .multi-select {
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  color: #333;
+  padding: 10px 14px;
+  font-size: 13px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fafafa;
+  color: #111;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.form-input:focus { border-color: #e53935; background: #fff; }
+
+textarea.form-input {
+  min-height: 100px;
+  resize: vertical;
 }
 
-.form-input:focus,
-.multi-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-
-.form-input option {
-  padding: 10px;
-}
-
-
-.btn-submit {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+select.form-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239ca3af' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
   cursor: pointer;
-  font-size: 16px;
 }
 
-.btn-submit:hover {
-  background-color: #0056b3;
+/* MultiSelect override */
+.multi-select .searchWrapper {
+  border: 1.5px solid #e5e7eb !important;
+  border-radius: 10px !important;
+  background: #fafafa !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+}
+.multi-select .chip {
+  background: #111 !important;
+  border-radius: 6px !important;
+  font-size: 12px !important;
+}
+.multi-select .optionContainer li:hover,
+.multi-select .optionContainer li.highlight {
+  background: #e53935 !important;
 }
 
-
-.image-preview-container {
-  margin-bottom: 20px;
-}
-
-.preview-title {
-  font-size: 18px;
-  font-weight: bold;
+/* Colors row */
+.product-colors {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 10px;
 }
 
-.image-previews {
+.color-option {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid rgba(0,0,0,0.1);
+  transition: transform 0.15s;
+  display: inline-block;
+}
+.color-option:hover {
+  transform: scale(1.2);
+  border-color: #e53935;
+}
+
+.color-add-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1.5px dashed #d1d5db;
+  background: #fafafa;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #9ca3af;
+  transition: border-color 0.2s, color 0.2s;
+  flex-shrink: 0;
+}
+.color-add-btn:hover { border-color: #e53935; color: #e53935; }
+
+/* Image uploader */
+.image-upload-section {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-.image-preview {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
+.image-upload-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #9ca3af;
+  display: block;
+  margin-bottom: 14px;
 }
 
-
-.multi-select .multiselect {
+/* Submit */
+.btn-submit {
   width: 100%;
+  padding: 14px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+.btn-submit:hover {
+  background: #e53935;
+  transform: translateY(-1px);
+}
+.btn-submit:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
 }
 
-
-@media (max-width: 768px) {
-  .admin-add-product-container {
-    padding: 15px;
-  }
-
-  .form-input {
-    padding: 8px;
-  }
-
-  .btn-submit {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  .image-preview {
-    width: 80px;
-    height: 80px;
-  }
+@media (max-width: 640px) {
+  .admin-add   { padding: 16px; }
+  .form-grid-2 { grid-template-columns: 1fr; }
+  .form-section, .image-upload-section { padding: 16px; }
 }
-
-@media (max-width: 480px) {
-  .admin-add-product-container {
-    padding: 10px;
-  }
-
-  .form-input {
-    padding: 6px;
-  }
-
-  .btn-submit {
-    padding: 6px 12px;
-    font-size: 12px;
-  }
-
-  .image-preview {
-    width: 60px;
-    height: 60px;
-  }
-}
-
