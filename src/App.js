@@ -56,6 +56,8 @@ function App() {
   // Check if the current page is an admin page
   const location = useLocation(); // Move this inside BrowserRouter
   const isAdminPage = location.pathname.startsWith("/admin");
+  const isAuthPage = ["/login", "/register", "/user/request-password"].includes(location.pathname);
+
 
   return (
     <>
@@ -129,7 +131,7 @@ function App() {
       </Routes>
 
       {/* Conditionally render the footer */}
-      {!isAdminPage && <Footer />}
+      {!isAdminPage && !isAuthPage && <Footer />}
     </>
   );
 }
