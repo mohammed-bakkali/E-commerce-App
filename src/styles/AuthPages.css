@@ -162,3 +162,27 @@
   }
   .auth-or::before { left: 0; }
   .auth-or::after  { right: 0; }
+
+
+  /* ── Demo hint box (shown only when VITE_SHOW_DEMO_HINT=true) ── */
+.demo-hint {
+  background: #fffbeb;
+  border: 1.5px dashed #f59e0b;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #92400e;
+  line-height: 1.7;
+}
+.demo-hint-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: #b45309;
+}
+.demo-hint strong {
+  font-weight: 700;
+  color: #78350f;
+  font-family: monospace;
+  font-size: 13px;
+}

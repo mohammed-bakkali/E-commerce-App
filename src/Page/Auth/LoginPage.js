@@ -7,15 +7,24 @@ import { ToastContainer } from "react-toastify";
 const LoginPage = () => {
   const { email, password, loading, onChangeEmail, onChangePassword, handleLogin } = useLoginHook();
 
+  //  console.log must be HERE — inside the function, outside the return()
+  // console.log("hint:", import.meta.env.VITE_SHOW_DEMO_HINT);
+
   return (
     <div className="auth-page">
       <ToastContainer position="bottom-left" autoClose={5000} />
-
       <div className="auth-card">
         <p className="auth-logo">Shop<span>Zone</span></p>
         <h2 className="auth-title">Welcome back</h2>
         <p className="auth-subtitle">Sign in to your account to continue</p>
         <hr className="auth-divider" />
+
+        {/*  Demo hint — hardcoded and always visible */}
+        <div className="demo-hint">
+          <p className="demo-hint-title">🔑 Demo Admin Access</p>
+          <p>Email: <strong>mohammedbakkali807@gmail.com</strong></p>
+          <p>Password: <strong>12345678</strong></p>
+        </div>
 
         <form onSubmit={handleLogin}>
           <div className="form-group">
