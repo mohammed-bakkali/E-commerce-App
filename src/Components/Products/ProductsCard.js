@@ -1,18 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faStar, faStarHalfAlt, faStar as faStarOutline } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar,
+  faStarHalfAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { faStar as faStarOutline } from "@fortawesome/free-regular-svg-icons";
 import "../../styles/ProductsCard.css";
 import { Link } from "react-router-dom";
 import useProductCardHook from "../../Hook/product/product-card-hook";
 
 const ProductsCard = ({ element, favoriteProds }) => {
-  const {
-    addToWishListData,
-    deleteToWishListData,
-    handelFav,
-    favImg,
-    imageUrl,
-  } = useProductCardHook(element, favoriteProds);
-
+  const { handelFav, favImg, imageUrl } = useProductCardHook(element, favoriteProds);
 
   const renderStars = (rating) => {
     const fullStars = Math.floor(rating); 
@@ -32,56 +29,46 @@ const ProductsCard = ({ element, favoriteProds }) => {
     return stars;
   };
 
+  const hasDiscount = element.priceAfterDiscount >= 1;
+  const discountPercent = hasDiscount
+    ? Math.round(((element.price - element.priceAfterDiscount) / element.price) * 100)
+    : 0;
+
   return (
     <div className="product-card">
+      {/* Image */}
       <div className="product-image-container">
-        <Link
-          to={`/products/${element._id}`}
-          style={{ textDecoration: "none" }}
-        >
-          <img src={imageUrl} alt="Product" className="product-image" />
+        <Link to={`/products/${element._id}`} style={{ textDecoration: "none" }}>
+          <img src={imageUrl} alt={element.title} className="product-image" />
         </Link>
-        <div className="favorite-icon">
-          <img
-            src={favImg}
-            alt=""
-            onClick={handelFav}
-            className="text-center"
-            style={{
-              height: "20px",
-              width: "26px",
-              cursor: "pointer",
-            }}
-          />
+        <div className="favorite-icon" onClick={handelFav}>
+          <img src={favImg} alt="favorite" />
         </div>
       </div>
 
-      <div className="between-flex">
-        <h4>{element.title}</h4>
-        <h4 className="price">
-          {element.priceAfterDiscount >= 1 ? (
+      {/* Body */}
+      <div className="product-card-body">
+        <Link to={`/products/${element._id}`} style={{ textDecoration: "none" }}>
+          <p className="product-title">{element.title}</p>
+        </Link>
+
+        <div className="product-price-row">
+          {hasDiscount ? (
             <>
-              <span className="original-price">${element.price}</span>  <span className="discounted-price">${element.priceAfterDiscount}</span>
+              <span className="discounted-price">${element.priceAfterDiscount}</span>
+              <span className="original-price">${element.price}</span>
+              <span className="discount-badge">-{discountPercent}%</span>
             </>
           ) : (
-            <span>${element.price}</span>
+            <span className="normal-price">${element.price}</span>
           )}
-        </h4>
-      </div>
-
-      <div className="rating">
-        {/* Show stars based on rating*/}
-        <span>({element.ratingsQuantity || 0})</span>
-        <div className="stars">
-          {renderStars(element.ratingsAverage || 0)}
         </div>
 
+        <div className="rating">
+          <div className="stars">{renderStars(element.ratingsAverage || 0)}</div>
+          <span className="rating-count">({element.ratingsQuantity || 0})</span>
+        </div>
       </div>
-
-      {/* <div className="add-to-cart">
-        <FontAwesomeIcon icon={faShoppingCart} className="fa-icon" /> Add to
-        Cart
-      </div> */}
     </div>
   );
 };

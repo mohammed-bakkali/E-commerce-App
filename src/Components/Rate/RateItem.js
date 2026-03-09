@@ -11,101 +11,78 @@ const RateItem = ({ review }) => {
     useDeleteRateHook(review);
 
   const {
-    isEditModalOpen,
-    openEditModal,
-    closeEditModal,
-    onConfirmEdit,
-    onChangeRateText,
-    newRateText,
-    onChangeRateValue,
-    newRateValue,
+    isEditModalOpen, openEditModal, closeEditModal,
+    onConfirmEdit, onChangeRateText, newRateText,
+    onChangeRateValue, newRateValue,
   } = useEditRateHook(review);
 
-  if (!review || !review.user) {
-    return <div>No review available</div>;
-  }
+  if (!review || !review.user) return <div>No review available</div>;
 
-  const settings = {
-    size: 20,             // Size of the stars (in pixels)
-    count: 5,             // Number of stars (5 stars in this case)
-    color: "#979797",     // Color of the empty stars
-    activeColor: "#ffc107", // Color of the filled stars (when rated)
-    value: newRateValue,  // Current rating value (updates when the user changes the rating)
-    a11y: true,           // Enable accessibility
-    isHalf: true,         // Allow half ratings (e.g., 4.5)
-    emptyIcon: <i className="far fa-star" />,  // Icon when not rated
-    halfIcon: <i className="fa fa-star-half-alt" />,  // Icon for half rating
-    filledIcon: <i className="fa fa-star" />,  // Icon for a full rating
-    onChange: onChangeRateValue,  // Function called when the user changes the rating
+  const starSettings = {
+    size: 18, count: 5,
+    color: "#ddd", activeColor: "#ffc107",
+    value: newRateValue,
+    a11y: true, isHalf: true,
+    emptyIcon:  <i className="far fa-star" />,
+    halfIcon:   <i className="fa fa-star-half-alt" />,
+    filledIcon: <i className="fa fa-star" />,
+    onChange: onChangeRateValue,
   };
-  
 
   return (
     <div className="rate-item">
+      {/* Header */}
       <div className="rate-item-name">
-        <div>{review.user.name || "Unknown User"}</div>
+        <span className="reviewer-name">{review.user.name || "Unknown"}</span>
         <div className="rate-item-rating">
-          <img src={rate} alt="Rating" height="16px" width="16px" />
-          <div className="rate-value">{review.rating || "N/A"}</div>
+          <img src={rate} alt="star" />
+          <span className="rate-value">{review.rating || "N/A"}</span>
         </div>
       </div>
-      <div className="rate-description">
-        {review.review || "No description available."}
-      </div>
-      {isUser === true ? (
-        <div className="rate-actions">
-          <FontAwesomeIcon
-            icon={faEdit}
-            className="icon edit-icon"
-            onClick={openEditModal}
-          />
-          <FontAwesomeIcon
-            icon={faTrashAlt}
-            className="icon delete-icon"
-            onClick={openModal}
-          />
-        </div>
-      ) : null}
 
+      {/* Body */}
+      <p className="rate-description">{review.review || "No description available."}</p>
+
+      {/* Actions */}
+      {isUser && (
+        <div className="rate-actions">
+          <FontAwesomeIcon icon={faEdit}     className="icon edit-icon"   onClick={openEditModal} />
+          <FontAwesomeIcon icon={faTrashAlt} className="icon delete-icon" onClick={openModal} />
+        </div>
+      )}
+
+      {/* Delete Modal */}
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={closeModal}>
-              &times;
-            </span>
-            <p id="OnePro">Are you sure you want to delete this Rating?</p>
-            <button id="confirmDelete" onClick={onConfirmDelete}>
-              Delete
-            </button>
-            <button id="cancelDelete" onClick={closeModal}>
-              Cancel
-            </button>
+            <span className="close" onClick={closeModal}>&times;</span>
+            <p>Are you sure you want to delete this review?</p>
+            <div className="modal-buttons">
+              <button id="confirmDelete" onClick={onConfirmDelete}>Delete</button>
+              <button id="cancelDelete"  onClick={closeModal}>Cancel</button>
+            </div>
           </div>
         </div>
       )}
-      {/* Edite */}
+
+      {/* Edit Modal */}
       {isEditModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={closeEditModal}>
-              &times;
-            </span>
-            <p id="OnePro"> Edit this Rating?</p>
+            <span className="close" onClick={closeEditModal}>&times;</span>
+            <p>Edit your review</p>
             <div className="edit-form">
-              <ReactStars {...settings} />
+              <ReactStars {...starSettings} />
               <textarea
                 onChange={onChangeRateText}
                 value={newRateText}
-                id="reviewInput"
-                placeholder="Enter new review"
+                placeholder="Update your review..."
               />
             </div>
-            <button id="confirmEdit" onClick={onConfirmEdit}>
-              Edit
-            </button>
-            <button id="cancelEdit" onClick={closeEditModal}>
-              Cancel
-            </button>
+            <div className="modal-buttons">
+              <button id="confirmEdit" onClick={onConfirmEdit}>Save</button>
+              <button id="cancelEdit"  onClick={closeEditModal}>Cancel</button>
+            </div>
           </div>
         </div>
       )}

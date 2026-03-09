@@ -1,38 +1,65 @@
+/* ── ProductGallery.css ── */
 .gallery-container {
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8f8f8;
 }
 
+/* Override react-image-gallery defaults */
+.image-gallery-slide img {
+  border-radius: 10px;
+  object-fit: contain;
+  max-height: 420px;
+  width: 100%;
+}
+
+.image-gallery-thumbnail {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid transparent !important;
+  transition: border-color 0.2s;
+}
+.image-gallery-thumbnail.active,
+.image-gallery-thumbnail:hover {
+  border-color: #e53935 !important;
+}
+.image-gallery-thumbnail img {
+  height: 60px;
+  object-fit: cover;
+}
+
+/* Nav Buttons */
 .gallery-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: transparent;
+  background: rgba(255,255,255,0.92);
   border: none;
-  cursor: pointer;
-  z-index: 1;
-  width: 35px; 
-  height: auto; 
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  z-index: 10;
+  transition: background 0.2s, transform 0.2s;
 }
-
+.gallery-button:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
 .gallery-button img {
-  width: 100%; 
-  height: 100%; 
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
 }
+.right-button { right: 12px; }
+.left-button  { left: 12px; }
 
-.right-button {
-  right: 10px;
-}
-
-.left-button {
-  left: 10px;
-}
-
-@media (max-width: 768px) {
-  .right-button,
-  .left-button {
-    top: 40%;
-  }
+@media (max-width: 576px) {
+  .gallery-button { width: 30px; height: 30px; }
+  .gallery-button img { width: 12px; height: 12px; }
 }
