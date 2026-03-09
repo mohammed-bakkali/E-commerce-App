@@ -1,85 +1,95 @@
-/* UserAllOrder.css */
-.user-orders-container {
-  padding: 20px;
+/* ── UserAllOrder.css ── */
+
+.user-orders-page {
+  padding: 24px;
+  flex: 1;
 }
 
-.page-title {
-  font-size: 24px;
+/* Header */
+.orders-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
   margin-bottom: 20px;
 }
-
-/* UserAllOrderItem.css */
-.order-item-container {
-  margin-bottom: 20px;
+.orders-header h2 { font-size: 1.2rem; font-weight: 700; color: #111; margin: 0; }
+.orders-count-badge {
+  background: #f3f4f6;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
 }
 
-.order-number {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.order-cards {
+/* Empty state */
+.orders-empty {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #9ca3af;
   gap: 10px;
+  text-align: center;
 }
+.orders-empty p    { font-size: 15px; font-weight: 500; margin: 0; }
+.orders-empty span { font-size: 13px; }
 
-.between-flex {
+/* Order card wrapper */
+.order-item-card {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.order-item-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+/* Top bar */
+.order-card-top {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+  padding: 13px 20px;
+  background: #fafafa;
+  border-bottom: 1px solid #f0f0f0;
 }
+.order-id { font-size: 13px; font-weight: 700; color: #111; }
+.order-id span { color: #9ca3af; font-weight: 500; margin-left: 4px; }
 
-.order-summary {
-  margin-top: 15px;
-}
-
-.order-status, .order-total {
-  font-size: 18px;
-}
-
-/* UserAllOrderCard.css */
-.order-card {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.item-details {
-  display: flex;
-  gap: 10px;
-}
-
-.item-image {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.item-info {
+/* Products list */
+.order-products {
+  padding: 12px 20px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
-.item-brand, .item-name, .item-rating {
-  margin-bottom: 5px;
-}
-
-.item-actions {
+/* Footer */
+.order-card-footer {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 20px;
+  border-top: 1px solid #f0f0f0;
 }
-
-.remove-item {
-  cursor: pointer;
-  color: red;
+.order-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
 }
-
-.item-price {
-  font-weight: bold;
-  text-align: right;
-}
+.pill-green  { background: #f0fdf4; color: #16a34a; }
+.pill-yellow { background: #fffbeb; color: #d97706; }
+.pill-blue   { background: #eff6ff; color: #2563eb; }
+.pill-red    { background: #fff3f3; color: #e53935; }
+.pill-gray   { background: #f3f4f6; color: #6b7280; }
+.order-total { margin-left: auto; font-size: 15px; font-weight: 800; color: #111; }

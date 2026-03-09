@@ -3,53 +3,53 @@ import useDeleteCartHook from "../../Hook/cart/delete-cart-hook";
 import useApplayCouponHook from "../../Hook/cart/applay-coupon-hook";
 import { useEffect } from "react";
 
-
-
-const CartCheckout = ({totalCartPrice, couponNameRes, totalCartPriceAfterDiscount, cartItems}) => {
-  
+const CartCheckout = ({ totalCartPrice, couponNameRes, totalCartPriceAfterDiscount, cartItems }) => {
   const { handleDeleteCart } = useDeleteCartHook();
-  const { couponName, onChangeCoupon, handleApplyCoupon, handleCheckout } = useApplayCouponHook(cartItems);
-    
+  const { couponName, onChangeCoupon, handleApplyCoupon, handleCheckout } =
+    useApplayCouponHook(cartItems);
 
   useEffect(() => {
     onChangeCoupon(couponNameRes);
   }, [couponNameRes]);
 
-
-
-
+  const hasDiscount = totalCartPriceAfterDiscount && totalCartPriceAfterDiscount >= 1;
 
   return (
     <div className="checkout-container">
-      <h2>Total:</h2>
-      <h3 className="product-price">
-        {totalCartPriceAfterDiscount && totalCartPriceAfterDiscount >= 1 ? (
-          <>
-            <span className="original-price">${totalCartPrice}</span>
-            <span className="discounted-price">
-              ${totalCartPriceAfterDiscount}
-            </span>
-          </>
-        ) : (
-          <span className="discounted-price">${totalCartPrice || 0}</span>
+      <p className="checkout-label">Order Summary</p>
+
+      {/* Price */}
+      <div className="checkout-price-row">
+        <span className="checkout-final-price">
+          ${hasDiscount ? totalCartPriceAfterDiscount : totalCartPrice || 0}
+        </span>
+        {hasDiscount && (
+          <span className="checkout-original-price">${totalCartPrice}</span>
         )}
-      </h3>
+      </div>
 
+      <hr className="checkout-divider" />
 
-
-      <button style={{marginBottom: "20px"}} onClick={handleCheckout} className="btn-primary">Checkout</button>
-
-
-      <button className="btn-primary" onClick={handleDeleteCart }>
-        Clear All Carts
+      {/* Checkout */}
+      <button onClick={handleCheckout} className="btn-checkout">
+        Proceed to Checkout
       </button>
 
+      {/* Clear cart */}
+      <button onClick={handleDeleteCart} className="btn-clear">
+        Clear Cart
+      </button>
+
+      <hr className="checkout-divider" />
+
+      {/* Coupon */}
+      <p className="checkout-label">Coupon Code</p>
       <div className="coupon-section">
         <input
           value={couponName}
           onChange={(e) => onChangeCoupon(e.target.value)}
           className="coupon-input"
-          placeholder="Enter Coupon"
+          placeholder="Enter coupon..."
         />
         <button onClick={handleApplyCoupon} className="coupon-btn">
           Apply

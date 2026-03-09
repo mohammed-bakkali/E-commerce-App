@@ -2,35 +2,22 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/CartItem.css";
-import jacket1 from "../../assets/images/products/jacket-1.jpg";
 import useDeleteCartHook from "../../Hook/cart/delete-cart-hook";
 import ModalDelete from "../Uitilys/ModalDelete";
 import useUpdateCartHook from "../../Hook/cart/update-cart-hook";
 
 const CartItem = ({ item }) => {
-  const {
-    closeModal,
-    openModal,
-    isModalOpen,
-    onConfirm,
-  } = useDeleteCartHook(item);
-
+  const { closeModal, openModal, isModalOpen, onConfirm } = useDeleteCartHook(item);
   const { itemCount, onchangeCount, handeleUpdateCart } = useUpdateCartHook(item);
 
-
-  const imageUrl =
-    item.product.imageCover.startsWith("http") &&
+  const imageUrl = item.product.imageCover.startsWith("http") &&
     !item.product.imageCover.includes("127.0.0.1:8000/products/")
-      ? `http://127.0.0.1:8000/products/${item.product.imageCover.replace(
-          /^http:\/\//,
-          ""
-        )}`
-      : !item.product.imageCover.startsWith("http") &&
-        item.product.imageCover.includes("127.0.0.1:8000")
-      ? `http://${item.product.imageCover}`
-      : item.product.imageCover.startsWith("http")
-      ? item.product.imageCover
-      : `http://127.0.0.1:8000/products/${item.product.imageCover}`;
+    ? `http://127.0.0.1:8000/products/${item.product.imageCover.replace(/^http:\/\//, "")}`
+    : !item.product.imageCover.startsWith("http") && item.product.imageCover.includes("127.0.0.1:8000")
+    ? `http://${item.product.imageCover}`
+    : item.product.imageCover.startsWith("http")
+    ? item.product.imageCover
+    : `http://127.0.0.1:8000/products/${item.product.imageCover}`;
 
   return (
     <>
@@ -38,45 +25,46 @@ const CartItem = ({ item }) => {
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         onConfirm={onConfirm}
-        openModal={openModal}
-        message={`Are you sure you want to ditch "${item.product.title}" from your cart?`}
+        message={`Remove "${item.product.title}" from your cart?`}
       />
 
       <div className="cart-item">
+        {/* Left: image + info */}
         <div className="item-details">
-          <img src={imageUrl} alt="Product" className="item-image" />
+          <img src={imageUrl} alt={item.product.title} className="item-image" />
           <div className="item-info">
             <h4 className="item-name">{item.product.title}</h4>
-            <p className="item-brand">Brand: {item.product.brand?.name}</p>
-            <p className="item-rating">{item.product.ratingsAverage || 0.0} </p>
-            {item.color === "" ? null : (
+            {item.product.brand?.name && (
+              <p className="item-brand">{item.product.brand.name}</p>
+            )}
+            {item.product.ratingsAverage > 0 && (
+              <p className="item-rating">★ {item.product.ratingsAverage}</p>
+            )}
+            {item.color && (
               <div className="item-color">
-                <span
-                  className="color-swatch"
-                  style={{ backgroundColor: `${item.color}` }}
-                ></span>
+                <span className="color-swatch" style={{ backgroundColor: item.color }} />
               </div>
             )}
             <div className="quantity-wrapper">
-              <label htmlFor="quantity" className="quantity-label">
-                Qty:
-              </label>
-
+              <label htmlFor="quantity" className="quantity-label">Qty:</label>
               <input
                 value={itemCount}
                 type="number"
-                placeholder="1"
                 className="quantity-input"
                 id="quantity"
                 onChange={onchangeCount}
               />
-              <button onClick={handeleUpdateCart} className="btn-update-quantity">Apply Quantity</button>
+              <button onClick={handeleUpdateCart} className="btn-update-quantity">
+                Apply
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Right: price + remove */}
         <div className="item-actions">
-          <div className="item-price">{item.price}$</div>
-          <button className="btn-delete" onClick={openModal}>
+          <div className="item-price">${item.price}</div>
+          <button className="btn-remove" onClick={openModal}>
             <FontAwesomeIcon icon={faTrashAlt} /> Remove
           </button>
         </div>

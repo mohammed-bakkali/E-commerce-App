@@ -3,15 +3,16 @@ import "../../styles/BrandCard.css";
 import { Link } from "react-router-dom";
 
 const BrandCard = ({ img, title, id }) => {
+  console.log("img",img)
   return (
-    <div className="brands">
-      <div className="brand">
-        <Link to={`/products/brand/${id}`}>
+    <Link to={`/products/brand/${id}`} style={{ textDecoration: "none" }}>
+      <div className="brand-card">
+        <div className="brand-img-wrap">
           <img src={img} alt={title} />
-      </Link>
+        </div>
+        <p className="brand-name">{title}</p>
       </div>
-      <p>{title}</p>
-    </div>
+    </Link>
   );
 };
 

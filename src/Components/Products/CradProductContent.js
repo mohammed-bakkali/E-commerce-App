@@ -4,7 +4,7 @@ const CradProductContent = ({ products }) => {
   const { favoriteProds } = useCardContainerHook();
 
   return (
-    <div className="responsive-grid-280">
+    <div className="responsive-grid-300">
       {products
         ? products.map((element, index) => (
             <ProductsCard

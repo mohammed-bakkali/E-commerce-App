@@ -54,30 +54,30 @@ const [showButton, setShowButton] = useState(false);
       <BrandFeatured title="Most famous brands" btntitle="More" pathText="/products" />
       {/* Back to Top Button */}
       {showButton && (
-  <button
-    onClick={scrollToTop}
-    title="Back to Top"
-    style={{
-      position: "fixed",
-      bottom: "20px",
-      right: "20px",
-      fontSize: "18px",
-      backgroundColor: "#007bff",
-      color: "white",
-      border: "none",
-      borderRadius: "50%",
-      cursor: "pointer",
-      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-      opacity: showButton ? 1 : 0,
-      transition: "opacity 0.3s ease-in-out",
-    }}
-  >
-    <FontAwesomeIcon style={{padding: "10px",}} icon={faCircleUp} />
-  </button>
-)}
+        <button
+          onClick={scrollToTop}
+          title="Back to Top"
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            fontSize: "18px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "50%",
+            cursor: "pointer",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            opacity: showButton ? 1 : 0,
+            transition: "opacity 0.3s ease-in-out",
+          }}
+        >
+          <FontAwesomeIcon style={{padding: "10px",}} icon={faCircleUp} />
+        </button>
+      )}
 
-    </>
-  );
-};
+          </>
+        );
+      };
 
 export default HomePage;

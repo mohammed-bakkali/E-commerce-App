@@ -1,29 +1,33 @@
 import React from "react";
 import "../../styles/CategoryHeader.css";
 import useAddCategoryPageHook from "../../Hook/category/add-category-page-hook";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const CategoryHeader = () => {
-  const { categories, totalPages, loading, handlePageClick } = useAddCategoryPageHook();
+  const { categories } = useAddCategoryPageHook();
 
-  
   return (
     <div className="header">
       <div className="container">
-        { 
-          categories ? (
-            categories.map((cat, index) => (
-            (  <Link to={`/products/category/${cat.id}`}>
-                <div className="header-item" key={index}>{cat.name}</div>
-              </Link>
-            )
-            ))
-          ) : null
-        }
-        <Link to="/allcategory">
-          <div className="header-item">Others</div>
-        </Link>
-        
+        {categories?.map((cat) => (
+          <NavLink
+            key={cat.id}
+            to={`/products/category/${cat.id}`}
+            className={({ isActive }) =>
+              `header-item${isActive ? " header-item-active" : ""}`
+            }
+          >
+            {cat.name}
+          </NavLink>
+        ))}
+        <NavLink
+          to="/allcategory"
+          className={({ isActive }) =>
+            `header-item${isActive ? " header-item-active" : ""}`
+          }
+        >
+          All Categories
+        </NavLink>
       </div>
     </div>
   );

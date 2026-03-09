@@ -1,79 +1,311 @@
-.user-profile {
-  margin: 0 auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* ── UserProfile.css ── */
+
+.user-profile-page {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.profile-header {
+/* Page header */
+.profile-page-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-page-header h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+/* Info card */
+.profile-info-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+}
+
+.profile-info-top {
+  background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+  padding: 24px;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
 }
 
-.profile-avatar {
-  width: 150px;
-  height: 150px;
+.profile-info-top::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
-  object-fit: cover;
-  margin-right: 20px;
-  border: 2px solid #ddd;
+  background: rgba(229,57,53,0.1);
+  top: -50px;
+  right: -30px;
 }
 
-.profile-name {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
+.profile-avatar-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #e53935;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  z-index: 1;
 }
 
-.profile-details p {
-  margin: 10px 0;
-  border-bottom: 1px solid #ccc;
-  font-size: 16px;
-  padding-bottom: 30px;
+.profile-top-text h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 3px;
+  z-index: 1;
+  position: relative;
 }
 
-.password-change-form {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.profile-top-text p {
+  font-size: 13px;
+  color: #9ca3af;
+  margin: 0;
+  z-index: 1;
+  position: relative;
 }
 
-.password-change-form h3 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #333;
+/* Details rows */
+.profile-details {
+  padding: 6px 0;
 }
 
-.form-group {
-  margin-bottom: 15px;
+.profile-detail-row {
+  display: flex;
+  align-items: center;
+  padding: 14px 24px;
+  border-bottom: 1px solid #f9fafb;
+  gap: 12px;
 }
 
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
+.profile-detail-row:last-child {
+  border-bottom: none;
 }
 
-.form-group input {
-  width: 100%;
+.detail-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.detail-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  margin-bottom: 2px;
+}
+
+.detail-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* Action buttons */
+.profile-actions {
+  display: flex;
+  gap: 10px;
+  padding: 16px 24px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.btn-edit {
+  flex: 1;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
 }
+.btn-edit:hover { background: #e53935; }
+
+.btn-delete {
+  padding: 10px 20px;
+  background: #fff3f3;
+  color: #e53935;
+  border: 1px solid #fdd;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-delete:hover { background: #ffe4e4; }
+
+/* Password card */
+.password-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #f0f0f0;
+  padding: 24px;
+}
+
+.password-card h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.password-card .form-group {
+  margin-bottom: 14px;
+}
+
+.password-card .form-group input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #111;
+  outline: none;
+  background: #fafafa;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.password-card .form-group input:focus {
+  border-color: #e53935;
+  background: #fff;
+}
+
+.password-card .form-group input::placeholder { color: #d1d5db; }
 
 .btn-save-password {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
+  background: #111;
   color: #fff;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-top: 4px;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-save-password:hover {
+  background: #e53935;
+  transform: translateY(-1px);
 }
 
+/* Edit modal — reuses RateItem modal styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  font-size: 20px;
+  color: #aaa;
+  cursor: pointer;
+}
+.modal-content .close:hover { color: #333; }
+
+.modal-content h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 18px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.edit-form input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+.edit-form input:focus { border-color: #e53935; }
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+#confirmEdit {
+  flex: 1;
+  padding: 11px;
+  background: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#confirmEdit:hover { background: #c62828; }
+
+#cancelEdit {
+  flex: 1;
+  padding: 11px;
+  background: #f2f2f2;
+  color: #555;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#cancelEdit:hover { background: #e8e8e8; }

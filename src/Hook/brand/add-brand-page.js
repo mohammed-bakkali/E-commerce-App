@@ -14,11 +14,13 @@ const useAddBrandPageHook = () => {
   }, [dispatch]);
 
 
-  const  brands  = useSelector((state) =>
+  const brands = useSelector((state) =>
     state.brand.brands.map((el) => ({
       ...el,
-      image: el.image ? `http://${el.image}` : "default-image-url.png",
       id: el._id,
+      image: el.image 
+        ? `${process.env.REACT_APP_API_URL}${el.image.replace(/^undefined\//, "")}` 
+        : "https://via.placeholder.com/150",
     }))
   );
 

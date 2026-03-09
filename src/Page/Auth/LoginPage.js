@@ -1,36 +1,22 @@
 import React from "react";
-import "../../styles/LoginPage.css";
+import "../../styles/AuthPages.css";
 import { Link } from "react-router-dom";
 import useLoginHook from "../../Hook/auth/login-hook";
 import { ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
-  const {
-    email,
-    password,
-    loading,
-    onChangeEmail,
-    onChangePassword,
-    handleLogin,
-  } = useLoginHook();
+  const { email, password, loading, onChangeEmail, onChangePassword, handleLogin } = useLoginHook();
 
   return (
-    <div className="container center-flex" style={{ height: "670px" }}>
-      <ToastContainer
-        position="bottom-left"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <div className="form-container">
-        <h2>Login</h2>
+    <div className="auth-page">
+      <ToastContainer position="bottom-left" autoClose={5000} />
 
-        {/*    onSubmit on form, supports Enter key */}
+      <div className="auth-card">
+        <p className="auth-logo">Shop<span>Zone</span></p>
+        <h2 className="auth-title">Welcome back</h2>
+        <p className="auth-subtitle">Sign in to your account to continue</p>
+        <hr className="auth-divider" />
+
         <form onSubmit={handleLogin}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -49,34 +35,23 @@ const LoginPage = () => {
               onChange={onChangePassword}
               type="password"
               id="password"
-              placeholder="Password"
+              placeholder="••••••••"
             />
           </div>
-
-          {/*    shows loading state and disables button */}
-          <button type="submit" className="login" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button type="submit" className="auth-btn" disabled={loading}>
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
 
-        <div className="form-footer">
+        <div className="auth-footer">
           <p>
             New user?
-            <Link to="/register" style={{ textDecoration: "none" }}>
-              <span className="ml-10" style={{ color: "#0EA5E9" }}>
-                Create an accountaccount
-              </span>
-            </Link>
+            <Link to="/register" className="auth-link">Create an account</Link>
           </p>
-        </div>
-
-        <div className="form-footer">
-          <span className="c-black">OR</span>
-          <Link to="/user/request-password" style={{ textDecoration: "none" }}>
-            <span className="ml-10" style={{ color: "#0EA5E9" }}>
-              Forgot your password?
-            </span>
-          </Link>
+          <span className="auth-or">OR</span>
+          <p>
+            <Link to="/user/request-password" className="auth-link">Forgot your password?</Link>
+          </p>
         </div>
       </div>
     </div>

@@ -1,68 +1,39 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHome,
-  faUserEdit,
-  faHeart,
-  faShoppingCart,
-  faAddressBook,
+  faHome, faUserEdit, faHeart,
+  faShoppingCart, faAddressBook,
 } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/AdminSideMenu.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+const menuItems = [
+  { to: "/user/account-dashboard", icon: faHome,         label: "Dashboard" },
+  { to: "/user/profile",           icon: faUserEdit,     label: "Account Info" },
+  { to: "/user/favoriteproducts",  icon: faHeart,        label: "Favourites" },
+  { to: "/user/allorders",         icon: faShoppingCart, label: "My Orders" },
+  { to: "/user/addresses",         icon: faAddressBook,  label: "Addresses" },
+];
 
 const UserMenu = () => {
   return (
-    <div className="sidmenu w-full">
+    <div className="sidmenu">
       <div className="logo-container">
-        <h1 className="logo-text">ShopZone</h1>
+        <h1 className="logo-text">Shop<span>Zone</span></h1>
       </div>
-      {/* Account Dashboard */}
-      <Link to="/user/account-dashboard" style={{ textDecoration: "none" }}>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faHome} className="icon-dashboard" />
-          <span>Account Dashboard</span>
-        </div>
-      </Link>
 
-      {/* User Profile */}
-      <Link to="/user/profile" style={{ textDecoration: "none" }}>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faUserEdit} className="icon-dashboard" />
-          <span>Account Information</span>
-        </div>
-      </Link>
+      <span className="menu-section-label">My Account</span>
 
-      {/* Favorite Products */}
-      <Link to="/user/favoriteproducts" style={{ textDecoration: "none" }}>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faHeart} className="icon-products" />
-          <span>Favorite Products</span>
-        </div>
-      </Link>
-
-      {/* Order Management */}
-      <Link to="/user/allorders" style={{ textDecoration: "none" }}>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faShoppingCart} className="icon-orders" />
-          <span>Orders</span>
-        </div>
-      </Link>
-
-      {/* Personal Addresses */}
-      <Link to="/user/addresses" style={{ textDecoration: "none" }}>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faAddressBook} className="icon-category" />
-          <span>Personal Addresses</span>
-        </div>
-      </Link>
-
-      {/* Account Settings */}
-      {/* <Link to="/user/settings" style={{ textDecoration: "none" }}>
-        <div className="menu-item">
-          <FontAwesomeIcon icon={faWrench} className="icon-settings" />
-          <span>Account Settings</span>
-        </div>
-      </Link> */}
+      {menuItems.map(({ to, icon, label }) => (
+        <NavLink
+          key={to}
+          to={to}
+          className={({ isActive }) => `menu-item${isActive ? " active" : ""}`}
+        >
+          <FontAwesomeIcon icon={icon} className="icon-dashboard" />
+          <span>{label}</span>
+        </NavLink>
+      ))}
     </div>
   );
 };

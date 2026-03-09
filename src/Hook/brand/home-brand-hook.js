@@ -13,9 +13,14 @@ const useHomeBrandHooks = () => {
   // Extract brands and loading state from the Redux store
   const brands = useSelector((state) =>
     state.brand.brands.map((el) => ({
+      id: el._id,
       name: el.name || "Unknown Name",
-      image: el.image ? `http://${el.image}` : "default-image-url.png",
-      id: el._id
+      image:
+        el.image && typeof el.image === "string"
+          ? el.image.startsWith("http")
+            ? el.image
+            : `${process.env.REACT_APP_API_URL}${el.image.replace(/^undefined\//, "")}`
+          : "https://via.placeholder.com/150", // fallback image
     }))
   );
 

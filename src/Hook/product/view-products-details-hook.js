@@ -46,11 +46,15 @@ const useViewProductsDetailsHook = (id) => {
 
 
   const images = item.images
-    ? item.images.map((imgUrl) => ({
-        original: imgUrl ? `http://${imgUrl}` : "default-image-url.png",
-        thumbnail: imgUrl ? `http://${imgUrl}` : "default-image-url.png",
-      }))
-    : [];
+  ? item.images.map((imgUrl) => ({
+      original: imgUrl
+        ? `${process.env.REACT_APP_API_URL}${imgUrl.replace(/^undefined\//, "")}`
+        : "https://via.placeholder.com/150",
+      thumbnail: imgUrl
+        ? `${process.env.REACT_APP_API_URL}${imgUrl.replace(/^undefined\//, "")}`
+        : "https://via.placeholder.com/150",
+    }))
+  : [];
 
   // Return product details, category, brand, loading state, and images
   return { item, selectedCategory, selectedProductLike, cat, brand, loading, images };

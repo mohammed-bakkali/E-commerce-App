@@ -1,0 +1,87 @@
+/* ── AddressForm.css ── shared by UserAddAddress & UserEditAddress ── */
+
+.address-form-page {
+    padding: 24px;
+    flex: 1;
+  }
+  
+  .address-form-header {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f0f0f0;
+    margin-bottom: 24px;
+  }
+  
+  .address-form-header h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+  }
+  
+  /* Card */
+  .address-form-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #f0f0f0;
+    padding: 28px;
+    max-width: 560px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  
+  /* Field */
+  .address-form-card .form-group {
+    margin-bottom: 16px;
+  }
+  
+  .address-form-card .form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #374151;
+    margin-bottom: 6px;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #111;
+    outline: none;
+    background: #fafafa;
+    box-sizing: border-box;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  
+  .form-input:focus {
+    border-color: #e53935;
+    background: #fff;
+  }
+  
+  .form-input::placeholder {
+    color: #d1d5db;
+  }
+  
+  /* Submit */
+  .btn-submit {
+    width: 100%;
+    padding: 13px;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.03em;
+  }
+  
+  .btn-submit:hover {
+    background: #e53935;
+    transform: translateY(-1px);
+  }

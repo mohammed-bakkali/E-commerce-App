@@ -1,50 +1,82 @@
+/* ── CategoryCard.css ── */
 .category-card {
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .category-item {
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   overflow: hidden;
-  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+}
+
+.category-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(0,0,0,0);
+  transition: background 0.25s ease;
+}
+
+.category-card:hover .category-item {
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.category-card:hover .category-item::after {
+  background: rgba(0,0,0,0.06);
 }
 
 .category-item img {
-  width: 110px;
-  height: 110px;
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
   transition: transform 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
-.category-item img:hover {
+
+.category-card:hover .category-item img {
   transform: scale(1.1);
 }
 
 .category-card p {
-  font-size: 16px;
-  color: #333;
-  font-weight: 600;
-  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.02em;
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Adding arrow icons (optional) */
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 24px;
-  color: #ccc;
-  cursor: pointer;
-  z-index: 10;
+/* Page header */
+.categories-page-header {
+  padding: 2rem 0 0.25rem;
+  text-align: center;
 }
-
-.arrow.left {
-  left: 0;
+.categories-page-header h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 6px;
 }
-
-.arrow.right {
-  right: 0;
+.categories-page-header p {
+  font-size: 14px;
+  color: #aaa;
+  margin: 0;
 }

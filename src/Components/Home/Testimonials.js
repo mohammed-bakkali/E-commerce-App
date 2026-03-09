@@ -1,11 +1,12 @@
-import React from 'react';
-import '../../styles/Testimonials.css';
+import React from "react";
+import "../../styles/Testimonials.css";
 import avatar from "../../assets/icons/man-avatar.png";
+
 const testimonials = [
   {
     id: 1,
     title: "Code Quality",
-    review: "Great job on the code quality! Your attention to detail and dedication to producing clean, well-structured, and efficient code is impressive. Keep up the excellent work!",
+    review: "Great job on the code quality! Your attention to detail and dedication to producing clean, well-structured, and efficient code is impressive.",
     name: "Zebra Fashion",
     jobTitle: "Founder & Owner",
     image: avatar,
@@ -14,7 +15,7 @@ const testimonials = [
   {
     id: 2,
     title: "Design Quality",
-    review: "Awesome! It is a high-quality HTML template, I suggest two things, please add Angular version as Default with HTML version and Please try to add LMS part. Thanks",
+    review: "Awesome! It is a high-quality HTML template. I suggest adding an Angular version as default with HTML version. Thanks!",
     name: "James Bowen",
     jobTitle: "Web Development",
     image: avatar,
@@ -23,7 +24,7 @@ const testimonials = [
   {
     id: 3,
     title: "Customer Support",
-    review: "High theme quality. Very good support, they spent almost an hour remotely to fix a problem. I hope this theme will have a long term support. Great Admin template comes in handy... :)",
+    review: "High theme quality. Very good support — they spent almost an hour remotely to fix a problem. I hope this theme will have long-term support.",
     name: "Alex Smith",
     jobTitle: "UI/UX Designer",
     image: avatar,
@@ -32,7 +33,7 @@ const testimonials = [
   {
     id: 4,
     title: "Feature Availability",
-    review: "Hello everyone, I would like to suggest here two contents that you could create. Course pages and blog pages. In them you could insert the listing and management of courses.",
+    review: "I would like to suggest two contents: course pages and blog pages, with listing and management of courses built in.",
     name: "Ayaan Bowen",
     jobTitle: "Fashion Designer",
     image: avatar,
@@ -41,7 +42,7 @@ const testimonials = [
   {
     id: 5,
     title: "Design Quality",
-    review: "Thank you for supporting CakePHP 4, we have purchased the template because of this support, please push forward more integration. The template is very complete as an admin panel.",
+    review: "Thank you for supporting CakePHP 4! The template is very complete as an admin panel — please push forward more integrations.",
     name: "Pitch Fashion",
     jobTitle: "Web Designer",
     image: avatar,
@@ -49,40 +50,38 @@ const testimonials = [
   },
 ];
 
-const Testimonials = () => {
-  return (
-    <section className="testimonials container">
-      <h2>What Customers Say About Us</h2>
-      <p>
-        A customer is a person or business that buys goods or services from another business.
-        Customers are crucial because they generate revenue.
-      </p>
-      <div className="container responsive-grid-250 mb-20 mt-20" style={{gap: "10px"}}>
-        {testimonials.map((testimonial) => (
-          <TestimonialCard key={testimonial.id} {...testimonial} />
-        ))}
-      </div>
-    </section>
-  );
-};
-
-const TestimonialCard = ({ title, review, name, jobTitle, image, rating }) => {
-  return (
-    <div className="testimonial-card">
-      <div className="rating">
-        {"★".repeat(rating)}
-      </div>
-      <h3>{title}</h3>
-      <p className="review">"{review}"</p>
-      <div className="author">
-        <img src={image} alt={name} className="author-image" />
-        <div>
-          <p className="author-name">{name}</p>
-          <p className="author-job">{jobTitle}</p>
-        </div>
+const TestimonialCard = ({ title, review, name, jobTitle, image, rating }) => (
+  <div className="testimonial-card">
+    <div className="card-stars">
+      {Array.from({ length: rating }).map((_, i) => (
+        <span key={i}>★</span>
+      ))}
+    </div>
+    <h3 className="card-title">{title}</h3>
+    <p className="review">"{review}"</p>
+    <hr className="card-divider" />
+    <div className="author">
+      <img src={image} alt={name} className="author-image" />
+      <div>
+        <p className="author-name">{name}</p>
+        <p className="author-job">{jobTitle}</p>
       </div>
     </div>
-  );
-};
+  </div>
+);
+
+const Testimonials = () => (
+  <section className="testimonials container">
+    <h2 className="testimonials-heading">What Customers Say About Us</h2>
+    <p className="testimonials-sub">
+      Real feedback from our customers who trust us every day.
+    </p>
+    <div className="responsive-grid-250 mb-20 mt-20" style={{ gap: "14px" }}>
+      {testimonials.map((t) => (
+        <TestimonialCard key={t.id} {...t} />
+      ))}
+    </div>
+  </section>
+);
 
 export default Testimonials;

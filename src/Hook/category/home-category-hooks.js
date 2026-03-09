@@ -11,13 +11,24 @@ const useHomeCategoryHooks = () => {
   }, [dispatch]);
 
   // Extract categories and loading state from the Redux store
+  // const categories = useSelector((state) =>
+
+  //   state.category.categories.map((el) => ({
+  //     id: el._id,
+  //     image: el.image ? `http://${el.image}` : "default-image-url.png", // Ensure valid image URL
+  //     name: el.name,
+  //   }))
+  // );
+
   const categories = useSelector((state) =>
-  
-    
     state.category.categories.map((el) => ({
       id: el._id,
-      image: el.image ? `http://${el.image}` : "default-image-url.png", // Ensure valid image URL
       name: el.name,
+      image: el.image && typeof el.image === "string"
+        ? el.image.startsWith("http")
+          ? el.image
+          : `${process.env.REACT_APP_API_URL}${el.image.replace(/^undefined\//, "")}`
+        : "https://via.placeholder.com/150", // fallback image
     }))
   );
 

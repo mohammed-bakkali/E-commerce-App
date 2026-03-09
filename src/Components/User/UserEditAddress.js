@@ -1,73 +1,56 @@
-import React from 'react';
-import "../../styles/UserEditAddress.css";
-import { useParams } from 'react-router-dom';
-import useEditAddressHook from '../../Hook/user/edit-address-hook';
+import React from "react";
+import "../../styles/AddressForm.css";
+import { useParams } from "react-router-dom";
+import useEditAddressHook from "../../Hook/user/edit-address-hook";
+
+const fields = [
+  { id: "alias",      placeholder: "Address name (e.g. Home, Work)", label: "Address Name", type: "text" },
+  { id: "detalis",    placeholder: "Full address details",            label: "Details",      type: "text" },
+  { id: "phone",      placeholder: "Phone number",                    label: "Phone",        type: "tel"  },
+  { id: "postalCode", placeholder: "Postal code",                     label: "Postal Code",  type: "text" },
+];
 
 const UserEditAddress = () => {
   const { id } = useParams();
-  console.log("ID1",id)
   const {
-    handelEdit,
-    alias,
-    detalis,
-    phone,
-    postalCode,
-    onChangeAlias,
-    onChangeDetalis,
-    onChangePhone,
-    onChangepostalCode,
+    handelEdit, alias, detalis, phone, postalCode,
+    onChangeAlias, onChangeDetalis, onChangePhone, onChangepostalCode,
   } = useEditAddressHook(id);
 
-
+  const values   = { alias, detalis, phone, postalCode };
+  const handlers = {
+    alias: onChangeAlias, detalis: onChangeDetalis,
+    phone: onChangePhone, postalCode: onChangepostalCode,
+  };
 
   return (
-    <div className="edit-address-container">
-      <h2 className="edit-address-title">Edit Address</h2>
-      <form className="edit-address-form">
-        <div className="form-group">
-          <input 
-            type="text" 
-            id="alias" // Changed ID to "alias"
-            className="form-input" 
-            placeholder="Enter your name address (work, home...)" 
-            value={alias}
-            onChange={onChangeAlias}
-          />
-        </div>
-        <div className="form-group">
-          <input 
-            type="text" 
-            id="details" // Changed ID to "details"
-            className="form-input" 
-            placeholder="Address in detail" 
-            value={detalis}
-            onChange={onChangeDetalis}
-          />
-        </div>
-        <div className="form-group">
-          <input 
-            type="text" 
-            id="phone" 
-            className="form-input" 
-            placeholder="Enter phone number" 
-            value={phone}
-            onChange={onChangePhone}
-          />
-        </div>
-        <div className="form-group">
-          <input 
-            type="text" 
-            id="postalCode"
-            className="form-input" 
-            placeholder="Enter postal code" 
-            value={postalCode}
-            onChange={onChangepostalCode}
-          />
-        </div>
-        <button onClick={handelEdit} type="submit" className="btn-submit">Update Address</button>
-      </form>
+    <div className="address-form-page">
+      <div className="address-form-header">
+        <h2>Edit Address</h2>
+      </div>
+
+      <div className="address-form-card">
+        <form>
+          {fields.map(({ id: fid, placeholder, label, type }) => (
+            <div className="form-group" key={fid}>
+              <label className="form-label" htmlFor={fid}>{label}</label>
+              <input
+                type={type}
+                id={fid}
+                className="form-input"
+                placeholder={placeholder}
+                value={values[fid]}
+                onChange={handlers[fid]}
+              />
+            </div>
+          ))}
+          <button onClick={handelEdit} type="submit" className="btn-submit">
+            Update Address
+          </button>
+        </form>
+      </div>
     </div>
   );
-}
+};
 
 export default UserEditAddress;

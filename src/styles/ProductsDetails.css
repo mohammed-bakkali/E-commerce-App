@@ -3,7 +3,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
-  max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
   background: #fff;

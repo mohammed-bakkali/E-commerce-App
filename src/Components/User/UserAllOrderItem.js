@@ -1,33 +1,37 @@
 import React from "react";
 import UserAllOrderCard from "./UserAllOrderCard";
+
+const statusPill = (condition, trueLabel, falseLabel, trueClass, falseClass) => (
+  <span className={`order-status-pill ${condition ? trueClass : falseClass}`}>
+    <span>●</span> {condition ? trueLabel : falseLabel}
+  </span>
+);
+
 const UserAllOrderItem = ({ orderItem }) => {
-console.log("orderItem",orderItem)
-
-
   return (
-    <div className="p-10 mb-20 " style={{background: "#fff", borderRadius: "5px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)"}}>
-      <div className="" style={{fontWeight: "bold"}}>Number Order: <span style={{color: "gray"}}>{orderItem.id || 0}</span></div>
+    <div className="order-item-card">
+      {/* Top: order ID */}
+      <div className="order-card-top">
+        <span className="order-id">
+          Order <span>#{orderItem.id || 0}</span>
+        </span>
+      </div>
 
-      {
-        orderItem.cartItems ? (orderItem.cartItems.map((cartItem, index) => {
-        return  <UserAllOrderCard  key={index} cartItem={cartItem}/>
-        })) : null
-      }
+      {/* Products */}
+      <div className="order-products">
+        {orderItem.cartItems?.map((cartItem, index) => (
+          <UserAllOrderCard key={index} cartItem={cartItem} />
+        ))}
+      </div>
 
-    
-      <div className="between-flex">
-        <div >
-          <div className="mr-10 " style={{fontWeight: "bold"}}>Delivery Status: <span style={{color: "gray"}}>{orderItem.isDelivered === true ? "Delivered" : "In Progress"}</span></div>
-        </div>
-        <div >
-          <div className="mr-10 " style={{fontWeight: "bold"}}>Payment Status: <span style={{color: "gray"}}>{orderItem.isPaid === true ? "Paid" : "Not Paid"}</span></div>
-        </div>
-        <div >
-          <div className="mr-10 " style={{fontWeight: "bold"}} >Payment Method: <span style={{color: "gray"}}>{orderItem.paymentMethodType === "cash" ? "Cash" : "Cerdite Card"}</span></div>
-        </div>
-        <div>
-        <div className="" style={{fontWeight: "bold"}}>Total Price: <span style={{color: "gray"}}>{orderItem.totalOrderPrice}$</span></div>
-        </div>
+      {/* Footer: status pills + total */}
+      <div className="order-card-footer">
+        {statusPill(orderItem.isDelivered, "Delivered",  "In Progress", "pill-green",  "pill-yellow")}
+        {statusPill(orderItem.isPaid,      "Paid",        "Not Paid",    "pill-blue",   "pill-red")}
+        <span className="order-status-pill pill-gray">
+          {orderItem.paymentMethodType === "cash" ? "💵 Cash" : "💳 Card"}
+        </span>
+        <span className="order-total">${orderItem.totalOrderPrice}</span>
       </div>
     </div>
   );

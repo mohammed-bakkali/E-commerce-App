@@ -92,16 +92,14 @@ const useProductCardHook = (element, favoriteProds) => {
     }
   }, [loadingRemove]);
 
+  console.log("IMAGE COVER:", element.imageCover);
 
-
-  const imageUrl = 
-  element.imageCover.startsWith("http") && !element.imageCover.includes("127.0.0.1:8000/products/")
-    ? `http://127.0.0.1:8000/products/${element.imageCover.replace(/^http:\/\//, "")}`
-    : !element.imageCover.startsWith("http") && element.imageCover.includes("127.0.0.1:8000")
-    ? `http://${element.imageCover}`
-    : element.imageCover.startsWith("http")
-    ? element.imageCover
-    : `http://127.0.0.1:8000/products/${element.imageCover}`;
+  const imageUrl =
+  element.imageCover && typeof element.imageCover === "string"
+    ? element.imageCover.startsWith("http")
+      ? element.imageCover
+      : `${process.env.REACT_APP_API_URL}${element.imageCover.replace(/^undefined\//, "")}`
+    : favoff; // fallback image
 
 
 

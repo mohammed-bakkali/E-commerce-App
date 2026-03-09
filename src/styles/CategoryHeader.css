@@ -1,38 +1,35 @@
 /* ── CategoryHeader.css ── */
 .header {
-  background: linear-gradient(135deg, #ff1d25 0%, #a0328c 35%, #4359c7 65%, #0082e6 100%);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  background: #111827;
+  border-bottom: 1px solid #1f2937;
 }
+
 .header .container {
   display: flex;
   align-items: center;
   overflow-x: auto;
-  gap: 4px;
+  gap: 2px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.header .container::-webkit-scrollbar {
-  display: none;
-}
+.header .container::-webkit-scrollbar { display: none; }
+
 .header-item {
   padding: 12px 14px;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.03em;
-  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  color: #9ca3af;
   white-space: nowrap;
   cursor: pointer;
   border-radius: 6px;
+  text-decoration: none;
   transition: background 0.2s, color 0.2s;
-}
-.header-item:hover {
-  background: rgba(255,255,255,0.18);
-  color: #fff;
+  letter-spacing: 0.02em;
 }
 
+.header-item:hover  { background: #1f2937; color: #f3f4f6; }
+.header-item-active { color: #fff; font-weight: 600; }
+
 @media (max-width: 480px) {
-  .header-item {
-    font-size: 12px;
-    padding: 10px 10px;
-  }
+  .header-item { font-size: 12px; padding: 10px; }
 }
