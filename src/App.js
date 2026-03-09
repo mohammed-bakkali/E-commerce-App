@@ -51,7 +51,7 @@ import AdminAllSubcategoryPage from "./Page/Admin/AdminAllSubcategoryPage";
 
 
 function App() {
-  const { userData, isUser, isAdmin } = useProtectedRouteHook();
+  const { isUser, isAdmin } = useProtectedRouteHook();
 
   // Check if the current page is an admin page
   const location = useLocation(); // Move this inside BrowserRouter
