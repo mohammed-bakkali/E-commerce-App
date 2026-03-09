@@ -40,7 +40,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-
   "browserslist": {
     "production": [
       ">0.2%",
@@ -55,6 +54,7 @@
   },
   "author": "Mohammed Bakkali <mohammedbakkali807@gmail.com> (https://mohammed-bakkali.netlify.app/) | Phone: +212 722-923357 | Web Developer | City: Tanger",
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^7.0.1",
     "react-scripts": "^5.0.1"
   }
 }
