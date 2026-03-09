@@ -87,9 +87,9 @@
     background: #fff;
   }
   
-  .form-group input::placeholder {
+  /* .form-group input::placeholder {
     color: #d1d5db;
-  }
+  } */
   
   /* Submit button */
   .auth-btn {

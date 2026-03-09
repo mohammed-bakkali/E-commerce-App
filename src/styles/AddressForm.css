@@ -61,10 +61,10 @@
     background: #fff;
   }
   
-  .form-input::placeholder {
+  /* .form-input::placeholder {
     color: #d1d5db;
   }
-  
+   */
   /* Submit */
   .btn-submit {
     width: 100%;

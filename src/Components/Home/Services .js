@@ -4,7 +4,7 @@ import "../../styles/Services.css";
 const Services = () => {
   return (
     <div className="container">
-    <div className="responsive-grid-300 mt-20">
+    <div className="responsive-grid-380 mt-20">
     <div className="service-card">
         <i className="fas fa-shipping-fast icon-service"></i>
         <div className="">

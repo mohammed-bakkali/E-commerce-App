@@ -201,7 +201,7 @@
   background: #fff;
 }
 
-.password-card .form-group input::placeholder { color: #d1d5db; }
+/* .password-card .form-group input::placeholder { color: #d1d5db; } */
 
 .btn-save-password {
   width: 100%;
