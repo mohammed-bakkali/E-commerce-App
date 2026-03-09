@@ -16,7 +16,7 @@ const useViewHomeProductsHook = () => {
 
   let items = [];
   if (Allproducts) {
-    items = Allproducts.slice(0,5);
+    items = Allproducts.slice(0,6);
   } else {
     items = [];
   }

@@ -25,9 +25,9 @@ const DiscountSection = () => {
           </div>
 
           {/* Image */}
-          <div className="discount-image">
+          {/* <div className="discount-image">
             <img src={discount} alt="Fashion Collection" />
-          </div>
+          </div> */}
 
         </div>
       </div>

@@ -76,7 +76,7 @@ const Testimonials = () => (
     <p className="testimonials-sub">
       Real feedback from our customers who trust us every day.
     </p>
-    <div className="responsive-grid-250 mb-20 mt-20" style={{ gap: "14px" }}>
+    <div className="responsive-grid-300 mb-20 mt-20" style={{ gap: "14px" }}>
       {testimonials.map((t) => (
         <TestimonialCard key={t.id} {...t} />
       ))}

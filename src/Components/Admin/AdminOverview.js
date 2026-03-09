@@ -1,133 +1,117 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faClipboardList,
-  faTimesCircle,
-  faClock,
-  faCheckCircle,
-  faEye,
+  faClipboardList, faShoppingCart,
+  faBoxOpen, faUsers, faEye,
 } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/AdminOverview.css";
 import useUserGetAllOrdersHook from "../../Hook/user/user-get-all-orders-hook";
 import useViewProductsAdminHook from "../../Hook/admin/view-products-admin-hook";
 import SalesChart from "../Chart/SalesChart";
 
-const AdminOverview = () => {
-  const { results, totalPaidSales, customerCount } =   useUserGetAllOrdersHook();
+const statCards = (totalPaidSales, results, numberOfProducts, customerCount) => [
+  {
+    icon: faClipboardList, iconClass: "sales-icon",
+    bg: "#eff6ff", label: "Total Sales Paid",
+    value: `$${totalPaidSales || 0}`,
+  },
+  {
+    icon: faShoppingCart, iconClass: "orders-icon",
+    bg: "#fff3f3", label: "Total Orders",
+    value: results || 0,
+  },
+  {
+    icon: faBoxOpen, iconClass: "revenue-icon",
+    bg: "#f0fdf4", label: "Total Products",
+    value: numberOfProducts || 0,
+  },
+  {
+    icon: faUsers, iconClass: "customers-icon",
+    bg: "#fffbeb", label: "Total Customers",
+    value: customerCount || 0,
+  },
+];
 
+const sampleOrders = [
+  { id: "1d564b921", date: "Aug 20, 2021", method: "Stripe",  status: "completed", total: "$100.00" },
+  { id: "d564b9213", date: "Apr 20, 2021", method: "—",       status: "pending",   total: "$1,050.00" },
+  { id: "d564b9214", date: "Feb 10, 2023", method: "—",       status: "cancelled", total: "$700.00" },
+  { id: "d564b9217", date: "Jun 30, 2024", method: "Paypal",  status: "completed", total: "$500.00" },
+];
+
+const monthlySalesData = [
+  { month: "January", sales: 1200 },
+  { month: "February", sales: 1500 },
+  { month: "March", sales: 900 },
+];
+
+const AdminOverview = () => {
+  const { results, totalPaidSales, customerCount } = useUserGetAllOrdersHook();
   const { numberOfProducts } = useViewProductsAdminHook();
-  console.log(numberOfProducts)
-  const monthlySalesData = [
-    { month: "January", sales: 1200 },
-    { month: "February", sales: 1500 },
-    { month: "March", sales: 900 },
-    // ...
-  ];
 
   return (
     <div className="overview-container">
       <h2 className="overview-title">Dashboard</h2>
-    
-      <div className="responsive-grid-250 mb-20" style={{ gap: "13px" }}>
-        <div className="overview-card">
-          <FontAwesomeIcon icon={faClipboardList} className="overview-icon sales-icon" />
-          <div className="overview-text">
-            <span>Total Sales Paid</span>
-            <h3>${totalPaidSales}</h3>
-          </div>
-        </div>
-        <div className="overview-card">
-          <FontAwesomeIcon icon={faTimesCircle} className="overview-icon orders-icon" />
-          <div className="overview-text">
-            <span>Number of Orders</span>
-            <h3>{results}</h3>
-          </div>
-        </div>
-        <div className="overview-card">
-          <FontAwesomeIcon icon={faClock} className="overview-icon revenue-icon" />
-          <div className="overview-text">
-            <span>Number of Products</span>
-            <h3>{numberOfProducts}</h3>
-          </div>
-        </div>
-        <div className="overview-card">
-          <FontAwesomeIcon icon={faCheckCircle} className="overview-icon customers-icon" />
-          <div className="overview-text">
-            <span>Number of Customers</span>
-            <h3>{customerCount}</h3>
-          </div>
-        </div>
-    </div>
-    {/*  */}
-    <SalesChart totalPaidSales={totalPaidSales} results={results} customerCount={customerCount}monthlySalesData={monthlySalesData} />
+
+      {/* Stat cards */}
+      <div className="responsive-grid-350 mb-20" style={{ gap: "14px" }}>
+        {statCards(totalPaidSales, results, numberOfProducts, customerCount).map(
+          ({ icon, iconClass, bg, label, value }) => (
+            <div className="overview-card" key={label}>
+              <div className="overview-icon-wrap" style={{ background: bg }}>
+                <FontAwesomeIcon icon={icon} className={`overview-icon ${iconClass}`} />
+              </div>
+              <div className="overview-text">
+                <span>{label}</span>
+                <h3>{value}</h3>
+              </div>
+            </div>
+          )
+        )}
+      </div>
+
+      {/* Chart */}
+      <SalesChart
+        totalPaidSales={totalPaidSales}
+        results={results}
+        customerCount={customerCount}
+        monthlySalesData={monthlySalesData}
+      />
+
+      {/* Recent orders table */}
+      <div className="table-header">
+        <h3>Recent Orders</h3>
+        <button className="btn-export">Export CSV</button>
+      </div>
+
       <table className="overview-table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Order ID</th>
             <th>Date</th>
             <th>Method</th>
-            <th>Payment Status</th>
+            <th>Status</th>
             <th>Total</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1d564b921</td>
-            <td>Aug 20, 2021</td>
-            <td>Stripe</td>
-            <td>
-              <span className="status-completed">completed</span>
-            </td>
-            <td>$100.00</td>
-            <td>
-              <button className="view-btn">
-                <FontAwesomeIcon icon={faEye} />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>d564b9213</td>
-            <td>Apr 20, 2021</td>
-            <td>---</td>
-            <td>
-              <span className="status-pending">pending</span>
-            </td>
-            <td>$1050.00</td>
-            <td>
-              <button className="view-btn">
-                <FontAwesomeIcon icon={faEye} />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>d564b9214</td>
-            <td>Feb 10, 2023</td>
-            <td>---</td>
-            <td>
-              <span className="status-cancelled">cancelled</span>
-            </td>
-            <td>$700.00</td>
-            <td>
-              <button className="view-btn">
-                <FontAwesomeIcon icon={faEye} />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td>d564b9217</td>
-            <td>Jun 30, 2024</td>
-            <td>Paypal</td>
-            <td>
-              <span className="status-completed">completed</span>
-            </td>
-            <td>$500.00</td>
-            <td>
-              <button className="view-btn">
-                <FontAwesomeIcon icon={faEye} />
-              </button>
-            </td>
-          </tr>
+          {sampleOrders.map(({ id, date, method, status, total }) => (
+            <tr key={id}>
+              <td style={{ fontFamily: "monospace", color: "#6b7280" }}>#{id}</td>
+              <td>{date}</td>
+              <td>{method}</td>
+              <td>
+                <span className={`status-${status}`}>● {status}</span>
+              </td>
+              <td style={{ fontWeight: 700 }}>{total}</td>
+              <td>
+                <button className="view-btn">
+                  <FontAwesomeIcon icon={faEye} />
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

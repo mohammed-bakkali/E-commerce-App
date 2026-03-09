@@ -1,60 +1,87 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../../styles/Slider.css";
-
+import { Link } from "react-router-dom";
 import banner1 from "../../assets/images/banner-1.jpg";
 import banner2 from "../../assets/images/banner-2.jpg";
 import banner3 from "../../assets/images/banner-3.jpg";
 import banner4 from "../../assets/images/slide-1.webp";
 
+const slides = [
+  {
+    img:     banner1,
+    badge:   "New Arrival",
+    title:   "Exclusive Collection\nFor Everyone",
+    price:   "$49.99",
+  },
+  {
+    img:     banner2,
+    badge:   "Best Sellers",
+    title:   "Top Picks of\nThe Season",
+    price:   "$39.99",
+  },
+  {
+    img:     banner3,
+    badge:   "Limited Offer",
+    title:   "Premium Fashion\nAt Great Prices",
+    price:   "$59.99",
+  },
+  {
+    img:     banner4,
+    badge:   "Trending Now",
+    title:   "Shop The Latest\nStyles Today",
+    price:   "$29.99",
+  },
+];
+
 const Slider = () => {
-  const images = [banner1, banner2, banner3, banner4];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() =>
+    setCurrent((i) => (i + 1) % slides.length), []);
+
+  const prev = () =>
+    setCurrent((i) => (i - 1 + slides.length) % slides.length);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    const id = setInterval(next, 4000);
+    return () => clearInterval(id);
+  }, [next]);
 
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [images.length]);
-
-  const handleDotClick = (index) => {
-    setCurrentIndex(index);
-  };
+  const { img, badge, title, price } = slides[current];
 
   return (
     <div className="slider-container">
+      {/* Slide */}
       <div
         className="slider-content"
-        style={{
-          backgroundImage: isMobile ? "none" : `url(${images[currentIndex]})`,
-          backgroundColor: isMobile ? "#F8F8F8" : "transparent",
-        }}
+        style={{ backgroundImage: `url(${img})` }}
       >
+        <div className="slider-overlay" />
+
         <div className="slider-text">
-          <p>Starting from: <span>$49.99</span></p>
-          <h1>Exclusive collection for everyone</h1>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat nulla repellat quo eaque alias corporis sunt, facilis nesciunt rem fugit!</p>
-          <button className="explore-button mt-40">Shop now</button>
+          <span className="slider-badge">{badge}</span>
+          <h1>{title.split("\n").map((line, i) => <span key={i}>{line}<br /></span>)}</h1>
+          <p className="slider-price">Starting from <span>{price}</span></p>
+          <Link to="/products">
+            <button className="explore-button">
+              Shop Now →
+            </button>
+          </Link>
         </div>
       </div>
+
+      {/* Arrows */}
+      <button className="slider-arrow slider-arrow-left" onClick={prev}>‹</button>
+      <button className="slider-arrow slider-arrow-right" onClick={next}>›</button>
+
+      {/* Dots */}
       <div className="slider-navigation">
-        {images.map((_, index) => (
+        {slides.map((_, i) => (
           <span
-            key={index}
-            className={`nav-dot ${index === currentIndex ? "active" : ""}`}
-            onClick={() => handleDotClick(index)}
-          ></span>
+            key={i}
+            className={`nav-dot ${i === current ? "active" : ""}`}
+            onClick={() => setCurrent(i)}
+          />
         ))}
       </div>
     </div>

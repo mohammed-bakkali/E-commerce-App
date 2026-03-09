@@ -3,15 +3,17 @@ import {
   fetchAllCategoriesPage,
 } from "../../Redux/reducers/categorySlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Custom hook for fetching and paginating categories
 const useAddCategoryPageHook = () => {
   const dispatch = useDispatch();
 
+  const [limit, setlimit] = useState(10)
+
   // Fetch all categories with a limit when the component mounts
   useEffect(() => {
-    dispatch(fetchAllCategories({ limit: 6 }));
+    dispatch(fetchAllCategories({limit}));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -28,7 +30,7 @@ const useAddCategoryPageHook = () => {
 
    // Select totalPages from the Redux store
   const totalPages = useSelector((state) => state.category.totalPages);
-  console.log("totalPages",totalPages)
+
 
 
   // Handle page change events

@@ -417,6 +417,13 @@ a {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 6px;
 }
+
+.responsive-grid-350 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 6px;
+}
+
 .responsive-grid-280 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

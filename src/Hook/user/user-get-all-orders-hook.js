@@ -55,9 +55,6 @@ const useUserGetAllOrdersHook = () => {
   .reduce((acc, order) => acc + (order.totalOrderPrice || 0), 0);
 
 
-
-
-
 const customerIds = orderData
 .filter((order) => order.isPaid === true) 
 .map((order) => order.user?._id); 

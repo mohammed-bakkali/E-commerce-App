@@ -40,9 +40,10 @@ const AdminAllProductsCard = ({ element }) => {
   };
 
   const imageUrl = element.imageCover
-    ? `http://${element.imageCover}`
-    : "default-image-url.png";
-
+  ? element.imageCover.startsWith("http")
+    ? element.imageCover
+    : `${process.env.REACT_APP_API_URL}${element.imageCover.replace(/^undefined\//, "")}`
+  : "/default-image.png";
   return (
     <>
       <div className="product-card">

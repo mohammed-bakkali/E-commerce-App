@@ -11,7 +11,7 @@ const BrandFeatured = ({ title, btntitle, pathText }) => {
   return (
     <div className="container">
       <SubTitle title={title} btntitle={btntitle} pathText="/allbrand" />
-      <div className="responsive-grid-250 mb-20 mt-20">
+      <div className="responsive-grid-300 mb-20 mt-20">
         {loading === false ? (
           brands.length > 0 ? (
             brands

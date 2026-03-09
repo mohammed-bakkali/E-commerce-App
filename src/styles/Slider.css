@@ -1,111 +1,170 @@
+/* ── Slider.css ── */
 .slider-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
+  border-radius: 0;
 }
 
+/* Slide */
 .slider-content {
   width: 100%;
-  height: 100vh;
+  height: 520px;
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
-  padding: 2rem;
   position: relative;
-  transition: background-image 0.3s ease-in-out;
+  transition: background-image 0.5s ease;
 }
 
+/* Dark overlay for readability */
+.slider-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0,0,0,0.60) 0%,
+    rgba(0,0,0,0.25) 60%,
+    rgba(0,0,0,0.05) 100%
+  );
+}
+
+/* Text */
 .slider-text {
-  z-index: 2;
-  line-height: 1.5;
-  color: #000;
   position: absolute;
   top: 50%;
+  left: 6%;
   transform: translateY(-50%);
-}
-.slider-text span {
-  color: rgb(240, 71, 111);
-}
-
-.slider-text p {
-  font-size: 20px;
-  color: var(--clr-primary);
+  z-index: 2;
   max-width: 500px;
 }
 
-.slider-text h1 {
-  font-size: 2.5rem;
-  margin: 1rem 0;
-  color: #000;
+.slider-badge {
+  display: inline-block;
+  background: #e53935;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
 }
 
-.explore-button {
-  padding: 0.75rem 2rem;
-  background: var(--blue-alt-color);
+.slider-text h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
   color: #fff;
+  line-height: 1.2;
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+}
+
+.slider-text p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.7;
+  margin: 0 0 28px;
+  max-width: 420px;
+}
+
+.slider-price {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px !important;
+}
+
+.slider-price span {
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* CTA */
+.explore-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background: #fff;
+  color: #111;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
-  z-index: 3;
-  margin-top: 40px;
-  transition: background-color 0.3s;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.02em;
 }
 
 .explore-button:hover {
-  background: var(--blue-alt-color);
+  background: #e53935;
+  color: #fff;
+  transform: translateY(-2px);
 }
 
+/* Nav dots */
 .slider-navigation {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
+  gap: 6px;
+  z-index: 3;
 }
 
 .nav-dot {
-  width: 10px;
-  height: 10px;
-  margin: 0 5px;
-  background-color: #ddd;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
+  background: rgba(255,255,255,0.4);
   cursor: pointer;
+  transition: background 0.2s, width 0.2s;
 }
 
 .nav-dot.active {
-  background-color: #000;
+  background: #fff;
+  width: 22px;
+  border-radius: 4px;
 }
 
+/* Arrow buttons */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+.slider-arrow:hover { background: rgba(255,255,255,0.28); }
+.slider-arrow-left  { left: 20px; }
+.slider-arrow-right { right: 20px; }
+
+/* Responsive */
 @media (max-width: 768px) {
-  .slider-content {
-    height: 50vh;
-    background-color: #F8F8F8;
-  }
+  .slider-content { height: 380px; }
+  .slider-text { left: 5%; max-width: 85%; }
+  .slider-text h1 { font-size: 1.6rem; }
+  .slider-text p  { font-size: 13px; display: none; }
+  .explore-button { padding: 11px 22px; font-size: 13px; }
+}
 
-  .slider-text {
-    max-width: 90%;
-    padding-left: 0;
-    text-align: center;
-  }
-
-  .slider-text h1 {
-    font-size: 1.8rem;
-  }
-
-  .slider-text p {
-    font-size: 18px;
-    max-width: none;
-  }
-
-  .explore-button {
-    margin-top: 1rem;
-  }
-
-  .nav-dot {
-    width: 8px;
-    height: 8px;
-  }
+@media (max-width: 480px) {
+  .slider-content { height: 300px; }
+  .slider-text h1 { font-size: 1.3rem; }
 }

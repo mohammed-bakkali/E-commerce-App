@@ -1,10 +1,13 @@
 import useCardContainerHook from "../../Hook/product/card-container-hook";
 import ProductsCard from "./ProductsCard";
+
+
 const CradProductContent = ({ products }) => {
+  console.log("products",products)
   const { favoriteProds } = useCardContainerHook();
 
   return (
-    <div className="responsive-grid-300">
+    <div className="responsive-grid-280">
       {products
         ? products.map((element, index) => (
             <ProductsCard
