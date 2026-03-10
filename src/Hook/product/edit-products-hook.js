@@ -52,6 +52,8 @@ const useEditProductsHook = (id) => {
 
   useEffect(() => {
     if (item) {
+      const API_URL = process.env.REACT_APP_API_URL;
+  
       setProdName(item.title);
       setProdDescription(item.description);
       setPriceBefore(item.price);
@@ -61,14 +63,26 @@ const useEditProductsHook = (id) => {
       setCatID(item.category);
       setselectSubID(item.subcategory);
       setColor(item.availableColors || []);
-
+  
       const formattedImages = item.images
-        ? item.images.map((img) => `http://${img}`)
+        ? item.images.map((img) => {
+            if (!img) return "";
+  
+    
+            if (img.startsWith("http")) return img;
+  
+          
+            const cleanImg = img
+              .replace("undefined/", "")
+              .replace("products/", "");
+  
+            return `${API_URL}/products/${cleanImg}`;
+          })
         : [];
+  
       setImages(formattedImages);
     }
   }, [item]);
-
   // Extract data from Redux store
   const categories = useSelector((state) => state.category.categories);
   const brands = useSelector((state) => state.brand.brands);

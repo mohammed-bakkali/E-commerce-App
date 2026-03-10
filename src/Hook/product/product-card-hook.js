@@ -19,7 +19,7 @@ const useProductCardHook = (element, favoriteProds) => {
 
   useEffect(() => {
     setIsFav(favoriteProds.some((idProduct) => idProduct === element._id));
-  }, [Fav]);
+  }, [favoriteProds, element._id]);
 
   const handelFav = () => {
     if (isFav) {
@@ -94,15 +94,21 @@ const useProductCardHook = (element, favoriteProds) => {
 
   console.log("IMAGE COVER:", element.imageCover);
 
-  const imageUrl =
-  element.imageCover && typeof element.imageCover === "string"
-    ? element.imageCover.startsWith("http")
-      ? element.imageCover
-      : `${process.env.REACT_APP_API_URL}${element.imageCover.replace(/^undefined\//, "")}`
-    : favoff; // fallback image
+  const API_URL = process.env.REACT_APP_API_URL;
 
-
-
+  let imageUrl = favoff;
+  
+  if (element?.imageCover) {
+    if (element.imageCover.startsWith("http")) {
+      imageUrl = element.imageCover;
+    } else {
+      const cleanImage = element.imageCover
+        .replace("undefined/", "")
+        .replace("products/", "");
+  
+      imageUrl = `${API_URL}/products/${cleanImage}`;
+    }
+  }
   return {
     addToWishListData,
     deleteToWishListData,

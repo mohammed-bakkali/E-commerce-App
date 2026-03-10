@@ -79,12 +79,12 @@ const AdminOverview = () => {
       />
 
       {/* Recent orders table */}
-      <div className="table-header">
+      {/* <div className="table-header">
         <h3>Recent Orders</h3>
         <button className="btn-export">Export CSV</button>
-      </div>
+      </div> */}
 
-      <table className="overview-table">
+      {/* <table className="overview-table">
         <thead>
           <tr>
             <th>Order ID</th>
@@ -113,7 +113,7 @@ const AdminOverview = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };

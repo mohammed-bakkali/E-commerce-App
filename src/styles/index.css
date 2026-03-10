@@ -400,7 +400,7 @@ a {
 }
 .dynamic-grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 .responsive-grid-200 {
   display: grid;
@@ -491,11 +491,11 @@ a {
 /* Start Modal */
 /* End Modal */
 /* Add responsive media query */
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
   .column-direction {
     flex-direction: column;
   }
-}
+} */
 /* ================================ Start Admin Styles  ================================ */
 .admin-add {
   padding: 20px;

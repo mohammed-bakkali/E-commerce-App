@@ -37,15 +37,21 @@ const [showButton, setShowButton] = useState(false);
       behavior: "smooth",
     });
   };
-  
+
+  // function to shuffle an array
+  const shuffleArray = (array) => {
+    return [...array].sort(() => Math.random() - 0.5);
+  };
+  const bestSeller = items ? shuffleArray(items).slice(0, 6) : [];
+  const weChoseForYou = items ? shuffleArray(items).slice(0, 6) : [];
 
   return (
     <>
       <Slider />
       <Services/>
       <HomeCategory />
-      <CradProductsContainer products={items} title="Best seller" btntitle="More" pathText="/products" />
-      <CradProductsContainer products={items}  title="We chose for you" btntitle="More" pathText="/products" />
+      <CradProductsContainer products={bestSeller} title="Best seller" />
+      <CradProductsContainer products={weChoseForYou} title="We chose for you" />
       <CradProductsContainer title="Most rated" btntitle="More" pathText="/products" />
       <CradProductsContainer title="Events Fashion" btntitle="More" pathText="/products" />
       <CradProductsContainer title="Best seller" btntitle="More" pathText="/products" />

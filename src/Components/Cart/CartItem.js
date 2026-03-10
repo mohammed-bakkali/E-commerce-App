@@ -10,14 +10,21 @@ const CartItem = ({ item }) => {
   const { closeModal, openModal, isModalOpen, onConfirm } = useDeleteCartHook(item);
   const { itemCount, onchangeCount, handeleUpdateCart } = useUpdateCartHook(item);
 
-  const imageUrl = item.product.imageCover.startsWith("http") &&
-    !item.product.imageCover.includes("127.0.0.1:8000/products/")
-    ? `http://127.0.0.1:8000/products/${item.product.imageCover.replace(/^http:\/\//, "")}`
-    : !item.product.imageCover.startsWith("http") && item.product.imageCover.includes("127.0.0.1:8000")
-    ? `http://${item.product.imageCover}`
-    : item.product.imageCover.startsWith("http")
-    ? item.product.imageCover
-    : `http://127.0.0.1:8000/products/${item.product.imageCover}`;
+  const API_URL = process.env.REACT_APP_API_URL;
+
+  let imageUrl = "/images/default-product.png";
+  
+  if (item?.product?.imageCover) {
+    if (item.product.imageCover.startsWith("http")) {
+      imageUrl = item.product.imageCover;
+    } else {
+      const cleanImage = item.product.imageCover
+        .replace("undefined/", "")
+        .replace("products/", "");
+  
+      imageUrl = `${API_URL}/products/${cleanImage}`;
+    }
+  }
 
   return (
     <>

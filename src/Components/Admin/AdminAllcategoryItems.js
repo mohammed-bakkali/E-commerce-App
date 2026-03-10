@@ -3,11 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import ModalDelete from "../Uitilys/ModalDelete";
 import { Link } from "react-router-dom";
-import useDeleteBrandHook from "../../Hook/brand/delete-brand-hook";
 import DeleteCategoryHook from "../../Hook/category/delete-category-hook";
 
-const AdminAllcategoryItems = ({ item, id }) => {
-  console.log("itemCAT",item)
+const AdminAllcategoryItems = ({ item }) => {
   const {
     loading,
     handleDeleteCart,
@@ -17,50 +15,75 @@ const AdminAllcategoryItems = ({ item, id }) => {
     isModalOpen,
   } = DeleteCategoryHook(item);
 
-  const formattedCreatedAt = new Date(item.createdAt).toLocaleDateString();
-  const formattedUpdatedAt = new Date(item.updatedAt).toLocaleDateString();
+  const formattedCreatedAt = new Date(item.createdAt).toLocaleDateString('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric'
+  });
+  const formattedUpdatedAt = new Date(item.updatedAt).toLocaleDateString('en-GB', {
+    day: '2-digit', month: 'short', year: 'numeric'
+  });
 
+  // ✅ Fixed: was `http://${item.image}` which broke URLs that already had https://
   const imageUrl = item.image
-    ? `http://${item.image}`
-    : "default-image-url.png";
+    ? (item.image.startsWith('http') ? item.image : `https://${item.image}`)
+    : null;
 
   return (
     <>
-      <tr className="brand-item-row">
-        <td>{item.name}</td>
+      <tr>
+        {/* Name with initial avatar */}
         <td>
-          {item.image ? (
-            <img src={imageUrl} alt={item.name} width="50" />
+          <div className="adm-cat-name-cell">
+            <div className="adm-cat-initial">
+              {item.name?.charAt(0) || '?'}
+            </div>
+            {item.name}
+          </div>
+        </td>
+
+        {/* Image */}
+        <td>
+          {imageUrl ? (
+            <img
+              src={imageUrl}
+              alt={item.name}
+              className="adm-cat-img"
+              onError={e => { e.target.style.display = 'none'; }}
+            />
           ) : (
-            "No Image"
+            <div className="adm-no-img">N/A</div>
           )}
         </td>
-        <td>{formattedCreatedAt}</td>
-        <td>{formattedUpdatedAt}</td>
+
+        {/* Dates */}
         <td>
-          <Link to={`/products/category/${item._id}`} className="brand-link">
-            <button className="view-btn" style={{ marginRight: "6px" }}>
+          <span className="adm-date-badge">📅 {formattedCreatedAt}</span>
+        </td>
+        <td>
+          <span className="adm-date-badge">🔄 {formattedUpdatedAt}</span>
+        </td>
+
+        {/* Actions */}
+        <td>
+          <div className="adm-action-group">
+            <Link to={`/products/category/${item._id}`} className="adm-btn-icon view" title="View">
               <FontAwesomeIcon icon={faEye} />
+            </Link>
+            <button className="adm-btn-icon edit" title="Edit">
+              <FontAwesomeIcon icon={faEdit} />
             </button>
-          </Link>
-          <FontAwesomeIcon
-            icon={faEdit}
-            className="icon edit-icon"
-            // onClick={openEditModal}
-          />
-          <FontAwesomeIcon
-            icon={faTrashAlt}
-            className="icon delete-icon"
-            onClick={openModal}
-          />
+            <button className="adm-btn-icon del" title="Delete" onClick={openModal}>
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </button>
+          </div>
         </td>
       </tr>
+
       <ModalDelete
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         onConfirm={onConfirm}
         openModal={openModal}
-        message={`Are you sure you want to delete this catogory?`}
+        message="Are you sure you want to delete this category?"
       />
     </>
   );
